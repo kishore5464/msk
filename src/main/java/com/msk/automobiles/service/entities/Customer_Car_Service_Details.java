@@ -30,6 +30,7 @@ public class Customer_Car_Service_Details implements Serializable {
 	private Customer_Details customer_Details;
 	private Date service_from;
 	private Date service_to;
+	private Date service_expire_date;
 	private String service;
 	private Payment_Mode payment_Mode;
 	private Double amount;
@@ -41,12 +42,14 @@ public class Customer_Car_Service_Details implements Serializable {
 	}
 
 	public Customer_Car_Service_Details(Integer id, Customer_Details customer_Details, Date service_from,
-			Date service_to, String service, Payment_Mode payment_Mode, Double amount, Date created_date) {
+			Date service_to, Date service_expire_date, String service, Payment_Mode payment_Mode, Double amount,
+			Date created_date) {
 		super();
 		this.id = id;
 		this.customer_Details = customer_Details;
 		this.service_from = service_from;
 		this.service_to = service_to;
+		this.setService_expire_date(service_expire_date);
 		this.service = service;
 		this.payment_Mode = payment_Mode;
 		this.amount = amount;
@@ -92,6 +95,16 @@ public class Customer_Car_Service_Details implements Serializable {
 
 	public void setService_to(Date service_to) {
 		this.service_to = service_to;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "service_expire_date")
+	public Date getService_expire_date() {
+		return service_expire_date;
+	}
+
+	public void setService_expire_date(Date service_expire_date) {
+		this.service_expire_date = service_expire_date;
 	}
 
 	@Column(name = "service")
