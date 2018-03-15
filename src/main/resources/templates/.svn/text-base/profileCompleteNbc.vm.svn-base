@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="utf-8">
+<title>TalentEx</title>
+</head>
+<body>
+<style type="text/css">
+.button:hover { background: #FC8500 !important; color: #fff !important; }
+.button:active { border-top-color: #1b435e !important; background: #DF7E1F !important; }
+></style>
+<div id="main_container" style="background-color: #E9E1E1; height: 1150px; width: 100%;">
+  <div id="container" style="background-color: #FFFFFF; height: 1150px; width: 760px; margin: auto;">
+    <div class="logo" style="height: 100px; width: 760px;">
+<div class="logo_img" style="height: 150px; width: 200px; margin-left: 40px; margin-right: 320px; float: left;"><img src="http://talentex.in/images/talentexcb.png" width="200" height="100px" alt="talentex"></div>
+<div class="logo_img" style="height: 150px; width: 200px; float: left;"><img src="http://talentex.in/PsychometricExam/resources/images/nbc.jpg" width="100px" height="100px" alt="NBC"></div>
+</div>
+    <div class="welcome" style="background-color: #48a78e; height: 360px; width: 760px; font-size: 48px; margin-topcolor: #FFFFFF;">
+      
+    
+    <div class="welcome_txt" style="font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, sans-serif; font-size: 55px; color: #FFFFFF; margin-left: 85px; margin-top: 20px; margin-bottom: 15px;">Welcome to TalentEx! </div>
+<div class="txt1" style="font-family: Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; line-height: 35px; color: #FFFFFF; margin-left: 25px; margin-right: 25px; text-align: justify;" align="center">TalentEx has great pleasure in partnering with NBC Global to conduct the career path analysis test, that helps in analyzing your preferences towards  entrepreneurship activites.</div>
+  <div class="button" style="height: 65px; width: 400px; -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0; -moz-box-shadow: rgba(0,0,0,1) 0 1px 0; box-shadow: rgba(0,0,0,1) 0 1px 0; text-shadow: rgba(0,0,0,.4) 0 1px 0; background-color: #EB8717; font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, sans-serif; font-size: 20px; line-height: 65px; color: #FFFFFF; text-align: center; font-weight: bold; cursor: pointer; margin: 40px auto 15px;" align="center"><a href="${psylink}" target="_blank" style="color: #FFFFFF; text-decoration: none;">START YOUR ANALYSIS</a></div>
+    </div>
+  
+
+
+    <div class="threecol" style="height: 150px; width: 760px;">
+
+    <div class="txt1" style="font-family: Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; line-height: 35px; color: #7C7C7C; margin-left: 25px; margin-right: 25px; margin-top: 25px; text-align: justify;" align="center">On completion of your analysis, you'll be provided with a graph showing your preferences towards doing business. Please note this is an indicative value and we recommend you to consult mentors from NBC Global to start your entrepreneurial journey.<br><br><span style="margin-left:40px;"> Alternatively, to start your journey towards career path,</span></div>
+   
+    </div>
+   
+    <div class="button" style="height: 65px; width: 400px; -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0; -moz-box-shadow: rgba(0,0,0,1) 0 1px 0; box-shadow: rgba(0,0,0,1) 0 1px 0; text-shadow: rgba(0,0,0,.4) 0 1px 0; background-color: #EB8717; font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, sans-serif; font-size: 20px; line-height: 65px; color: #FFFFFF; text-align: center; font-weight: bold; cursor: pointer; margin: 60px auto 30px;" align="center"><a href="http://talentex.in/" target="_blank" style="color: #FFFFFF; text-decoration: none;">Visit TalentEx</a></div>
+  
+
+
+<div class="green" style="height: 200px; width: 760px; font-weight: normal; font-size: normal; font-variant: normal; font-style: normal; line-height: normal; color: white; background-color: #48a78e;">
+<div class="p2" style="color: white; font-size: 22px; font-weight: bold; line-height: 75px; text-align: center; padding-top: 20px;" align="center">Let your friends know you're on TalentEx</div>
+<p style="font-size: 15px; color: #EC5C11; font-weight: bold; padding-left: 150px;"><a href="https://www.facebook.com/talentex" target="_blank"><img src="http://talentex.in:8080/StaticPages/images/logo_fb.png" width="45px" height="45px" style="margin-left: 115px; cursor: pointer;"  alt="fb"></a><a href="https://twitter.com/Talent_Ex" target="_blank"><img src="http://talentex.in:8080/StaticPages/images/logo_tw.png" width="45px" height="45px" style="margin-left: 45px; cursor: pointer;" alt="twi"></a><a href="http://www.linkedin.com/groups/TalentEx-HR-Professionals-6732104?gid=6732104&amp;mostPopular=&amp;trk=tyah&amp;trkInfo=tarId%3A1406643008327%2Ctas%3Atalentex%20%2Cidx%3A2-1-2" target="_blank"><img src="http://talentex.in:8080/StaticPages/images/logo_ln.png" width="45px" height="45px" alt="linkedin" style="margin-left: 45px; cursor: pointer;"></a></p>
+
+
+</div>
+
+<div class="white" style="height: 100px; width: 760px; text-align: center; color: #999999;" align="center">
+<center><h2>Fore Brain Technologies Pvt Ltd.</h2></center>
+<pre>
+MS Towers, 2nd floor, 633/1
+Aminjikarai Chennai, Tamil Nadu 600029
+Phone: 044 3190 3195</pre>
+ <a href="http://www.talentex.in" target="_blank">www.talentex.in</a>    <a href="http://www.fbtech.in" target="_blank">www.fbtech.in</a>
+
+
+</div>
+
+ </div>
+
+
+
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>TalentEx</title>
+
+</head>
+
+<body>
+<div id="main_container" style="background-color: #E9E1E1; height: 1180px; width: 100%;">
+  <div id="container" style="background-color: #FFFFFF; height: 1180px; width: 760px; margin: auto;">
+    <div class="logo" style="height: 150px; width: 400px; margin: auto;"><img src="http://talentex.in/images/talentexcb.png" width="400" height="150px" alt="talentex" /></div>
+    <div class="welcome" style="background-color: #48a78e; height: 300px; width: 760px; font-size: 48px; margin-topcolor: #FFFFFF;">
+      
+    
+    <div class="welcome_txt" style="font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, sans-serif; font-size: 55px; color: #FFFFFF; margin-left: 85px; margin-top: 20px; margin-bottom: 15px;">Welcome to TalentEx! </div>
+<div class="txt1" style="font-family: Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 35px; line-height: 45px; color: #FFFFFF; margin-left: 35px; margin-right: 35px; text-align: center;" align="center">We are excited to have you join in our TalentEx Community</div>
+<div class="button" style="height: 65px; width: 400px; background-color: #EB8717; font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, sans-serif; font-size: 20px; line-height: 65px; color: #FFFFFF; text-align: center; font-weight: bold; cursor: pointer; margin: 20px auto 15px;" align="center"><a href="http://www.talentex.in" target="_blank" style="color: #FFFFFF; text-decoration: none;">TAKE YOUR FIRST STEP</a></div>
+
+
+    </div>
+    <div class="threecol" style="height: 280px; width: 760px;">
+      <div class="col" style="float: left; height: 200px; width: 250px;">
+        <div class="image" style="height: 100px; width: 250px; margin-top: 20px; margin-bottom: 20px;"><div class="icon1" style="height: 60px; width: 60px; border-radius: 50%; margin-top: 60px; margin-left: 90px; font-style: normal; font-variant: normal; font-weight: normal; font-size: normal; line-height: normal; border: 7px solid #329dd9;">
+            <span id="design1" style="position: relative; top: 4px; float: left; left: 22px; font-size: 45px; color: #329dd9;">J</span>
+        </div></div>
+        <div class="col_txt" style="font-size: normal; line-height: normal; font-style: normal; font-weight: normal; font-variant: normal; color: #807777; text-align: center; margin-right: 10px; margin-left: 10px;" align="center">We make you aware of jobroles available in an Industry. </div>
+      
+      </div>
+    <div class="col1" style="float: left; height: 200px; width: 250px; margin-left: 5px; margin-right: 5px;">
+       <div class="image" style="height: 100px; width: 250px; margin-top: 20px; margin-bottom: 20px;"><div class="icon1" style="height: 60px; width: 60px; border-radius: 50%; margin-top: 60px; margin-left: 90px; font-style: normal; font-variant: normal; font-weight: normal; font-size: normal; line-height: normal; border: 7px solid #329dd9;">
+            <span id="design2" style="position: relative; top: 4px; float: left; left: 15px; font-size: 45px; color: #329dd9;">C </span>
+        </div></div>
+       <div class="col_txt" style="font-size: normal; line-height: normal; font-style: normal; font-weight: normal; font-variant: normal; color: #807777; text-align: center; margin-right: 10px; margin-left: 10px;" align="center">We make you aware of courses you required to get your dream job. </div>
+       
+       
+    </div>
+    <div class="col" style="float: left; height: 200px; width: 250px;">
+       <div class="image" style="height: 100px; width: 250px; margin-top: 20px; margin-bottom: 20px;">  <div class="icon2" style="height: 60px; width: 60px; border-radius: 50%; margin-top: 60px; margin-left: 90px; font-variant: normal; font-style: normal; font-weight: normal; font-size: normal; line-height: normal; border-color: #329dd9 #329dd9 #329dd9 #666666; border-style: solid; border-width: 7px;">
+            <span id="design3" style="position: relative; top: 21px; float: left; left: 12px; font-size: 22px; color: #329dd9;">89%</span>
+        </div></div>
+      <div class="col_txt" style="font-size: normal; line-height: normal; font-style: normal; font-weight: normal; font-variant: normal; color: #807777; text-align: center; margin-right: 10px; margin-left: 10px;" align="center">You can know where you stand among your peers</div>
+    </div>
+    
+    
+    </div>
+    
+    <div class="button" style="height: 65px; width: 400px; background-color: #EB8717; font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, sans-serif; font-size: 20px; line-height: 65px; color: #FFFFFF; text-align: center; font-weight: bold; cursor: pointer; margin: 20px auto 15px;" align="center"><a href="http://www.talentex.in" target="_blank" style="color: #FFFFFF; text-decoration: none;">CLICK HERE TO CONTINUE</a></div>
+  
+
+
+<div class="green" style="height: 200px; width: 760px; font-weight: normal; font-size: normal; font-variant: normal; font-style: normal; line-height: normal; color: white; background-color: #48a78e;">
+<div class="p2" style="color: white; font-size: 22px; font-weight: bold; line-height: 75px; text-align: center; padding-top: 20px;" align="center">Let your friends know you're on TalentEx</div>
+<p style="font-size: 15px; color: #EC5C11; font-weight: bold; padding-left: 150px;"><a href="https://www.facebook.com/talentex" target="_blank"><img src="http://talentex.in:8080/StaticPages/images/logo_fb.png" width="45px" height="45px" style="margin-left: 115px; cursor: pointer;"  alt="fb"></a><a href="https://twitter.com/Talent_Ex" target="_blank"><img src="http://talentex.in:8080/StaticPages/images/logo_tw.png" width="45px" height="45px" style="margin-left: 45px; cursor: pointer;" alt="twi"></a><a href="http://www.linkedin.com/groups/TalentEx-HR-Professionals-6732104?gid=6732104&amp;mostPopular=&amp;trk=tyah&amp;trkInfo=tarId%3A1406643008327%2Ctas%3Atalentex%20%2Cidx%3A2-1-2" target="_blank"><img src="http://talentex.in:8080/StaticPages/images/logo_ln.png" width="45px" height="45px" alt="linkedin" style="margin-left: 45px; cursor: pointer;"></a></p>
+
+
+</div>
+
+<div class="white" style="height: 100px; width: 760px; text-align: center; color: #999999;" align="center">
+<center><h2>Fore Brain Technologies Pvt Ltd.</h2></center>
+<pre>
+MS Towers, 2nd floor, 633/1
+Aminjikarai Chennai, Tamil Nadu 600029
+Phone: 044 3190 3195</pre>
+ <a href="http://www.talentex.in" target="_blank">www.talentex.in</a> &nbsp;&nbsp; <a href="http://www.fbtech.in" target="_blank">www.fbtech.in</a>
+
+
+</div>
+
+ </div>
+
+
+
+</div>
+
+
+
+</body>
+</html>

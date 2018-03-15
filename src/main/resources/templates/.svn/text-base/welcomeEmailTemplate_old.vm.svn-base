@@ -1,0 +1,256 @@
+ 	<!DOCTYPE html> 
+	<!-- 
+	To change this license header, choose License Headers in Project Properties. 
+	To change this template file, choose Tools | Templates 
+	and open the template in the editor. 
+	--> 
+	<html> 
+	<head> 
+	<title>Talentex</title> 
+	<meta charset="UTF-8"> 
+	<meta name="viewport" content="width=device-width"> 
+	
+	<style> 
+	body{ 
+	margin:0px; 
+	padding:0px; 
+	
+	} 
+	.btn { 
+	background: #3498db; 
+	background-image: -webkit-linear-gradient(top, #3498db, #2980b9); 
+	background-image: -moz-linear-gradient(top, #3498db, #2980b9); 
+	background-image: -ms-linear-gradient(top, #3498db, #2980b9); 
+	background-image: -o-linear-gradient(top, #3498db, #2980b9); 
+	background-image: linear-gradient(to bottom, #3498db, #2980b9); 
+	-webkit-border-radius: 0; 
+	-moz-border-radius: 0; 
+	border-radius: 0px; 
+	font-family: Arial; 
+	color: #ffffff; 
+	font-size: 20px; 
+	padding: 10px 40px 10px 40px; 
+	border: solid #f7f7f7 7px; 
+	text-decoration: none; 
+	margin-top:5px; 
+	} 
+	
+	.btn:hover { 
+	background: #3cb0fd; 
+	background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db); 
+	background-image: -moz-linear-gradient(top, #3cb0fd, #3498db); 
+	background-image: -ms-linear-gradient(top, #3cb0fd, #3498db); 
+	background-image: -o-linear-gradient(top, #3cb0fd, #3498db); 
+	background-image: linear-gradient(to bottom, #3cb0fd, #3498db); 
+	text-decoration: none; 
+	} 
+	p{ 
+	margin:0.2em; 
+	line-height: 20px; 
+	} 
+	.container{ 
+	width:600px; 
+	height:680px; 
+	margin:auto; 
+	border: 9px solid #043176; 
+	} 
+	.header{ 
+	width:600px; 
+	height:90px; 
+	} 
+	.talen_logo{ 
+	
+	width:200px; 
+	height:90px; 
+	margin-left:10px; 
+	} 
+	
+	.content{ 
+	width:600px; 
+	height:270px; 
+	color: #002a80; 
+	margin-top:20px; 
+	} 
+	.talent{ 
+	
+	font-size: 22px; 
+	text-decoration:none; 
+	text-align:center; 
+	color: #176BED; 
+	} 
+	.talent:hover{ 
+	
+	} 
+	.txt{ 
+	width:500px; 
+	height:250px; 
+	float:left; 
+	font-size: 18px; 
+	
+	color: #002a80; 
+	margin-left:30px; 
+	padding-top:10px; 
+	text-align:justify; 
+	line-height: 35px; 
+	
+	
+	} 
+	.image{ 
+	float:left; 
+	width:250px; 
+	height:270px; 
+	} 
+	.click{ 
+	width:275px; 
+	margin-left:15px; 
+	margin-top:30px; 
+	height:50px; 
+	color:white; 
+	text-align:center; 
+	line-height: 35px; 
+	background-color: #0088cc; 
+	font-size: 18px; 
+	font-weight: bold; 
+	cursor:pointer; 
+	
+	} 
+	
+	
+	.orword{ 
+	color: #00cccc; 
+	margin-top:30px; 
+	margin-left:200px; 
+	font-size:40px; 
+	font-style: italic; 
+	
+	
+	} 
+	.fbt{ 
+	width:600px; 
+	height:90px; 
+	margin-top:15px; 
+	} 
+	.fbtfooter 
+	{ 
+	height:180px; 
+	width: 600px; 
+	padding-top: 40px; 
+	} 
+	.fbt_image{ 
+	width:200px; 
+	height:90px; 
+	
+	padding-top: 0px; 
+	padding-left:400px; 
+	} 
+	.fbtcpy 
+	{ 
+	width: 300px; 
+	height: 90px; 
+	float: left; 
+	padding-left: 5px; 
+	padding-top: 10px; 
+	color: #666666; 
+	
+	} 
+	.social{ 
+	padding-left:170px; 
+	width:500px; 
+	height:90px; 
+	padding-top:0px; 
+	
+	} 
+	.link 
+	{ 
+	
+	color: #002a80; 
+	
+	} 
+	
+	#logo 
+	{ 
+	margin:0px; 
+	padding: 0px; 
+	} 
+	#logo li 
+	{ 
+	list-style-type:none; 
+	float: left; 
+	} 
+	text a{ 
+	color: #002a80; 
+	} 
+	.cbody{ 
+	text-indent: 50px; 
+	} 
+	.address{ 
+	color: white; 
+	background:#1B77BA; 
+	line-height:20px; 
+	} 
+	
+	</style> 
+	
+	</head> 
+	<body> 
+	<div class="container"> 
+	<div class="header"> 
+	<div class="talen_logo"> 
+	<img src="http://talentex.in/images/talentexcb.png" alt="talentex" width="200px" height="100px"/> 
+	</div> 
+	</div> 
+	
+	<div class="content"> 
+	<div class="txt"> 
+	Hi ${name}, 
+	<p class="cbody">Thanks For Registering.Your Quick registration is completed successful. Click on the below link to verify your email ID and proceed with profile completion.</p> 
+	<br/> <center><a class="btn" target="_blank" href="${link}">Click here..</a> <center><br/><p>If you are unable to click the link please copy the below url and paste it in your browser.</p> 
+	<center>${link}</center> 
+	</div> 
+	
+	</div> 
+	
+	
+	<div class="fbt"> 
+	<div class="fbtfooter"> 
+	<div class="social"> <center> 
+	
+	<ul id="logo"> 
+	<table>
+	<tr>
+	<td><a href="https://www.facebook.com/talentex"><img src="http://talentex.in:8080/StaticPages/images/logo_fb.png"></a></td>
+	<td><a href="https://twitter.com/Talent_Ex"><img src="http://talentex.in:8080/StaticPages/images/logo_tw.png"></a></td>
+	<td><a href="http://www.linkedin.com/groups/TalentEx-HR-Professionals-6732104?gid=6732104&mostPopular=&trk=tyah&trkInfo=tarId%3A1406643008327%2Ctas%3Atalentex%20%2Cidx%3A2-1-2"><img src="http://talentex.in:8080/StaticPages/images/logo_ln.png"></a></td>
+	<td><a href="https://plus.google.com/105845670791792255444/about/p/pub"><img src="http://talentex.in:8080/StaticPages/images/logo_gplus.png"></a></td>
+
+	</tr> 
+	</table>
+	
+	</center> 
+	</div> 
+	<hr> 
+	<div class="address"> 
+	
+	<center><b>Fore Brain Technologies Pvt Ltd.</b><br/> 
+	<em>MS Towers, 2nd floor, 633/1 
+	Aminjikarai 
+	Chennai, Tamil Nadu 600029 </em><br/> 
+	<b>Phone:</b> +91-44-3190 3195 / 6453 6373 / 42307128 /+91 � 9042031031<br/> 
+	<b>Email Us:</b> 
+	<i>info@fbtech.in</i> 
+
+	</center> 
+	</div> 
+	<hr> 
+	<div class="fbtcpy">�Copyright Fore Brain Technologies</div> 
+	<div class="fbt_image"> 
+	<img src='http://talentex.in/images/poweredby.png'> 
+	</div> 
+	
+	</div> 
+	
+	</div> 
+	
+	</div> 
+	</body> 
+	</html> 

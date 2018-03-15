@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/TalentPortal/!svn/ver/1422/TalentEx_version_1.0/Talentex-Jobseeker/src/main/webapp/WEB-INF/spring/resource
+END
+servlet-context.xml
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/TalentPortal/!svn/ver/1086/TalentEx_version_1.0/Talentex-Jobseeker/src/main/webapp/WEB-INF/spring/resource/servlet-context.xml
+END
+applicationContext-mail.xml
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/TalentPortal/!svn/ver/1422/TalentEx_version_1.0/Talentex-Jobseeker/src/main/webapp/WEB-INF/spring/resource/applicationContext-mail.xml
+END
+applicationContext-dao.xml
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/TalentPortal/!svn/ver/1086/TalentEx_version_1.0/Talentex-Jobseeker/src/main/webapp/WEB-INF/spring/resource/applicationContext-dao.xml
+END
+applicationContext-init.xml
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/TalentPortal/!svn/ver/1422/TalentEx_version_1.0/Talentex-Jobseeker/src/main/webapp/WEB-INF/spring/resource/applicationContext-init.xml
+END

@@ -1,0 +1,18 @@
+Login Date and Time : ${datetime}
+<br>
+User UniqueID : ${userid}
+<br>
+Name : ${name}
+<br>
+Mobile Number : ${mobile}
+<br>
+Email ID : ${email}
+
+
+
+
+
+
+
+
+

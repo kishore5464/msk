@@ -1,0 +1,5 @@
+Forget Password:
+
+Your Access Code is send to : ${email}
+Hi : ${name}
+Your Access Code is : ${access_code}

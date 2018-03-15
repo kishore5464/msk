@@ -1,0 +1,9 @@
+mail.host=smtp.talentex.in
+mail.port=25
+mail.username=TalentEx-Jobs@talentex.in
+mail.password=Job$Info@123
+mail.auth=true
+mail.enable=true
+mail.debug=false
+mail.sslenable=false
+mail.ssltrust=smtp.talentex.in

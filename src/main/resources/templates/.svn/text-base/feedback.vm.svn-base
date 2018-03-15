@@ -1,0 +1,34 @@
+<!doctype html>
+<!-- Date:11-02-2015
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>TalentEx</title>
+
+</head>
+
+<body style="margin: 0px; padding: 0px;">
+<table border="1" style="width:10%">
+  <tr>
+    <td>Name</td>
+    <td>${name}</td> 
+     </tr>
+  <tr>
+    <td>Company</td>
+    <td>${company}</td> 
+     </tr>
+	 <tr>
+    <td>Email Id</td>
+    <td>${mail}</td> 
+     </tr>
+	 <tr>
+    <td>Phone</td>
+    <td>${phone}</td> 
+     </tr>
+	 <tr>
+    <td>Comment</td>
+    <td>${comment}</td> 
+     </tr>
+</table>
+   </body>
+   </html>
