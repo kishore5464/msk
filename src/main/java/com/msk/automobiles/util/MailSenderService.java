@@ -22,6 +22,6 @@ public class MailSenderService {
 	@Autowired
 	VelocityEngine velocityEngine;
 
-	private final String fromEmailAddress = "fbtkishore@gmail.com";
+//	private final String fromEmailAddress = "fbtkishore@gmail.com";
 
 }

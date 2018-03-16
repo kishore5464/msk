@@ -111,7 +111,7 @@
             <div class="account-wall">
                 <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                     alt="">
-                <form class="form-signin">
+                <form class="form-signin" action="msk/login" method="POST"> 
                         <div class="alert alert-danger" style="display:none" [ngStyle]="{display: status == false ? 'block':'none'}">
                                 <strong>Invalid!</strong> User name and password 
                         </div>
@@ -119,9 +119,9 @@
                                 <img src="../assets/loading.gif" width="30px"><br/>
                                 <strong> You Successfuly Logined Now !</strong>
                         </div>
-                <input type="text" class="form-control" #username placeholder="Email" required autofocus>
-                <input type="password" class="form-control" #password placeholder="Password" required>
-                <button class="btn btn-lg btn-primary btn-block" type="button" (click)="login(username,password)">
+                <input type="text" class="form-control" name="username"  placeholder="Email" required autofocus>
+                <input type="password" class="form-control" name="password"  placeholder="Password" required>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="login(username,password)">
                     Sign in</button>
                 <label class="checkbox pull-left">
                     <input type="checkbox" value="remember-me">

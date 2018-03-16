@@ -14,6 +14,7 @@ import org.glassfish.jersey.server.mvc.Viewable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 
 import com.msk.automobiles.business.interfaces.Get_Business_Interface;
@@ -21,6 +22,7 @@ import com.msk.automobiles.business.interfaces.Insert_Business_Interface;
 import com.msk.automobiles.business.interfaces.Update_Business_Interface;
 import com.msk.automobiles.exception.CustomGenericException;
 import com.msk.automobiles.service.pojos.UICar_Brands;
+import com.msk.automobiles.util.UtilityClass;
 
 import net.minidev.json.JSONObject;
 
@@ -39,10 +41,46 @@ public class HomeContorller {
 	@Autowired
 	Update_Business_Interface update_Business_Interface;
 
+	@Autowired
+	UtilityClass util;
+
+	@Autowired
+	Environment env;
+
 	@GET
 	@Path("/login")
 	public Viewable login() {
 		return new Viewable("/login");
+	}
+
+	@POST
+	@Path("/login")
+	public Response login_cred(@FormParam("username") String username, @FormParam("password") String password,
+			@Context HttpServletRequest request) {
+		JSONObject mix = new JSONObject();
+		Viewable view = null;
+		String status = null;
+
+		try {
+			String msk_Owner = get_Business_Interface.getMSKOwnerDetail(username, password);
+
+			if (msk_Owner.equals("success")) {
+				status = "success";
+
+				mix.put("status", status);
+
+				view = new Viewable("/service_details.jsp", mix);
+			} else {
+				status = "failure";
+				mix.put("status", status);
+
+				view = new Viewable("/login.jsp", mix);
+			}
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+
+		return Response.ok().entity(view).build();
 	}
 
 	@GET
@@ -54,10 +92,6 @@ public class HomeContorller {
 		Viewable view = null;
 		try {
 			List<UICar_Brands> brands = get_Business_Interface.getAllBrands();
-
-			for (int i = 0; i < brands.size(); i++) {
-				System.out.println(brands.get(i).getLogo());
-			}
 
 			data.put("brands", brands);
 
@@ -74,16 +108,16 @@ public class HomeContorller {
 
 	@POST
 	@Path("/{brand}/car-models")
-	public Response car_models(@FormParam("brand_id") String brand_id,@Context HttpServletRequest request) {
+	public Response car_models(@FormParam("brand_id") String brand_id, @Context HttpServletRequest request) {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 
 		Viewable view = null;
-		
-		System.out.println("brand_id=======>"+brand_id);
+
+		System.out.println("brand_id=======>" + brand_id);
 		try {
 
-//			System.out.println("KKKKKKKKKKKKKKKKKKKS "+brand_id);
+			// System.out.println("KKKKKKKKKKKKKKKKKKKS "+brand_id);
 			// List<UICar_Models> models =
 			// get_Business_Interface.getModels(brand_id);
 			//
