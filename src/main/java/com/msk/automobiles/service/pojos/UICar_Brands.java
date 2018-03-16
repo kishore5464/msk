@@ -41,4 +41,9 @@ public class UICar_Brands {
 		this.logo = logo;
 	}
 
+	@Override
+	public String toString() {
+		return "UICar_Brands [brand_id=" + brand_id + ", brand=" + brand + ", logo=" + logo + "]";
+	}
+
 }

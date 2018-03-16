@@ -20,6 +20,7 @@
 /home/sornaraj/Desktop/sorna_workspace/kishore project/msk/src/main/java/com/msk/automobiles/dao/interfaces/Get_DAO_Interface.java
 /home/sornaraj/Desktop/sorna_workspace/kishore project/msk/src/main/java/com/msk/automobiles/service/entities/Gender.java
 /home/sornaraj/Desktop/sorna_workspace/kishore project/msk/src/main/java/com/msk/automobiles/business/impl/Update_Business_Impl.java
+/home/sornaraj/Desktop/sorna_workspace/kishore project/msk/src/main/java/com/msk/automobiles/service/pojos/UICar_Models.java
 /home/sornaraj/Desktop/sorna_workspace/kishore project/msk/src/main/java/com/msk/automobiles/business/interfaces/Delete_Business_Interface.java
 /home/sornaraj/Desktop/sorna_workspace/kishore project/msk/src/main/java/com/msk/automobiles/service/entities/Fuel_Type.java
 /home/sornaraj/Desktop/sorna_workspace/kishore project/msk/src/main/java/com/msk/automobiles/service/entities/Parts.java
