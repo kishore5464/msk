@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html lang="en"><head>
   <meta charset="utf-8">
   <title>Bike</title>
@@ -5,309 +12,82 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="../css/carbrands.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 </head>
 <body cz-shortcut-listen="true">
 
-<h6>${it}</h6>
 
-  <app-root _nghost-c0="" ng-version="5.1.3">
-
-
-
-
-<router-outlet _ngcontent-c0=""></router-outlet><app-dashboard _nghost-c1="">
-<app-header _ngcontent-c1="" _nghost-c2=""><nav _ngcontent-c2="" class="navbar navbar-inverse">
-  <div _ngcontent-c2="" class="container-fluid">
-    <div _ngcontent-c2="" class="navbar-header">
-      <a _ngcontent-c2="" class="navbar-brand" href="#">Bike WebSiteName</a>
+<app-header><nav _ class="navbar navbar-inverse">
+  <div _ class="container-fluid">
+    <div class="navbar-header">
+      <a _ class="navbar-brand" href="#">Bike WebSiteName</a>
     </div>
-    <ul _ngcontent-c2="" class="nav navbar-nav">
-      <li _ngcontent-c2=""><a _ngcontent-c2="">Home</a></li>    
-      <li _ngcontent-c2=""><a _ngcontent-c2="">Add Bike</a></li>
+    <ul _ class="nav navbar-nav">
+      <li _><a _>Home</a></li>    
+      <li _><a _>Add car</a></li>
     </ul>
-    <button _ngcontent-c2="" class="btn btn-danger navbar-btn" style="float:right"><a _ngcontent-c2="" href="#" style="color:#ffff">Logout</a></button>
+    
   </div>
 </nav></app-header>
 
-
-<!--bindings={
-  "ng-reflect-ng-if": "true"
-}--><div _ngcontent-c1="" class="container">
-
-  <!--bindings={
-  "ng-reflect-ng-for-of": "[object Object],[object Object"
-}-->
-
-    <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://www.motorbeam.com/wp-content/uploads/2017-KTM-Duke-390-Review.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Yamaha FZ</h4>
+<div class="col-lg-12">
+<div class="container">
+<c:forEach var="brands" varStatus="counter"  items="${it.data.brands}">
+    <div _ class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
+      <div _ class="thumbnail car_brand">
+      <c:if test="${brands == 'noimage'}">
+        <img _ class="" style="width:100%;max-height:100px" src="../images/noimage.jpg">
+        </c:if>
+        <c:if test="${brands != null}">
+        <img _ class="" style="width:100%;max-height:100px" src="${brands.logo}">
+        </c:if>
+        <div _ class="caption">
+          <h5 id="thumbnail-label" class="brand_name">${brands.brand}</h5>
           
        
         </div>
       
       </div>
+      <span id="brand_id" style="display:none">${brands.brand_id}</span>
     </div>
-
-
-    <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://media.zigcdn.com/media/photogallery/2017/Feb/img_3562_640x480.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Pulsar 150</h4>
-          
-      
-          
-         
-        </div>
-       
-      </div>
-    </div>
-
-
-   <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://www.motorbeam.com/wp-content/uploads/2017-KTM-Duke-390-Review.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Yamaha FZ</h4>
-          
-       
-        </div>
-      
-      </div>
-    </div>
-
-
-    <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://media.zigcdn.com/media/photogallery/2017/Feb/img_3562_640x480.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Pulsar 150</h4>
-          
-      
-          
-         
-        </div>
-       
-      </div>
-    </div>
-
-
- <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://www.motorbeam.com/wp-content/uploads/2017-KTM-Duke-390-Review.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Yamaha FZ</h4>
-          
-       
-        </div>
-      
-      </div>
-    </div>
-
-
-    <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://media.zigcdn.com/media/photogallery/2017/Feb/img_3562_640x480.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Pulsar 150</h4>
-          
-      
-          
-         
-        </div>
-       
-      </div>
-    </div>
-
-
- <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://www.motorbeam.com/wp-content/uploads/2017-KTM-Duke-390-Review.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Yamaha FZ</h4>
-          
-       
-        </div>
-      
-      </div>
-    </div>
-
-
-    <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://media.zigcdn.com/media/photogallery/2017/Feb/img_3562_640x480.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Pulsar 150</h4>
-          
-      
-          
-         
-        </div>
-       
-      </div>
-    </div>
-
-
- <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://www.motorbeam.com/wp-content/uploads/2017-KTM-Duke-390-Review.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Yamaha FZ</h4>
-          
-       
-        </div>
-      
-      </div>
-    </div>
-
-
-    <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://media.zigcdn.com/media/photogallery/2017/Feb/img_3562_640x480.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Pulsar 150</h4>
-          
-      
-          
-         
-        </div>
-       
-      </div>
-    </div>
-
- <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://www.motorbeam.com/wp-content/uploads/2017-KTM-Duke-390-Review.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Yamaha FZ</h4>
-          
-       
-        </div>
-      
-      </div>
-    </div>
-
-
-    <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://media.zigcdn.com/media/photogallery/2017/Feb/img_3562_640x480.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Pulsar 150</h4>
-          
-      
-          
-         
-        </div>
-       
-      </div>
-    </div>
-
- <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://www.motorbeam.com/wp-content/uploads/2017-KTM-Duke-390-Review.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Yamaha FZ</h4>
-          
-       
-        </div>
-      
-      </div>
-    </div>
-
-
-    <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://media.zigcdn.com/media/photogallery/2017/Feb/img_3562_640x480.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Pulsar 150</h4>
-          
-      
-          
-         
-        </div>
-       
-      </div>
-    </div>
-
- <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://www.motorbeam.com/wp-content/uploads/2017-KTM-Duke-390-Review.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Yamaha FZ</h4>
-          
-       
-        </div>
-      
-      </div>
-    </div>
-
-
-    <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://media.zigcdn.com/media/photogallery/2017/Feb/img_3562_640x480.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Pulsar 150</h4>
-          
-      
-          
-         
-        </div>
-       
-      </div>
-    </div>
-
- <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://www.motorbeam.com/wp-content/uploads/2017-KTM-Duke-390-Review.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Yamaha FZ</h4>
-          
-       
-        </div>
-      
-      </div>
-    </div>
-
-
-    <div _ngcontent-c3="" class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ngcontent-c3="" class="thumbnail">
-        <img _ngcontent-c3="" class="" style="width:100%;max-height:100px" src="https://media.zigcdn.com/media/photogallery/2017/Feb/img_3562_640x480.jpg">
-        <div _ngcontent-c3="" class="caption">
-          <h4 _ngcontent-c3="" id="thumbnail-label">Pulsar 150</h4>
-          
-      
-          
-         
-        </div>
-       
-      </div>
-    </div>
-
-
+</c:forEach>
+</div>
 </div>
 
+	<form name="submitForm" method="post" id="menuurl" action=""
+		style="display: none;">
+		 <input type="hidden" name="brandid" id="brandid" value="">
+		 <input type="hidden" name="applicationState" id="formapplicationState"
+			value='${it.applicationStateJson}'> <input type="hidden"
+			name="job_id" id="form_job_id" value=''> <a
+			href="javascript:document.submitForm.submit()" id="formsubmit"></a>
 
-<!--bindings={
-  "ng-reflect-ng-if": "false"
-}-->
-
-
-
-
-<!--bindings={
-  "ng-reflect-ng-if": "false"
-}-->
-
-</app-dashboard>
-
-
-
-
-</app-root>
-<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script>
+    </form>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+    
+    $(document).ready(function(){
+    	
+    	$('.car_brand').click(function(){
+    		
+    		console.log("car clickeddd");
+    		
+    		
+    		console.log("------code-->"+$(this).next().text());
+    		$('#brandid').val($(this).next().text());
+    		
+    		 window.setTimeout(function() {
+    	   		 $("#menuurl").attr("action","/brand/");
+    	   	     document.submitForm.submit(); 
+    	    }, 300);
+    		
+    	});
+    	
+    	
+    });
+    
+    </script>
 
 </body></html>
