@@ -22,6 +22,7 @@ import com.msk.automobiles.business.interfaces.Insert_Business_Interface;
 import com.msk.automobiles.business.interfaces.Update_Business_Interface;
 import com.msk.automobiles.exception.CustomGenericException;
 import com.msk.automobiles.service.pojos.UICar_Brands;
+import com.msk.automobiles.service.pojos.UICar_Models;
 import com.msk.automobiles.util.UtilityClass;
 
 import net.minidev.json.JSONObject;
@@ -117,15 +118,14 @@ public class HomeContorller {
 		System.out.println("brand_id=======>" + brand_id);
 		try {
 
-			// System.out.println("KKKKKKKKKKKKKKKKKKKS "+brand_id);
-			// List<UICar_Models> models =
-			// get_Business_Interface.getModels(brand_id);
-			//
-			// data.put("models", models);
-			//
-			// mix.put("data", data);
+			System.out.println("KKKKKKKKKKKKKKKKKKKS " + brand_id);
+			List<UICar_Models> models = get_Business_Interface.getModels(brand_id);
 
-			view = new Viewable("/car_models");
+			data.put("models", models);
+
+			mix.put("data", data);
+
+			view = new Viewable("/car_models", mix);
 
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());

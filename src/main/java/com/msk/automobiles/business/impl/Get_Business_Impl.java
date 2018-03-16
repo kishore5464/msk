@@ -50,13 +50,19 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		List<Car_Models> models = get_DAO_Interface.getModels(Integer.parseInt(car_brands_id));
 		List<UICar_Models> uiCar_Models = new ArrayList<UICar_Models>();
 
+		System.out.println(models.size());
 		if (!models.isEmpty()) {
 			for (int i = 0; i < models.size(); i++) {
 				UICar_Models car_Models = new UICar_Models();
 				car_Models.setBrand_id(Integer.toString(models.get(i).getCar_Brands().getId()));
 				car_Models.setModel_id(Integer.toString(models.get(i).getId()));
 				car_Models.setModel(models.get(i).getModels());
-				car_Models.setImage(models.get(i).getModel_image());
+
+				if (models.get(i).getModel_image() == null) {
+					car_Models.setImage("noimage");
+				} else {
+					car_Models.setImage(models.get(i).getModel_image());
+				}
 
 				uiCar_Models.add(car_Models);
 			}

@@ -199,10 +199,10 @@ h4{
 				
 				</h4>
 			<a href="msk/login"><button type="button" class="btn btn-primary btn-lg btn1">Invoice</button></a>&nbsp;&nbsp;&nbsp;
-			<form action="msk/jeep/car-models" method="GET">
-		<!-- 	<a href="/msk/jeep/car-models">	<button type="button" class="btn btn-primary btn-lg btn2">Register</button></a> -->
-			<button type="submit" class="btn btn-primary btn-lg btn2">Register</button>
-				</form>
+			
+		 	<a href="msk/car-brand">	<button type="button" class="btn btn-primary btn-lg btn2">Register</button></a> 
+			
+				
 			</div>
 		</div></center>
 		<div class="carousel-inner ">
