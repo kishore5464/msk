@@ -55,7 +55,7 @@
 
 	<servlet-mapping>
 		<servlet-name>jersey-serlvet</servlet-name>
-		<url-pattern>/portal/*</url-pattern>
+		<url-pattern>/msk/*</url-pattern>
 	</servlet-mapping>
 	
 	
