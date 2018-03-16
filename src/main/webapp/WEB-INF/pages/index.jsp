@@ -205,7 +205,7 @@ h4{
 		</div></center>
 		<div class="carousel-inner ">
 			<div class="item active bg-img">
-				<img src="images/CARBG.jpg" style="" alt=""/>											
+				<img src="../images/CARBG.jpg" style="" alt=""/>											
 			</div>
 		</div>
 	</div>
