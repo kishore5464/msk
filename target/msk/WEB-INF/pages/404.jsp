@@ -4,9 +4,9 @@
 <meta charset="ISO-8859-1">
 <title>404</title>
 
-<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
-<script src="../js/jquery.js"></script>
-                  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+                  <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -16,7 +16,7 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<div class="row">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-							<a href="index"><img src="../images/talentexcb.png" width="180px" height="80px" /></a>
+							<a href="index"><img src="images/talentexcb.png" width="180px" height="80px" /></a>
 						
 					</div>
 				</div>
@@ -27,14 +27,12 @@
 						class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<ul class="nav nav-tabs navbar-right">
-							<li class="active"><a href="personal"><span
+							<li class="active"><a href="index"><span
 									class="glyphicon glyphicon-home"></span> Home</a></li>
-							<li><a href="http://talentex.in:8080/StaticPages/faq.html"
+							<li><a href="http://talentex.in/user/mocd#tf-nodal"
 								target="_blank"><span class="glyphicon glyphicon-eye-open"></span>
 									FAQ</a></li>
-							<li><a href="about.htm"
-								target="_blank"><span class="glyphicon glyphicon-globe"></span>
-									About us</a></li>
+							
 					
 						</ul>
 					</div>
@@ -51,7 +49,7 @@
 </div>
 <div class="col-lg-7 col-lg-offset-3">
 
-<img src="../images/404.png" style="height:350px" alt="page not found"/>
+<img src="images/404.png" style="height:350px" alt="page not found"/>
 </div>
 <div class="col-lg-8 col-lg-offset-2">
 <h4 class="text-primary" style="line-height:30px">
@@ -68,7 +66,7 @@ Page doesnt occur or some other error occured. go to our <a href="http://www.tal
 
 			</div>
 			<div class="col-sm-6">
-				<img src="../images/poweredby.png" class="pull-right" />
+				<img src="images/poweredby.png" class="pull-right" />
 			</div>
 		</div>
 	</div>
