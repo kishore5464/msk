@@ -29,7 +29,12 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				UICar_Brands car_Brands = new UICar_Brands();
 				car_Brands.setBrand_id(Integer.toString(brands.get(i).getId()));
 				car_Brands.setBrand(brands.get(i).getBrand());
-				car_Brands.setLogo(brands.get(i).getLogo());
+
+				if (brands.get(i).getLogo() == null) {
+					car_Brands.setLogo("noimage");
+				} else {
+					car_Brands.setLogo(brands.get(i).getLogo());
+				}
 
 				uiCar_Brands.add(car_Brands);
 			}

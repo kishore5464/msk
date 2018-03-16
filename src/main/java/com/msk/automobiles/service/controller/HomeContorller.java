@@ -58,6 +58,10 @@ public class HomeContorller {
 		try {
 			List<UICar_Brands> brands = get_Business_Interface.getAllBrands();
 
+			for (int i = 0; i < brands.size(); i++) {
+				System.out.println(brands.get(i).getLogo());
+			}
+
 			data.put("brands", brands);
 
 			mix.put("data", data);
@@ -73,14 +77,14 @@ public class HomeContorller {
 
 	@GET
 	@Path("/{brand}/car-models")
-	public Response car_models(@FormParam("brand_id") String brand_id, @Context HttpServletRequest request) {
+	public Response car_models(@Context HttpServletRequest request) {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 
 		Viewable view = null;
 		try {
 
-			System.out.println("KKKKKKKKKKKKKKKKKKKS " + brand_id);
+			System.out.println("KKKKKKKKKKKKKKKKKKKS ");
 			// List<UICar_Models> models =
 			// get_Business_Interface.getModels(brand_id);
 			//
