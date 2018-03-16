@@ -31,6 +31,7 @@ public class Customer_Details implements Serializable {
 
 	private Integer id;
 	private Car_Models car_Models;
+	private String customer_id;
 	private String first_name;
 	private String last_name;
 	private String mobile;
@@ -46,11 +47,12 @@ public class Customer_Details implements Serializable {
 		super();
 	}
 
-	public Customer_Details(Integer id, Car_Models car_Models, String first_name, String last_name, String mobile,
-			String email, Gender gender, Date dob, String gst_no, Date created_date) {
+	public Customer_Details(Integer id, Car_Models car_Models, String customer_id, String first_name, String last_name,
+			String mobile, String email, Gender gender, Date dob, String gst_no, Date created_date) {
 		super();
 		this.id = id;
 		this.car_Models = car_Models;
+		this.customer_id = customer_id;
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.mobile = mobile;
@@ -80,6 +82,15 @@ public class Customer_Details implements Serializable {
 
 	public void setCar_Models(Car_Models car_Models) {
 		this.car_Models = car_Models;
+	}
+
+	@Column(name = "customer_id", nullable = false)
+	public String getCustomer_id() {
+		return customer_id;
+	}
+
+	public void setCustomer_id(String customer_id) {
+		this.customer_id = customer_id;
 	}
 
 	@Column(name = "first_name", nullable = false)
