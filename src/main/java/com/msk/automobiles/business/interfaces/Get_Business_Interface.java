@@ -11,4 +11,6 @@ public interface Get_Business_Interface {
 
 	List<UICar_Models> getModels(String car_brands_id);
 
+	String getMSKOwnerDetail(String username, String password);
+
 }

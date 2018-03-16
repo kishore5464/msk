@@ -10,8 +10,10 @@ import com.msk.automobiles.business.interfaces.Get_Business_Interface;
 import com.msk.automobiles.dao.interfaces.Get_DAO_Interface;
 import com.msk.automobiles.service.entities.Car_Brands;
 import com.msk.automobiles.service.entities.Car_Models;
+import com.msk.automobiles.service.entities.MSK_Owner;
 import com.msk.automobiles.service.pojos.UICar_Brands;
 import com.msk.automobiles.service.pojos.UICar_Models;
+import com.msk.automobiles.util.Encrypt_Decrypt;
 
 @Service
 public class Get_Business_Impl implements Get_Business_Interface {
@@ -61,6 +63,28 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		}
 
 		return uiCar_Models;
+	}
+
+	@Override
+	public String getMSKOwnerDetail(String username, String password) {
+
+		List<MSK_Owner> msk_Owner = get_DAO_Interface.getMSKOwnerDetail(username);
+		Encrypt_Decrypt password_Encrypt_Decrypt = new Encrypt_Decrypt();
+		String encrypt_password = password_Encrypt_Decrypt.encrypt(password);
+
+		String status = null;
+
+		if (!msk_Owner.isEmpty()) {
+			if (encrypt_password.equals(msk_Owner.get(0).getPassword())) {
+				status = "success";
+			} else {
+				status = "failure";
+			}
+		} else {
+			status = "failure";
+		}
+
+		return status;
 	}
 
 }
