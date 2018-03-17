@@ -61,4 +61,30 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 		return msk_Owners;
 	}
 
+	@Override
+	public List<Car_Brands> getBrandById(Integer brand_id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Car_Brands where id = '" + brand_id + "'");
+		List<Car_Brands> car_Brands = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return car_Brands;
+	}
+
+	@Override
+	public List<Car_Models> getModelById(Integer model_id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Car_Models where id = '" + model_id + "'");
+		List<Car_Models> car_Models = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return car_Models;
+	}
+
 }

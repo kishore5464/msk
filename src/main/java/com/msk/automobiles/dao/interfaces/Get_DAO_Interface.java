@@ -14,4 +14,8 @@ public interface Get_DAO_Interface {
 
 	List<MSK_Owner> getMSKOwnerDetail(String username);
 
+	List<Car_Brands> getBrandById(Integer brand_id);
+
+	List<Car_Models> getModelById(Integer model_id);
+
 }

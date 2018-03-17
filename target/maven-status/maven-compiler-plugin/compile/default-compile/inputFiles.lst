@@ -2,8 +2,10 @@
 /home/kicha/REST_MSK/msk/src/main/java/com/msk/automobiles/service/entities/Fuel_Type.java
 /home/kicha/REST_MSK/msk/src/main/java/com/msk/automobiles/dao/interfaces/Delete_DAO_Interface.java
 /home/kicha/REST_MSK/msk/src/main/java/com/msk/automobiles/dao/interfaces/Update_DAO_Interface.java
+/home/kicha/REST_MSK/msk/src/main/java/com/msk/automobiles/service/pojos/UICar_Models.java
 /home/kicha/REST_MSK/msk/src/main/java/com/msk/automobiles/service/controller/DownloadContorller.java
 /home/kicha/REST_MSK/msk/src/main/java/com/msk/automobiles/service/entities/Parts.java
+/home/kicha/REST_MSK/msk/src/main/java/com/msk/automobiles/service/entities/MSK_Owner.java
 /home/kicha/REST_MSK/msk/src/main/java/com/msk/automobiles/dao/impl/Delete_DAO_Impl.java
 /home/kicha/REST_MSK/msk/src/main/java/com/msk/automobiles/service/entities/Car_Models.java
 /home/kicha/REST_MSK/msk/src/main/java/com/msk/automobiles/service/entities/Customer_Details.java

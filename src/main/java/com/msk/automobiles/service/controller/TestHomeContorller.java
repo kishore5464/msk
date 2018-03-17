@@ -1,7 +1,11 @@
 package com.msk.automobiles.service.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
 
 import org.glassfish.jersey.server.mvc.Viewable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,11 +61,28 @@ public class TestHomeContorller {
 	public Viewable add_car_model() {
 		return new Viewable("/add_car_model");
 	}
-	
+
 	@GET
 	@Path("/customer-service-details")
 	public Viewable view_customer_details() {
 		return new Viewable("/view_customer_details");
 	}
-	
+
+	@POST
+	@Path("/upload-brand")
+	public void upload_brand(@FormParam("brand_id") String brand_id, @FormParam("logo") String logo,
+			@Context HttpServletRequest request) {
+
+		System.out.println("OOOOOOOOOOOOOOOOOoo");
+		System.out.println("KKKKKKKKKKKKKKKKKKKk  " + brand_id);
+		insert_Business_Interface.insertOrUpdateBrandLogo(brand_id, logo);
+	}
+
+	@POST
+	@Path("/upload-model")
+	public void upload_model(@FormParam("model_id") String model_id, @FormParam("logo") String logo,
+			@Context HttpServletRequest request) {
+
+		insert_Business_Interface.insertOrUpdateModelLogo(model_id, logo);
+	}
 }
