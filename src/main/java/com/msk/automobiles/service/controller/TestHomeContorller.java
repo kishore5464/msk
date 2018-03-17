@@ -37,6 +37,12 @@ public class TestHomeContorller {
 	public Viewable get_index() {
 		return new Viewable("/index");
 	}
+	
+//	@GET
+//	@Path("/invoice")
+//	public Viewable get_index() {
+//		return new Viewable("/index");
+//	}
 
 	@GET
 	@Path("/dashboard")

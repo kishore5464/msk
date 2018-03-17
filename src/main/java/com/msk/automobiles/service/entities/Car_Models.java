@@ -7,6 +7,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +33,7 @@ public class Car_Models implements Serializable {
 	private Car_Brands car_Brands;
 	private String models;
 	private String model_image;
-	private String fuel_type;
+	private Fuel_Type fuel_type;
 	private Date created_date;
 
 	private Set<Customer_Details> customer_Details = new HashSet<Customer_Details>();
@@ -41,7 +43,7 @@ public class Car_Models implements Serializable {
 		super();
 	}
 
-	public Car_Models(Integer id, Car_Brands car_Brands, String models, String model_image, String fuel_type,
+	public Car_Models(Integer id, Car_Brands car_Brands, String models, String model_image, Fuel_Type fuel_type,
 			Date created_date) {
 		super();
 		this.id = id;
@@ -83,11 +85,12 @@ public class Car_Models implements Serializable {
 	}
 
 	@Column(name = "fuel_type")
-	public String getFuel_type() {
+	@Enumerated(EnumType.STRING)
+	public Fuel_Type getFuel_type() {
 		return fuel_type;
 	}
 
-	public void setFuel_type(String fuel_type) {
+	public void setFuel_type(Fuel_Type fuel_type) {
 		this.fuel_type = fuel_type;
 	}
 

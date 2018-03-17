@@ -30,7 +30,7 @@ public class Get_Business_Impl implements Get_Business_Interface {
 			for (int i = 0; i < brands.size(); i++) {
 				UICar_Brands car_Brands = new UICar_Brands();
 				car_Brands.setBrand_id(Integer.toString(brands.get(i).getId()));
-				car_Brands.setBrand(brands.get(i).getBrand());
+				car_Brands.setBrand(brands.get(i).getBrand().replace("+", " "));
 
 				if (brands.get(i).getLogo() == null) {
 					car_Brands.setLogo("noimage");
@@ -56,7 +56,7 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				UICar_Models car_Models = new UICar_Models();
 				car_Models.setBrand_id(Integer.toString(models.get(i).getCar_Brands().getId()));
 				car_Models.setModel_id(Integer.toString(models.get(i).getId()));
-				car_Models.setModel(models.get(i).getModels());
+				car_Models.setModel(models.get(i).getModels().replace("+", " "));
 
 				if (models.get(i).getModel_image() == null) {
 					car_Models.setImage("noimage");
