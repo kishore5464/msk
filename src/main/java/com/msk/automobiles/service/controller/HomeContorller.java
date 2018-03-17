@@ -35,10 +35,16 @@ public class HomeContorller {
 	}
 
 	@GET
+	@Path("/customer_details")
+	public Viewable customer_details() {
+		return new Viewable("/customer_details");
+	}
+	@GET
 	@Path("/dashboard")
 	public Viewable dashboard() {
 		return new Viewable("/dashboard");
 	}
+
 
 	@GET
 	@Path("/index")

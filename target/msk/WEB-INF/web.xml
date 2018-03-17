@@ -3,7 +3,7 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
-	<display-name>JOBSEEKER</display-name>
+	<display-name>msk</display-name>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
@@ -47,7 +47,7 @@
 		
 		<init-param>
 	        <param-name>javax.ws.rs.Application</param-name>
-	        <param-value>com.fbt.talentex.jobseeker.util.CustomResourceConfig</param-value>
+	        <param-value>com.msk.automobiles.util.CustomResourceConfig</param-value>
     	</init-param>
 		
 		<load-on-startup>1</load-on-startup>
@@ -110,7 +110,7 @@
 	<session-config>
         <session-timeout>30</session-timeout>
 </session-config>
-	 <error-page>
+	 <!-- <error-page>
 		<exception-type>com.fbt.jobseeker.service.exception.CustomException</exception-type>
 		<location>/WEB-INF/pages/generic_error.jsp</location>
 	</error-page> 
@@ -123,5 +123,5 @@
 	<error-page>
 		<exception-type>java.lang.Exception</exception-type>
 		<location>/WEB-INF/pages/exception_error</location>
-	</error-page> 
+	</error-page>  -->
 </web-app>
