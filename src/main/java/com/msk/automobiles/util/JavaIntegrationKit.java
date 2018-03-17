@@ -33,9 +33,9 @@ import javax.servlet.http.HttpServletResponse;
 // This Class has 4 Methods in total which combinely processes HTTP POST Request
 // parameters and puts those processed parameters (Some Refined and Some
 // Processed) into urlParams Map DataStructure
+@SuppressWarnings("unused")
 public class JavaIntegrationKit {
 
-	@SuppressWarnings("unused")
 	private Integer error;
 
 	// This Method returns true, if the string is null (or) empty and returns
@@ -85,7 +85,6 @@ public class JavaIntegrationKit {
 	// parameters and its values' inside params Map DataStructure
 	public Map<String, String> hashCalMethod(HttpServletRequest request, HttpServletResponse response,
 			Map<String, String> paramlistvalues) throws ServletException, IOException {
-		System.out.println("HEYYYYY");
 		response.setContentType("text/html;charset=UTF-8");
 		String salt = "CLvgJJJYD8";
 		String action1 = "";
@@ -117,7 +116,7 @@ public class JavaIntegrationKit {
 		Map<String, String> urlParams = new HashMap<String, String>();
 
 		while (paramNames.hasMoreElements()) {
-			String paramName = (String) paramNames.nextElement();
+			String paramName = paramNames.nextElement();
 
 			// String paramValue = request.getParameter(paramName);
 			String paramValue = paramlistvalues.get(paramName); // CHANGE #2
@@ -143,7 +142,6 @@ public class JavaIntegrationKit {
 		} else
 			txnid = params.get("txnid");
 
-		@SuppressWarnings("unused")
 		String txn = "abcd";
 		String hash = "";
 		String otherPostParamSeq = "phone|surl|furl|lastname|curl|address1|address2|city|state|country|zipcode|pg"; // These
