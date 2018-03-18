@@ -24,7 +24,7 @@
 <app-header><nav _ class="navbar navbar-inverse">
   <div _ class="container-fluid">
     <div class="navbar-header">
-      <a _ class="navbar-brand" href="#">Bike WebSiteName</a>
+      <a _ class="navbar-brand" href="/">MSK Automotive</a>
     </div>
     <ul _ class="nav navbar-nav">
       <li _><a _>Home</a></li>    
@@ -51,7 +51,6 @@
         </div>
       </div>
       <span id="brand_id" style="display:none">${brands.brand_id}</span>
-       <button type="button" class="choose">Choose Image</button>
     </div>
 </c:forEach>
 </div>
