@@ -56,12 +56,12 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				UICar_Models car_Models = new UICar_Models();
 				car_Models.setBrand_id(Integer.toString(models.get(i).getCar_Brands().getId()));
 				car_Models.setModel_id(Integer.toString(models.get(i).getId()));
-				car_Models.setModel(models.get(i).getModels().replace("+", " "));
+				car_Models.setModel(models.get(i).getModel().replace("+", " "));
 
-				if (models.get(i).getModel_image() == null) {
+				if (models.get(i).getImage() == null) {
 					car_Models.setImage("noimage");
 				} else {
-					car_Models.setImage(models.get(i).getModel_image());
+					car_Models.setImage(models.get(i).getImage());
 				}
 
 				uiCar_Models.add(car_Models);

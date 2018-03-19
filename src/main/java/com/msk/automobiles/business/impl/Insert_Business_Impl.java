@@ -40,7 +40,7 @@ public class Insert_Business_Impl implements Insert_Business_Interface {
 		List<Car_Models> model = get_DAO_Interface.getModelById(Integer.parseInt(model_id));
 
 		if (!model.isEmpty()) {
-			model.get(0).setModel_image(logo);
+			model.get(0).setImage(logo);
 
 			update_DAO_Interface.updateModelDetail(model.get(0));
 		}
