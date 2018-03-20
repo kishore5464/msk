@@ -174,4 +174,27 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		return service_Type_Pojos;
 	}
 
+	@Override
+	public String getServiceCardNo() {
+		// TODO Auto-generated method stub
+		List<Service_Invoice_Card> service_Invoice_Cards = get_DAO_Interface.getServiceInvoiceCards();
+		String service_card_id = null;
+
+		if (!service_Invoice_Cards.isEmpty()) {
+			if (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() <= 9) {
+				service_card_id = "MSK 00" + service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId();
+			} else if (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() >= 10
+					&& service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() <= 99) {
+				service_card_id = "MSK 0" + service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId();
+			} else if (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() >= 100
+					&& service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() <= 999) {
+				service_card_id = "MSK 00" + service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId();
+			}
+		} else {
+			service_card_id = "MSK 001";
+		}
+
+		return service_card_id;
+	}
+
 }

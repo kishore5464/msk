@@ -22,4 +22,6 @@ public interface Get_Business_Interface {
 
 	List<Service_Type_Pojo> getServiceType();
 
+	String getServiceCardNo();
+
 }

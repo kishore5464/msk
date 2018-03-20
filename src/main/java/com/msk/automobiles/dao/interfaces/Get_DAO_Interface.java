@@ -35,4 +35,6 @@ public interface Get_DAO_Interface {
 
 	List<Service_Type> getServiceType();
 
+	List<Service_Invoice_Card> getServiceInvoiceCards();
+
 }

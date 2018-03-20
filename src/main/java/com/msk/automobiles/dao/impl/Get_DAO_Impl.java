@@ -172,4 +172,17 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 		return service_Types;
 	}
 
+	@Override
+	public List<Service_Invoice_Card> getServiceInvoiceCards() {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Service_Invoice_Card ");
+		List<Service_Invoice_Card> service_Invoice_Cards = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return service_Invoice_Cards;
+	}
+
 }

@@ -77,21 +77,17 @@ public class AddingController {
 			@Context HttpServletRequest request) {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
-		String status = null;
-
 		try {
 			Integer customer_detail_id = insert_Business_Interface.insertCustomerDetail(model_id, first_name, last_name,
 					mobile, email, dob, registration_no, gst_no);
 
 			data.put("customer_detail_id", customer_detail_id);
 			mix.put("data", data);
-
-			status = "success";
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
 		}
 
-		return Response.ok().entity(status).build();
+		return Response.ok().entity(mix.toString()).build();
 	}
 
 	@POST
@@ -100,11 +96,30 @@ public class AddingController {
 			@FormParam("address_line_1") String address_line_1, @FormParam("address_line_2") String address_line_2,
 			@FormParam("location_id") String location_id, @FormParam("pincode") String pincode,
 			@Context HttpServletRequest request) {
-		String status = null;
-
+		JSONObject mix = new JSONObject();
+		JSONObject data = new JSONObject();
 		try {
 			insert_Business_Interface.insertCustomerContactDetails(customer_id, address_line_1, address_line_2,
 					location_id, pincode);
+			String service_card_id = get_Business_Interface.getServiceCardNo();
+			data.put("service_card_id", service_card_id);
+			mix.put("data", data);
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+
+		return Response.ok().entity(mix.toString()).build();
+	}
+
+	@POST
+	@Path("/add-service-card")
+	public Response add_service_card(@FormParam("customer_detail_id") String customer_detail_id,
+			@FormParam("service_type_id") String service_type_id, @FormParam("kilometer") String kilometer,
+			@FormParam("service") String service, @Context HttpServletRequest request) {
+		String status = null;
+
+		try {
+//			insert_Business_Interface.insertCarBrand(brand, logo);
 			status = "success";
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
