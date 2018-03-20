@@ -244,6 +244,7 @@ CREATE TABLE IF NOT EXISTS `customer_details` (
   `mobile` varchar(15) NOT NULL,
   `email` varchar(30) DEFAULT NULL,
   `dob` date DEFAULT NULL,
+  `registration_no` varchar(50) NOT NULL,
   `gst_no` varchar(50) DEFAULT NULL,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -260,7 +261,6 @@ DELETE FROM `customer_details`;
 DROP TABLE IF EXISTS `location`;
 CREATE TABLE IF NOT EXISTS `location` (
   `id` int(15) NOT NULL AUTO_INCREMENT,
-  `state` varchar(50) NOT NULL,
   `city` varchar(50) NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -330,6 +330,7 @@ CREATE TABLE IF NOT EXISTS `service_invoice_card` (
   `card_status` enum('OPEN','CLOSED','BILLED') NOT NULL,
   `from_date` date NOT NULL,
   `expire_date` date NOT NULL,
+  `current_service_date` date NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `service_id` (`service_id`),

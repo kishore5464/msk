@@ -26,7 +26,6 @@ public class Location implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	private String state;
 	private String city;
 	private Date created_date;
 
@@ -36,10 +35,9 @@ public class Location implements Serializable {
 		super();
 	}
 
-	public Location(Integer id, String state, String city, Date created_date) {
+	public Location(Integer id, String city, Date created_date) {
 		super();
 		this.id = id;
-		this.state = state;
 		this.city = city;
 		this.created_date = created_date;
 	}
@@ -53,15 +51,6 @@ public class Location implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	@Column(name = "state")
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
 	}
 
 	@Column(name = "city")

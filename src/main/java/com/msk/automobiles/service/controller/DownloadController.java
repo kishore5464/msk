@@ -8,14 +8,15 @@ import com.msk.automobiles.business.interfaces.Insert_Business_Interface;
 import com.msk.automobiles.business.interfaces.Update_Business_Interface;
 
 @Controller
-public class GenericContorller {
+public class DownloadController {
 
 	@Autowired
 	Get_Business_Interface get_Business_Interface;
 
 	@Autowired
 	Insert_Business_Interface insert_Business_Interface;
-
+	
 	@Autowired
 	Update_Business_Interface update_Business_Interface;
+
 }

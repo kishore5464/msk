@@ -35,6 +35,7 @@ public class Customer_Details implements Serializable {
 	private String mobile;
 	private String email;
 	private Date dob;
+	private String registration_no;
 	private String gst_no;
 	private Date created_date;
 
@@ -46,7 +47,7 @@ public class Customer_Details implements Serializable {
 	}
 
 	public Customer_Details(Integer id, Car_Models car_Models, String customer_id, String first_name, String last_name,
-			String mobile, String email, Date dob, String gst_no, Date created_date,
+			String mobile, String email, Date dob, String registration_no, String gst_no, Date created_date,
 			Set<Customer_Contact_Details> customer_Contact_Details) {
 		super();
 		this.id = id;
@@ -57,6 +58,7 @@ public class Customer_Details implements Serializable {
 		this.mobile = mobile;
 		this.email = email;
 		this.dob = dob;
+		this.setRegistration_no(registration_no);
 		this.gst_no = gst_no;
 		this.created_date = created_date;
 		this.customer_Contact_Details = customer_Contact_Details;
@@ -136,6 +138,15 @@ public class Customer_Details implements Serializable {
 
 	public void setDob(Date dob) {
 		this.dob = dob;
+	}
+
+	@Column(name = "registration_no")
+	public String getRegistration_no() {
+		return registration_no;
+	}
+
+	public void setRegistration_no(String registration_no) {
+		this.registration_no = registration_no;
 	}
 
 	@Column(name = "gst_no", nullable = true)

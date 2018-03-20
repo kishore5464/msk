@@ -21,8 +21,8 @@ import com.msk.automobiles.business.interfaces.Get_Business_Interface;
 import com.msk.automobiles.business.interfaces.Insert_Business_Interface;
 import com.msk.automobiles.business.interfaces.Update_Business_Interface;
 import com.msk.automobiles.exception.CustomGenericException;
-import com.msk.automobiles.service.pojos.UICar_Brands;
-import com.msk.automobiles.service.pojos.UICar_Models;
+import com.msk.automobiles.service.pojos.Car_Brands_Pojo;
+import com.msk.automobiles.service.pojos.Car_Models_Pojo;
 import com.msk.automobiles.util.UtilityClass;
 
 import net.minidev.json.JSONObject;
@@ -31,7 +31,7 @@ import net.minidev.json.JSONObject;
 @PropertySource("classpath:/application_path.properties")
 @Controller
 @Path("/")
-public class HomeContorller {
+public class HomeController {
 
 	@Autowired
 	Get_Business_Interface get_Business_Interface;
@@ -92,7 +92,7 @@ public class HomeContorller {
 
 		Viewable view = null;
 		try {
-			List<UICar_Brands> brands = get_Business_Interface.getAllBrands();
+			List<Car_Brands_Pojo> brands = get_Business_Interface.getAllBrands();
 
 			data.put("brands", brands);
 
@@ -115,7 +115,7 @@ public class HomeContorller {
 
 		Viewable view = null;
 		try {
-			List<UICar_Models> models = get_Business_Interface.getModels(brand_id);
+			List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id);
 
 			data.put("models", models);
 
