@@ -38,15 +38,15 @@
 <div class="col-lg-12">
 <div class="container">
 <c:forEach var="brands" varStatus="counter"  items="${it.data.brands}">
-    <div _ class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div _ class="thumbnail car_brand">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
+      <div class="thumbnail car_brand">
        <c:if test="${brands == 'noimage'}">
-<!--         <img _ class="" style="width:100%;max-height:100px" src="http://personalityanalysistest.com/template/images/logo.png">
- -->         </c:if>
+         <img class="" style="width:150px;height:100px" src="http://personalityanalysistest.com/template/images/logo.png">
+       </c:if>
         <c:if test="${brands != 'noimage'}">
-        <img class="zz" style="width:100%;max-height:100px" src="${brands.logo}">
+        <img class="zz" style="width:150px;height:100px" src="${brands.logo}">
         </c:if>
-        <div _ class="caption">
+        <div class="caption">
           <h5 id="thumbnail-label" class="brand_name">${brands.brand}</h5>
         </div>
       </div>

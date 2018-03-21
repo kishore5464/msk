@@ -18,26 +18,128 @@
 	<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
 	<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" href="../css/bootstrapValidator.css">
+	<script src="../js/bootstrapValidator.js"></script>
+
 </head>
 <script>
 	$(document).ready(function(){
 		$('#myTable').dataTable();
 	});
 	$(document).ready(function(){
-		$('.add').click(function(){
+		$('.add_cust').click(function(){
 		   $('.service_add').toggle();
-		   $(".add").hide();
+		   $(".add_cust").hide();
 		});
 		
+		$(".service_add_close").click(function(){
+			$(".service_add").hide();
+			$(".add_cust").show();
+		});
+	
+		$(".service_add_close").click(function(){
+			$(".service_add").hide();
+		});
+	
+	$('#add_details').bootstrapValidator(
+					{
+						framework : 'bootstrap',
+						feedbackIcons : {
+							
+							validating : 'glyphicon glyphicon-refresh'
+						},
+						fields : {
+										cus_name : {
+										validators : {
+											notEmpty : {
+												message : 'Name is required'
+											},
+										}
+									},
+									mobile_no: {
+						                 validators: {
+						                     digits: {
+						                         message: 'The phone number can contain digits only'
+						                     },
+						                     notEmpty: {
+						                         message: 'The phone number is required / You might have entered an existing mobile number'
+						                     },
+						                     stringLength: {
+						                         min: 10,
+						                         max: 10,
+						                         message: 'The phone number must have 10 digits'
+						                     },
+						                     regexp: {
+						                         regexp: /^[789]\d{9}$/i,
+						                         message: 'Enter a valid phone number'
+						                     }
+						                 }
+						             },
+								    email_id: {
+								    	validators: {
+						                     notEmpty: 
+						                     {
+						                         message: 'The email address is empty/not valid or is already registered with us '
+						                     },
+						                  regexp:{              	 
+						                 		regexp: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i,
+						                 		message: 'The email address is not a valid'
+						                  },
+						      			}
+						             },
+						             service_type: {
+						                 validators: {
+						                     
+						                     notEmpty: {
+						                         message: 'The service type is Empty'
+						                     },
+						                     
+						                 }
+						             },
+						             from_date: {
+						                 validators: {
+						                     
+						                     notEmpty: {
+						                         message: 'Pleasea choose the from-date'
+						                     },
+						                     
+						                 }
+						             },
+						             to_date: {
+						                 validators: {
+						                     
+						                     notEmpty: {
+						                         message: 'please choose the to-date'
+						                     },
+						                     
+						                 }
+						             },
+						             
+				        	}
+					});     
+				            
+	
+	
 		$(".service_details_close").click(function(){
 			$(".service_add").hide();
 			$(".add").show();
 		});
-	});
-	$(document).ready(function(){
+
 		$(".service_add_close").click(function(){
 			$(".service_add").hide();
 		});
+		$(".service_details_btn").click(function(){
+			$(".view_service_details").show();
+			$(".service_details_btn").hide();
+			$(".close_btn").show();
+		});	
+		$(".close_btn").click(function(){
+			$(".view_service_details").hide();
+			$(".close_btn").hide();
+			$(".service_details_btn").show();
+		});
+	
 	});
 </script>
 <style>
@@ -64,6 +166,7 @@
 		padding: 16px;
 		margin-top: 5%;
 		height:auto;
+		background-image: url("car-bg.jpg");
 	}
 	#myTable_filter{
 		margin-right:3%;
@@ -98,7 +201,16 @@
 		width:12%;
 	}
 	.btn{
-		padding:3px 12px;
+		padding:3px 10px;
+		border-radius:0px;
+		font-weight:bol;
+	}
+	.btn:hover{
+		background-color:transparent;
+		border-radius:0px;
+		border:1px solid #31b0d5;
+		font-weight:bold;
+		color:black;
 	}
 	input[type=date]{
 		border-radius:5px;
@@ -122,12 +234,32 @@
 		margin-left:2%;
 		width:14%;
 	}
-	.Service_add_close{
+
+	.glyphicon-remove-circle{
+		cursor:pointer;
 		float:right;
 		margin-right:4%;
 		margin-top:2%;
 		font-size:1.5em;
 	}
+
+	.glyphicon-plus-sign,.add{
+		opacity:0.2;
+		font-size:40px;
+		
+	}
+	.glyphicon-plus-sign{
+		margin-top:10px;
+	
+	}
+	.add_cust{
+		cursor:pointer;
+	}
+	.has-success .form-control{
+		border-color:#3c763d;
+	}
+	
+
 	
 </style>  
 <body>
@@ -148,15 +280,14 @@
 			</tr>  
 		</thead>  
 		<tbody>
-			<tr class="add">
-				<td><b><h3><center>ADD</center></h3></b></td>
-			</tr>
-			
-			  
+
+			<tr class="add_cust">
+				<td class="add_cust_details"><h4><center><span class="glyphicon glyphicon-plus-sign" style="font-size:36px;"></span><span class="add"><b>ADD</b> </span></center></h4></td>
+
 			<tr>  
 				<td >
-			
-					<div class="container-fluid "style="display:none">
+					<div class="container-fluid "style="display:n">
+
 						<div class="row">
 							<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 name" tyle="border:2px solid red">
 								NAME : <label> MANI </label>
@@ -175,7 +306,12 @@
 							</div>
 							<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 service_details" tyle="border:2px solid yellow">
 								<center>
-								<button class="btn btn-info service_details_btn" > Service Details </button>
+								<button class="btn btn-info service_details_btn" > View Service Details </button>
+								</center>
+							</div>
+							 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 service_details" tyle="border:2px solid yellow;">
+								<center>
+								<button class="btn btn-info close_btn"style="display:none" > Close</button>
 								</center>
 							</div>
 						</div>
@@ -183,22 +319,51 @@
 							
 				</td>  
 			</tr>
-			
-			<tr class="service_add" style="display:none">  
+			<tr>
 				<td>
-					<div class="Service_add_close">X</div><br><br>
-					<div class="container service_type">
-						<form action="">
+					<div class="container view_service_details"style="display:none">
+
+						<div class="row">
+							<div class="col-lg- col-md-2 col-sm-2 col-xs-2 name" tyle="border:2px solid red">
+								Service Type : <label> Full service </label>
+							</div>	
+							<div class="col-lg- col-md-2 col-sm-2 col-xs-2"  tyle="border:2px solid red">	
+								From date: <label> 11/03/2018 </label>
+							</div>
+							<div class="col-lg- col-md-2 col-sm-2 col-xs-2" tyle="border:2px solid red">
+								To date : <label> 15/03/2018 </label>
+							</div>
+							<div class="col-lg- col-md-2 col-sm-2 col-xs-2 email" tyle="border:2px solid blue">
+								comment : <label> buibyvuvyuuvyutvvtuuvyyvbiyibyibyibuibybiyyb </label>
+							</div>
+							
+						</div>
+					</div>
+				</td>
+				
+			</tr>
+
+			<tr class="service_add" style="display:none">
+					
+				<td>
+				<form action="" id="add_details" method="post">	
+					<div class="service_add_close "><span class="glyphicon glyphicon-remove-circle"></span></div><br><br>
+					<div class="container service_type form-group">
+						
 							<div class="row" style="margin-top:2%">
-								<div class="col-lg-5 form-group" tyle="background-color:red">
-									<div>
-										Enter Customer Name :<input type="text" class="form-control" id="cus_name">
+								<div class="col-lg-5" tyle="background-color:red">
+									<div class="form-group">
+										Enter Customer Name :<input type="text" class="form-control" name="cus_name" id="cus_name" value="">
+										<small class="help-block invalid-name" style="color:#a94442"></small>  
 									</div><br>
-									<div>
-										Mobile Number : <input type="text" class="form-control" id="mobile_no">	
+									<div class="form-group">
+										Mobile Number : <input type="text" class="form-control" name="mobile_no" id="mobile_no" >	
+										<small class="help-block invalid-mob" style="display:none;color:#a94442" data-bv-validator="notEmpty" data-bv-for="email" data-bv-result="VALID" ></small> 
 									</div><br>
-									<div>
-										Email Id: <input type="email" class="form-control" id="email_id">
+									<div class="form-group">
+										Email Id: <input type="email" class="form-control" name="email_id" id="email_id" >
+										<small class="help-block invalid-mail" style="color:#a94442"></small> 
+
 									</div>
 									<!--  <div>										
 										Service Type : 
@@ -211,27 +376,38 @@
 									</div>
 									-->
 								</div>	
-								<div class="col-lg-2 form-group vl" tyle="background-color:yellow">
+
+								<div class="col-lg-2 vl" tyle="background-color:yellow">
 									
 								</div>
-								<div class="col-lg-5 form-group" tyle="background-color:blue">
-									<div>										
-										Service Type : <input type="email" class="form-control" id="email_id">
+								<div class="col-lg-5 " tyle="background-color:blue">
+									<div class="form-group">										
+										Service Type : <input type="email" class="form-control" id="email_id" name="service_type" >
 									</div><br>
-									<div>
-										<span>From Date :<input type="date" class="form-control"></span><br>
-										<span>To Date :<input type="date" class="form-control"></span>
+									<div class="form-group">
+										From Date :<input type="date" class="form-control" name="from_date">
 									</div><br>
-									<div>
-										Details :	<textarea class="form-control" rows="4" id="comment"></textarea>
+									<div class="form-group">
+										To Date :<input type="date" class="form-control" name="to_date">
+									</div><br>
+									<div class="form-group">
+
+										Details :	<textarea class="form-control" rows="4" id="comment" name="comment"></textarea>
 									</div>
 									
 								</div>
-							</div>	
-							<div>
-								<div>
+
+							</div>
+							<div class="form-group">
+								<div class="col-md-9 col-md-offset-3">
+									<div id="messages"></div>
+								</div>
+							</div>		
+							<div class=" ">
+								<div class="form-group">
 									
-									<button class="btn btn-info save_btn" > SAVE </button>
+									<button class="btn btn-info save_btn" name="action"> SAVE </button>
+
 								
 								</div>
 							</div>
