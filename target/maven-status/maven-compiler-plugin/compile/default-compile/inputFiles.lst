@@ -4,6 +4,7 @@
 /home/sornaraj/Desktop/sorna_workspace/kishore project/msk/src/main/java/com/msk/automobiles/service/controller/AddingController.java
 /home/sornaraj/Desktop/sorna_workspace/kishore project/msk/src/main/java/com/msk/automobiles/service/entities/Location.java
 /home/sornaraj/Desktop/sorna_workspace/kishore project/msk/src/main/java/com/msk/automobiles/business/impl/Get_Business_Impl.java
+/home/sornaraj/Desktop/sorna_workspace/kishore project/msk/src/main/java/com/msk/automobiles/service/pojos/Service_Card_Pojo.java
 /home/sornaraj/Desktop/sorna_workspace/kishore project/msk/src/main/java/com/msk/automobiles/exception/CustomGenericException.java
 /home/sornaraj/Desktop/sorna_workspace/kishore project/msk/src/main/java/com/msk/automobiles/dao/interfaces/Insert_DAO_Interface.java
 /home/sornaraj/Desktop/sorna_workspace/kishore project/msk/src/main/java/com/msk/automobiles/util/AuthorizationRequestFilter.java

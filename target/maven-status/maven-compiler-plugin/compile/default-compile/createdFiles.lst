@@ -15,6 +15,7 @@ com/msk/automobiles/util/SessionIdentifierGenerator.class
 com/msk/automobiles/service/controller/ListsController.class
 com/msk/automobiles/service/entities/Card_Status.class
 com/msk/automobiles/service/pojos/Car_Brands_Pojo.class
+com/msk/automobiles/service/pojos/Service_Card_Pojo.class
 com/msk/automobiles/util/CustomResourceConfig.class
 com/msk/automobiles/service/entities/Location.class
 com/msk/automobiles/util/ServletFilter.class

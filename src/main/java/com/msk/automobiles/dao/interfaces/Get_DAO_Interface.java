@@ -8,6 +8,7 @@ import com.msk.automobiles.service.entities.Customer_Contact_Details;
 import com.msk.automobiles.service.entities.Customer_Details;
 import com.msk.automobiles.service.entities.Location;
 import com.msk.automobiles.service.entities.MSK_Owner;
+import com.msk.automobiles.service.entities.Parts;
 import com.msk.automobiles.service.entities.Service_Invoice_Card;
 import com.msk.automobiles.service.entities.Service_Type;
 
@@ -36,5 +37,9 @@ public interface Get_DAO_Interface {
 	List<Service_Type> getServiceType();
 
 	List<Service_Invoice_Card> getServiceInvoiceCards();
+
+	String getLocationByCityId(String location_id);
+
+	List<Parts> getSparePartsInStock();
 
 }

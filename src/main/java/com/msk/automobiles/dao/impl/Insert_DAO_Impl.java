@@ -41,25 +41,17 @@ public class Insert_DAO_Impl implements Insert_DAO_Interface {
 	}
 
 	@Override
-	public Integer insertCustomerDetails(Customer_Details customer_Details) {
+	public void insertCustomerDetails(Customer_Details customer_Details,
+			Customer_Contact_Details customer_Contact_Details) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-		Integer customer_detail_id = (Integer) session.save(customer_Details);
-		transaction.commit();
-		session.flush();
-		session.close();
-		return customer_detail_id;
-	}
 
-	@Override
-	public void insertCustomerContactDetails(Customer_Contact_Details customer_Contact_Details) {
-		// TODO Auto-generated method stub
-		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
+		Integer customer_detail_id = (Integer) session.save(customer_Details);
+		customer_Details.setId(customer_detail_id);
+
+		customer_Contact_Details.setCustomer_Details(customer_Details);
+
 		session.save(customer_Contact_Details);
-		transaction.commit();
-		session.flush();
 		session.close();
 	}
 

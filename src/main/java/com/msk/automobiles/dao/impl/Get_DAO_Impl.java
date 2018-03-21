@@ -16,6 +16,7 @@ import com.msk.automobiles.service.entities.Customer_Contact_Details;
 import com.msk.automobiles.service.entities.Customer_Details;
 import com.msk.automobiles.service.entities.Location;
 import com.msk.automobiles.service.entities.MSK_Owner;
+import com.msk.automobiles.service.entities.Parts;
 import com.msk.automobiles.service.entities.Service_Invoice_Card;
 import com.msk.automobiles.service.entities.Service_Type;
 
@@ -183,6 +184,41 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 		session.flush();
 		session.close();
 		return service_Invoice_Cards;
+	}
+
+	@Override
+	public String getLocationByCityId(String location_id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Service_Invoice_Card ");
+		List<Location> locations = query.list();
+		String city = null;
+
+		if (!locations.isEmpty()) {
+			city = locations.get(0).getCity();
+		} else {
+			city = "empty";
+		}
+
+		transaction.commit();
+		session.flush();
+		session.close();
+
+		return city;
+	}
+
+	@Override
+	public List<Parts> getSparePartsInStock() {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Parts ");
+		List<Parts> parts = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return parts;
 	}
 
 }

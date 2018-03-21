@@ -195,10 +195,13 @@ h4{
 		<div class="carousel-caption carousel-caption-box carousel-width">
 			<div class="carousel-title">
 				<h1>We take care of your CAR</h1>
+				
+
 			<a href="login"><button type="button" class="btn btn-primary btn-lg btn1">Invoice</button></a>&nbsp;&nbsp;&nbsp;
 			
-		 	<a href="car-brand">	<button type="button" class="btn btn-primary btn-lg btn2">Service</button></a> 
+		 	<a href="car-brand">	<button type="button" class="btn btn-primary btn-lg btn1">Service</button></a> 
 			
+			<a href="parts"><button type="button" class="btn btn-primary btn-lg btn1">Spare Parts</button></a>&nbsp;&nbsp;&nbsp;
 				
 			</div>
 		</div></center>

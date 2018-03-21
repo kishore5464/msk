@@ -1,5 +1,7 @@
 package com.msk.automobiles.service.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -7,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
+import org.glassfish.jersey.server.mvc.Viewable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -16,6 +19,9 @@ import com.msk.automobiles.business.interfaces.Get_Business_Interface;
 import com.msk.automobiles.business.interfaces.Insert_Business_Interface;
 import com.msk.automobiles.business.interfaces.Update_Business_Interface;
 import com.msk.automobiles.exception.CustomGenericException;
+import com.msk.automobiles.service.pojos.Car_Brands_Pojo;
+import com.msk.automobiles.service.pojos.Car_Models_Pojo;
+import com.msk.automobiles.service.pojos.Service_Card_Pojo;
 
 import net.minidev.json.JSONObject;
 
@@ -40,32 +46,52 @@ public class AddingController {
 	@Path("/add-car-brand")
 	public Response add_car_brand(@FormParam("brand") String brand, @FormParam("logo") String logo,
 			@Context HttpServletRequest request) {
-		String status = null;
+		JSONObject mix = new JSONObject();
+		JSONObject data = new JSONObject();
+
+		Viewable view = null;
 
 		try {
 			insert_Business_Interface.insertCarBrand(brand, logo);
-			status = "success";
+
+			List<Car_Brands_Pojo> brands = get_Business_Interface.getAllBrands();
+
+			data.put("brands", brands);
+
+			mix.put("data", data);
+
+			view = new Viewable("/car_brands", mix);
+
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
 		}
 
-		return Response.ok().entity(status).build();
+		return Response.ok().entity(view).build();
 	}
 
 	@POST
 	@Path("/add-car-model")
 	public Response add_car_models(@FormParam("brand_id") String brand_id, @FormParam("model") String model,
 			@FormParam("image") String image, @Context HttpServletRequest request) {
-		String status = null;
+		JSONObject mix = new JSONObject();
+		JSONObject data = new JSONObject();
+
+		Viewable view = null;
 
 		try {
 			insert_Business_Interface.insertCarModel(brand_id, model, image);
-			status = "success";
+			List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id);
+
+			data.put("models", models);
+
+			mix.put("data", data);
+
+			view = new Viewable("/car_models", mix);
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
 		}
 
-		return Response.ok().entity(status).build();
+		return Response.ok().entity(view).build();
 	}
 
 	@POST
@@ -74,41 +100,26 @@ public class AddingController {
 			@FormParam("first_name") String first_name, @FormParam("last_name") String last_name,
 			@FormParam("mobile") String mobile, @FormParam("email") String email, @FormParam("dob") String dob,
 			@FormParam("registration_no") String registration_no, @FormParam("gst_no") String gst_no,
-			@Context HttpServletRequest request) {
+			@FormParam("customer_id") String customer_id, @FormParam("address_line_1") String address_line_1,
+			@FormParam("address_line_2") String address_line_2, @FormParam("location_id") String location_id,
+			@FormParam("pincode") String pincode, @Context HttpServletRequest request) {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
-		try {
-			Integer customer_detail_id = insert_Business_Interface.insertCustomerDetail(model_id, first_name, last_name,
-					mobile, email, dob, registration_no, gst_no);
+		Viewable view = null;
 
-			data.put("customer_detail_id", customer_detail_id);
+		try {
+			Service_Card_Pojo service_Card_Pojo = insert_Business_Interface.insertCustomerDetail(model_id, first_name,
+					last_name, mobile, email, dob, registration_no, gst_no, address_line_1, address_line_2, location_id,
+					pincode);
+			data.put("Service_card", service_Card_Pojo);
 			mix.put("data", data);
+
+			view = new Viewable("/service_card", mix);
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
 		}
 
-		return Response.ok().entity(mix.toString()).build();
-	}
-
-	@POST
-	@Path("/add-customer-contact-detail")
-	public Response add_customer_contact_detail(@FormParam("customer_id") String customer_id,
-			@FormParam("address_line_1") String address_line_1, @FormParam("address_line_2") String address_line_2,
-			@FormParam("location_id") String location_id, @FormParam("pincode") String pincode,
-			@Context HttpServletRequest request) {
-		JSONObject mix = new JSONObject();
-		JSONObject data = new JSONObject();
-		try {
-			insert_Business_Interface.insertCustomerContactDetails(customer_id, address_line_1, address_line_2,
-					location_id, pincode);
-			String service_card_id = get_Business_Interface.getServiceCardNo();
-			data.put("service_card_id", service_card_id);
-			mix.put("data", data);
-		} catch (Exception e) {
-			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
-		}
-
-		return Response.ok().entity(mix.toString()).build();
+		return Response.ok().entity(view).build();
 	}
 
 	@POST
@@ -119,7 +130,7 @@ public class AddingController {
 		String status = null;
 
 		try {
-//			insert_Business_Interface.insertCarBrand(brand, logo);
+			// insert_Business_Interface.insertCarBrand(brand, logo);
 			status = "success";
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
