@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +30,7 @@ public class Parts implements Serializable {
 	private Car_Models car_Models;
 	private String part;
 	private Integer quantity;
+	private Stock_Status parts_status;
 	private Double amount;
 	private Date created_date;
 
@@ -35,12 +38,14 @@ public class Parts implements Serializable {
 		super();
 	}
 
-	public Parts(Integer id, Car_Models car_Models, String part, Integer quantity, Double amount, Date created_date) {
+	public Parts(Integer id, Car_Models car_Models, String part, Integer quantity, Stock_Status parts_status,
+			Double amount, Date created_date) {
 		super();
 		this.id = id;
 		this.car_Models = car_Models;
 		this.part = part;
-		this.setQuantity(quantity);
+		this.quantity = quantity;
+		this.setParts_status(parts_status);
 		this.amount = amount;
 		this.created_date = created_date;
 	}
@@ -73,6 +78,16 @@ public class Parts implements Serializable {
 
 	public void setPart(String part) {
 		this.part = part;
+	}
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "parts_status")
+	public Stock_Status getParts_status() {
+		return parts_status;
+	}
+
+	public void setParts_status(Stock_Status parts_status) {
+		this.parts_status = parts_status;
 	}
 
 	@Column(name = "quantity")

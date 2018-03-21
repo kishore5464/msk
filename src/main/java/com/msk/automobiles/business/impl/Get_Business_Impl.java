@@ -202,7 +202,7 @@ public class Get_Business_Impl implements Get_Business_Interface {
 	@Override
 	public List<Spare_Parts_Pojo> getSparePartsInStock() {
 		// TODO Auto-generated method stub
-		List<Parts> spare_parts = get_DAO_Interface.getSpareParts();
+		List<Parts> spare_parts = get_DAO_Interface.getSparePartsInStock();
 		List<Spare_Parts_Pojo> spare_Parts_Pojos = new ArrayList<Spare_Parts_Pojo>();
 
 		if (!spare_parts.isEmpty()) {

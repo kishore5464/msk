@@ -191,7 +191,7 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
-		Query query = session.createQuery(" from Service_Invoice_Card ");
+		Query query = session.createQuery(" from Location ");
 		List<Location> locations = query.list();
 		String city = null;
 
@@ -209,11 +209,11 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 	}
 
 	@Override
-	public List<Parts> getSpareParts() {
+	public List<Parts> getSparePartsInStock() {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
-		Query query = session.createQuery(" from Parts ");
+		Query query = session.createQuery(" from Parts where parts_status = 'INSTOCK' ");
 		List<Parts> parts = query.list();
 		transaction.commit();
 		session.flush();

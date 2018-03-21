@@ -95,6 +95,69 @@ public class ListsController {
 	}
 
 	@GET
+	@Path("/parts-car-brand")
+	public Response parts_car_brand() {
+		JSONObject mix = new JSONObject();
+		JSONObject data = new JSONObject();
+		try {
+			List<Car_Brands_Pojo> brands = get_Business_Interface.getAllBrands();
+
+			data.put("brands", brands);
+
+			mix.put("data", data);
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+
+		return Response.ok().entity(mix.toString()).build();
+	}
+
+	@POST
+	@Path("/parts-car-models")
+	public Response parts_car_models(@FormParam("brand_id") String brand_id, @Context HttpServletRequest request) {
+		JSONObject mix = new JSONObject();
+		JSONObject data = new JSONObject();
+		try {
+			List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id);
+
+			data.put("models", models);
+
+			if (!models.isEmpty()) {
+				data.put("brand_id", models.get(0).getBrand_id());
+			}
+
+			mix.put("data", data);
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+
+		return Response.ok().entity(mix.toString()).build();
+	}
+
+	@POST
+	@Path("/exists-parts")
+	public Response exists_parts(@FormParam("model_id") String model_id, @FormParam("part") String part,
+			@Context HttpServletRequest request) {
+		JSONObject mix = new JSONObject();
+		JSONObject data = new JSONObject();
+		try {
+			List<Car_Models_Pojo> models = get_Business_Interface.getModels(model_id);
+
+			data.put("models", models);
+
+			if (!models.isEmpty()) {
+				data.put("brand_id", models.get(0).getBrand_id());
+			}
+
+			mix.put("data", data);
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+
+		return Response.ok().entity(mix.toString()).build();
+	}
+
+	@GET
 	@Path("/customer-detail")
 	public Response customer_detail() {
 		JSONObject mix = new JSONObject();
