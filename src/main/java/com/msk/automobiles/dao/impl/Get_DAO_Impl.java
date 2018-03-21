@@ -164,7 +164,7 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
-		Query query = session.createQuery(" from Service_Type group by service_type ");
+		Query query = session.createQuery(" from Service_Type ");
 		List<Service_Type> service_Types = query.list();
 		transaction.commit();
 		session.flush();

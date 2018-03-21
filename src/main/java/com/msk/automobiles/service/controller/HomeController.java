@@ -49,6 +49,12 @@ public class HomeController {
 	Environment env;
 
 	@GET
+	@Path("/")
+	public Viewable index() {
+		return new Viewable("/index");
+	}
+	
+	@GET
 	@Path("/login")
 	public Viewable login() {
 		return new Viewable("/login");
