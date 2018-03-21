@@ -37,4 +37,6 @@ public interface Get_DAO_Interface {
 
 	List<Service_Invoice_Card> getServiceInvoiceCards();
 
+	String getLocationByCityId(String location_id);
+
 }

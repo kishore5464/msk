@@ -11,8 +11,6 @@ public interface Insert_DAO_Interface {
 
 	void insertCarModel(Car_Models car_Models);
 
-	Integer insertCustomerDetails(Customer_Details customer_Details);
-
-	void insertCustomerContactDetails(Customer_Contact_Details customer_Contact_Details);
+	void insertCustomerDetails(Customer_Details customer_Details, Customer_Contact_Details customer_Contact_Details);
 
 }

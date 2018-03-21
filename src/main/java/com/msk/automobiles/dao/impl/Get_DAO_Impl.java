@@ -185,4 +185,26 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 		return service_Invoice_Cards;
 	}
 
+	@Override
+	public String getLocationByCityId(String location_id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Service_Invoice_Card ");
+		List<Location> locations = query.list();
+		String city = null;
+
+		if (!locations.isEmpty()) {
+			city = locations.get(0).getCity();
+		} else {
+			city = "empty";
+		}
+
+		transaction.commit();
+		session.flush();
+		session.close();
+
+		return city;
+	}
+
 }

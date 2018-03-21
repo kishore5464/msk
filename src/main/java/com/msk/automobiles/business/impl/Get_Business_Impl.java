@@ -188,7 +188,7 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				service_card_id = "MSK 0" + service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId();
 			} else if (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() >= 100
 					&& service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() <= 999) {
-				service_card_id = "MSK 00" + service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId();
+				service_card_id = "MSK " + service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId();
 			}
 		} else {
 			service_card_id = "MSK 001";
