@@ -11,6 +11,7 @@ import com.msk.automobiles.service.entities.Car_Brands;
 import com.msk.automobiles.service.entities.Car_Models;
 import com.msk.automobiles.service.entities.Customer_Contact_Details;
 import com.msk.automobiles.service.entities.Customer_Details;
+import com.msk.automobiles.service.entities.Parts;
 
 @Repository
 public class Insert_DAO_Impl implements Insert_DAO_Interface {
@@ -52,6 +53,17 @@ public class Insert_DAO_Impl implements Insert_DAO_Interface {
 		customer_Contact_Details.setCustomer_Details(customer_Details);
 
 		session.save(customer_Contact_Details);
+		session.close();
+	}
+
+	@Override
+	public void insertSparePart(Parts parts) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		session.save(parts);
+		transaction.commit();
+		session.flush();
 		session.close();
 	}
 

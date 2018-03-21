@@ -123,6 +123,18 @@ public class AddingController {
 	}
 
 	@POST
+	@Path("/add-spare-part")
+	public void add_spare_part(@FormParam("model_id") String model_id, @FormParam("part") String part,
+			@FormParam("quantity") String quantity, @FormParam("amount") String amount,
+			@Context HttpServletRequest request) {
+		try {
+			insert_Business_Interface.insertSparePart(model_id, part, quantity, amount);
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+	}
+
+	@POST
 	@Path("/add-service-card")
 	public Response add_service_card(@FormParam("customer_detail_id") String customer_detail_id,
 			@FormParam("service_type_id") String service_type_id, @FormParam("kilometer") String kilometer,

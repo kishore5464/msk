@@ -16,6 +16,7 @@ import com.msk.automobiles.service.entities.Car_Models;
 import com.msk.automobiles.service.entities.Customer_Contact_Details;
 import com.msk.automobiles.service.entities.Customer_Details;
 import com.msk.automobiles.service.entities.Location;
+import com.msk.automobiles.service.entities.Parts;
 import com.msk.automobiles.service.entities.Service_Invoice_Card;
 import com.msk.automobiles.service.pojos.Service_Card_Pojo;
 
@@ -33,6 +34,7 @@ public class Insert_Business_Impl implements Insert_Business_Interface {
 
 	@Override
 	public void insertOrUpdateBrandLogo(String brand_id, String logo) {
+		// TODO Auto-generated method stub
 		List<Car_Brands> brand = get_DAO_Interface.getBrandById(Integer.parseInt(brand_id));
 
 		if (!brand.isEmpty()) {
@@ -44,6 +46,7 @@ public class Insert_Business_Impl implements Insert_Business_Interface {
 
 	@Override
 	public void insertOrUpdateModelLogo(String model_id, String logo) {
+		// TODO Auto-generated method stub
 		List<Car_Models> model = get_DAO_Interface.getModelById(Integer.parseInt(model_id));
 
 		if (!model.isEmpty()) {
@@ -55,6 +58,7 @@ public class Insert_Business_Impl implements Insert_Business_Interface {
 
 	@Override
 	public void insertCarBrand(String brand, String logo) {
+		// TODO Auto-generated method stub
 		Car_Brands car_Brands = new Car_Brands();
 		car_Brands.setBrand(brand);
 		car_Brands.setLogo(logo);
@@ -64,6 +68,7 @@ public class Insert_Business_Impl implements Insert_Business_Interface {
 
 	@Override
 	public void insertCarModel(String brand_id, String model, String image) {
+		// TODO Auto-generated method stub
 		Car_Brands car_Brands = new Car_Brands();
 		car_Brands.setId(Integer.parseInt(brand_id));
 
@@ -161,6 +166,22 @@ public class Insert_Business_Impl implements Insert_Business_Interface {
 		service_Card_Pojo.setRegistration_no(registration_no);
 
 		return service_Card_Pojo;
+	}
+
+	@Override
+	public void insertSparePart(String model_id, String part, String quantity, String amount) {
+		// TODO Auto-generated method stub
+		Parts parts = new Parts();
+
+		Car_Models car_Models = new Car_Models();
+		car_Models.setId(Integer.parseInt(model_id));
+
+		parts.setCar_Models(car_Models);
+		parts.setPart(part);
+		parts.setQuantity(Integer.parseInt(quantity));
+		parts.setAmount(Double.parseDouble(amount));
+
+		insert_DAO_Interface.insertSparePart(parts);
 	}
 
 }
