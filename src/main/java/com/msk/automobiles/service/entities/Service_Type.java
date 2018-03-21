@@ -57,7 +57,7 @@ public class Service_Type implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "service")
+	@Column(name = "service_type")
 	public String getService_type() {
 		return service_type;
 	}
@@ -66,7 +66,7 @@ public class Service_Type implements Serializable {
 		this.service_type = service_type;
 	}
 
-	@Column(name = "service")
+	@Column(name = "common_service")
 	public String getCommon_service() {
 		return common_service;
 	}

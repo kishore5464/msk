@@ -91,7 +91,7 @@
 }
 
 .banner{
-    background: url('https://wallpaperset.com/w/full/f/0/2/155416.jpg');
+    background: url('https://www.desktop-background.com/p/2010/12/25/131557_import-tuner-car-wallpaper-images_1680x1050_h.jpg');
     background-repeat: no-repeat;
     background-size: 100% auto;
     background-position: center top;
