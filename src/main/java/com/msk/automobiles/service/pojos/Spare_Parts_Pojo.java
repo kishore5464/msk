@@ -3,7 +3,6 @@ package com.msk.automobiles.service.pojos;
 public class Spare_Parts_Pojo {
 
 	private String id;
-	private String stock_id;
 	private String brand;
 	private String model;
 	private String spare_part_name;
@@ -16,11 +15,10 @@ public class Spare_Parts_Pojo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Spare_Parts_Pojo(String id, String stock_id, String brand, String model, String spare_part_name,
-			String quantity, String price_per_unit, String total_price) {
+	public Spare_Parts_Pojo(String id, String brand, String model, String spare_part_name, String quantity,
+			String price_per_unit, String total_price) {
 		super();
 		this.id = id;
-		this.stock_id = stock_id;
 		this.brand = brand;
 		this.model = model;
 		this.spare_part_name = spare_part_name;
@@ -35,14 +33,6 @@ public class Spare_Parts_Pojo {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getStock_id() {
-		return stock_id;
-	}
-
-	public void setStock_id(String stock_id) {
-		this.stock_id = stock_id;
 	}
 
 	public String getBrand() {
@@ -95,9 +85,9 @@ public class Spare_Parts_Pojo {
 
 	@Override
 	public String toString() {
-		return "Spare_Parts_Pojo [id=" + id + ", stock_id=" + stock_id + ", brand=" + brand + ", model=" + model
-				+ ", spare_part_name=" + spare_part_name + ", quantity=" + quantity + ", price_per_unit="
-				+ price_per_unit + ", total_price=" + total_price + "]";
+		return "Spare_Parts_Pojo [id=" + id + ",brand=" + brand + ", model=" + model + ", spare_part_name="
+				+ spare_part_name + ", quantity=" + quantity + ", price_per_unit=" + price_per_unit + ", total_price="
+				+ total_price + "]";
 	}
 
 }

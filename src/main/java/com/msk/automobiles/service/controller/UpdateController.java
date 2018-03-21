@@ -1,11 +1,6 @@
 package com.msk.automobiles.service.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +10,6 @@ import org.springframework.stereotype.Controller;
 import com.msk.automobiles.business.interfaces.Get_Business_Interface;
 import com.msk.automobiles.business.interfaces.Insert_Business_Interface;
 import com.msk.automobiles.business.interfaces.Update_Business_Interface;
-import com.msk.automobiles.exception.CustomGenericException;
-
-import net.minidev.json.JSONObject;
 
 @Configuration
 @PropertySource("classpath:/application_path.properties")
@@ -25,7 +17,7 @@ import net.minidev.json.JSONObject;
 @Path("/")
 public class UpdateController {
 
-	// HERE I WROTE SERVLET FOR ADDING BRAND, MODEL, PARTS, CUSTOMER DETAILS
+	// HERE I WROTE SERVLET FOR UPDATE BRAND, MODEL, PARTS, CUSTOMER DETAILS
 
 	@Autowired
 	Get_Business_Interface get_Business_Interface;

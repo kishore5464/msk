@@ -12,6 +12,8 @@ import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.server.mvc.Viewable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 
 import com.msk.automobiles.business.interfaces.Get_Business_Interface;
@@ -22,13 +24,15 @@ import com.msk.automobiles.service.pojos.Car_Brands_Pojo;
 import com.msk.automobiles.service.pojos.Car_Models_Pojo;
 import com.msk.automobiles.service.pojos.Customer_Details_Pojo;
 import com.msk.automobiles.service.pojos.Location_Pojo;
-import com.msk.automobiles.service.pojos.Service_Card_Pojo;
 import com.msk.automobiles.service.pojos.Service_Type_Pojo;
 import com.msk.automobiles.service.pojos.Spare_Parts_Pojo;
 
 import net.minidev.json.JSONObject;
 
+@Configuration
+@PropertySource("classpath:/application_path.properties")
 @Controller
+@Path("/")
 public class ListsController {
 
 	@Autowired
@@ -117,15 +121,20 @@ public class ListsController {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 
+		Viewable view = null;
+
 		try {
 			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock();
+
 			data.put("spare_parts", spare_Parts_Pojos);
 			mix.put("data", data);
+
+			view = new Viewable("/customer_detail", mix);
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
 		}
 
-		return Response.ok().entity(mix.toString()).build();
+		return Response.ok().entity(view).build();
 	}
 
 	@GET

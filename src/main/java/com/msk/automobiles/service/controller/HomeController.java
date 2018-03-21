@@ -1,7 +1,5 @@
 package com.msk.automobiles.service.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -21,8 +19,6 @@ import com.msk.automobiles.business.interfaces.Get_Business_Interface;
 import com.msk.automobiles.business.interfaces.Insert_Business_Interface;
 import com.msk.automobiles.business.interfaces.Update_Business_Interface;
 import com.msk.automobiles.exception.CustomGenericException;
-import com.msk.automobiles.service.pojos.Car_Brands_Pojo;
-import com.msk.automobiles.service.pojos.Car_Models_Pojo;
 import com.msk.automobiles.util.UtilityClass;
 
 import net.minidev.json.JSONObject;

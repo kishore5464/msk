@@ -209,7 +209,7 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 	}
 
 	@Override
-	public List<Parts> getSparePartsInStock() {
+	public List<Parts> getSpareParts() {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();

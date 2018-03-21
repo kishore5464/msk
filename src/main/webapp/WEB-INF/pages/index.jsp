@@ -201,7 +201,7 @@ h4{
 			
 		 	<a href="car-brand">	<button type="button" class="btn btn-primary btn-lg btn1">Service</button></a> 
 			
-			<a href="parts"><button type="button" class="btn btn-primary btn-lg btn1">Spare Parts</button></a>&nbsp;&nbsp;&nbsp;
+			<a href="spare-parts"><button type="button" class="btn btn-primary btn-lg btn1">Spare Parts</button></a>&nbsp;&nbsp;&nbsp;
 				
 			</div>
 		</div></center>
