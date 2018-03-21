@@ -27,6 +27,7 @@ public class Parts implements Serializable {
 	private Integer id;
 	private Car_Models car_Models;
 	private String part;
+	private Integer quantity;
 	private Double amount;
 	private Date created_date;
 
@@ -34,11 +35,12 @@ public class Parts implements Serializable {
 		super();
 	}
 
-	public Parts(Integer id, Car_Models car_Models, String part, Double amount, Date created_date) {
+	public Parts(Integer id, Car_Models car_Models, String part, Integer quantity, Double amount, Date created_date) {
 		super();
 		this.id = id;
 		this.car_Models = car_Models;
 		this.part = part;
+		this.setQuantity(quantity);
 		this.amount = amount;
 		this.created_date = created_date;
 	}
@@ -71,6 +73,15 @@ public class Parts implements Serializable {
 
 	public void setPart(String part) {
 		this.part = part;
+	}
+
+	@Column(name = "quantity")
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	@Column(name = "amount")

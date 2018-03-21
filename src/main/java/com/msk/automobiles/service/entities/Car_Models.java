@@ -29,9 +29,8 @@ public class Car_Models implements Serializable {
 
 	private Integer id;
 	private Car_Brands car_Brands;
-	private String models;
-	private String model_image;
-	private String fuel_type;
+	private String model;
+	private String image;
 	private Date created_date;
 
 	private Set<Customer_Details> customer_Details = new HashSet<Customer_Details>();
@@ -41,14 +40,12 @@ public class Car_Models implements Serializable {
 		super();
 	}
 
-	public Car_Models(Integer id, Car_Brands car_Brands, String models, String model_image, String fuel_type,
-			Date created_date) {
+	public Car_Models(Integer id, Car_Brands car_Brands, String model, String image, Date created_date) {
 		super();
 		this.id = id;
 		this.car_Brands = car_Brands;
-		this.models = models;
-		this.model_image = model_image;
-		this.fuel_type = fuel_type;
+		this.model = model;
+		this.image = image;
 		this.created_date = created_date;
 	}
 
@@ -73,22 +70,22 @@ public class Car_Models implements Serializable {
 		this.car_Brands = car_Brands;
 	}
 
-	@Column(name = "models")
-	public String getModels() {
-		return models;
+	@Column(name = "model")
+	public String getModel() {
+		return model;
 	}
 
-	public void setModels(String models) {
-		this.models = models;
+	public void setModel(String model) {
+		this.model = model;
 	}
 
-	@Column(name = "fuel_type")
-	public String getFuel_type() {
-		return fuel_type;
+	@Column(name = "image")
+	public String getImage() {
+		return image;
 	}
 
-	public void setFuel_type(String fuel_type) {
-		this.fuel_type = fuel_type;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -119,12 +116,4 @@ public class Car_Models implements Serializable {
 		this.parts = parts;
 	}
 
-	@Column(name = "model_image")
-	public String getModel_image() {
-		return model_image;
-	}
-
-	public void setModel_image(String model_image) {
-		this.model_image = model_image;
-	}
 }
