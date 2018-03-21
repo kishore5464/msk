@@ -7,8 +7,6 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,19 +34,21 @@ public class Customer_Details implements Serializable {
 	private String last_name;
 	private String mobile;
 	private String email;
-	private Gender gender;
 	private Date dob;
+	private String registration_no;
 	private String gst_no;
 	private Date created_date;
 
-	private Set<Customer_Car_Service_Details> customer_Car_Service_Details = new HashSet<Customer_Car_Service_Details>();
+	private Set<Customer_Contact_Details> customer_Contact_Details = new HashSet<Customer_Contact_Details>();
+	private Set<Service_Invoice_Card> service_Invoice_Cards = new HashSet<Service_Invoice_Card>();
 
 	public Customer_Details() {
 		super();
 	}
 
 	public Customer_Details(Integer id, Car_Models car_Models, String customer_id, String first_name, String last_name,
-			String mobile, String email, Gender gender, Date dob, String gst_no, Date created_date) {
+			String mobile, String email, Date dob, String registration_no, String gst_no, Date created_date,
+			Set<Customer_Contact_Details> customer_Contact_Details) {
 		super();
 		this.id = id;
 		this.car_Models = car_Models;
@@ -57,10 +57,11 @@ public class Customer_Details implements Serializable {
 		this.last_name = last_name;
 		this.mobile = mobile;
 		this.email = email;
-		this.gender = gender;
 		this.dob = dob;
+		this.setRegistration_no(registration_no);
 		this.gst_no = gst_no;
 		this.created_date = created_date;
+		this.customer_Contact_Details = customer_Contact_Details;
 	}
 
 	@Id
@@ -129,16 +130,6 @@ public class Customer_Details implements Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "gender")
-	@Enumerated(EnumType.STRING)
-	public Gender getGender() {
-		return gender;
-	}
-
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
-
 	@Temporal(TemporalType.DATE)
 	@Column(name = "dob", nullable = true)
 	public Date getDob() {
@@ -147,6 +138,15 @@ public class Customer_Details implements Serializable {
 
 	public void setDob(Date dob) {
 		this.dob = dob;
+	}
+
+	@Column(name = "registration_no")
+	public String getRegistration_no() {
+		return registration_no;
+	}
+
+	public void setRegistration_no(String registration_no) {
+		this.registration_no = registration_no;
 	}
 
 	@Column(name = "gst_no", nullable = true)
@@ -169,12 +169,21 @@ public class Customer_Details implements Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer_Details")
-	public Set<Customer_Car_Service_Details> getCustomer_Car_Service_Details() {
-		return customer_Car_Service_Details;
+	public Set<Customer_Contact_Details> getCustomer_Contact_Details() {
+		return customer_Contact_Details;
 	}
 
-	public void setCustomer_Car_Service_Details(Set<Customer_Car_Service_Details> customer_Car_Service_Details) {
-		this.customer_Car_Service_Details = customer_Car_Service_Details;
+	public void setCustomer_Contact_Details(Set<Customer_Contact_Details> customer_Contact_Details) {
+		this.customer_Contact_Details = customer_Contact_Details;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer_Details")
+	public Set<Service_Invoice_Card> getService_Invoice_Cards() {
+		return service_Invoice_Cards;
+	}
+
+	public void setService_Invoice_Cards(Set<Service_Invoice_Card> service_Invoice_Cards) {
+		this.service_Invoice_Cards = service_Invoice_Cards;
 	}
 
 }

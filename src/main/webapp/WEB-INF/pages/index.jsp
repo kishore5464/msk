@@ -1,5 +1,5 @@
 
-<html><head><title>job_seekers</title>
+<html><head><title>MSK Automotive</title>
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -53,7 +53,7 @@ color: #fff;
 .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
     display: block;
     max-width: 100%;
-    height: 550px;
+    height: 662px;
 }
 .bg-img img{
 	width:100%;
@@ -124,7 +124,7 @@ h4{
 .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
     display: block;
     max-width: 100%;
-    height: auto;
+    height: 662px;
 }
 .carousel-caption-box{
     max-width: 230px;
@@ -187,27 +187,24 @@ h4{
 
 <body>
 <div>
-	<div class="container-fluid">
-		<h1 class="nav"><img class="logo" src="http://talentex.in/images/MAINLOGO.png" width="200px" style="margin-left:7%"></h1>
-	</div>
+	<!-- <div class="container-fluid">
+		 <h1 class="nav"><img class="logo" src="http://talentex.in/images/MAINLOGO.png" width="200px" style="margin-left:7%"></h1>
+	</div> -->
 	<div id="carousel-company-bg" class="carousel slide">
 		<center>
 		<div class="carousel-caption carousel-caption-box carousel-width">
 			<div class="carousel-title">
-				<h1>Make sure that the bike you buy doesn't have a hidden past</h1>
-				<h4>
-				
-				</h4>
-			<a href="msk/login"><button type="button" class="btn btn-primary btn-lg btn1">Invoice</button></a>&nbsp;&nbsp;&nbsp;
+				<h1>We take care of your CAR</h1>
+			<a href="login"><button type="button" class="btn btn-primary btn-lg btn1">Invoice</button></a>&nbsp;&nbsp;&nbsp;
 			
-		 	<a href="msk/car-brand">	<button type="button" class="btn btn-primary btn-lg btn2">Register</button></a> 
+		 	<a href="car-brand">	<button type="button" class="btn btn-primary btn-lg btn2">Service</button></a> 
 			
 				
 			</div>
 		</div></center>
 		<div class="carousel-inner ">
 			<div class="item active bg-img">
-				<img src="../images/CARBG.jpg" style="" alt=""/>											
+				<img src="../images/IMGS.jpg" style="" alt=""/>										
 			</div>
 		</div>
 	</div>

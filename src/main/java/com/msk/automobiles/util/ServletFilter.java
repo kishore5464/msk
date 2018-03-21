@@ -43,7 +43,9 @@ public class ServletFilter implements Filter {
 			} // if
 
 			String str = url;
+			System.out.println("LLLLLlllllllll " + url);
 			str = str + "/";
+			System.out.println("KKKKKkkkkkkkkk " + str);
 			Pattern pattern = Pattern.compile(host + "/(.*?)/");
 			Matcher matcher = pattern.matcher(str);
 

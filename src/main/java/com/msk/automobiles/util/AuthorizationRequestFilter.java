@@ -25,6 +25,7 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
 			String fin = elements[1];
 
 			if ((fin.equals("loggedin")) || (requestContext.getMethod().equals("GET"))) {
+				System.out.println("I");
 			} else {
 				if ((user_agent.indexOf("Mozilla") != -1) || (user_agent.indexOf("AppleWebKit") != -1)
 						|| (user_agent.indexOf("Chrome") != -1) || (user_agent.indexOf("Safari") != -1)) {
@@ -49,6 +50,7 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
 				java.net.URI location = null;
 				String url = "http://" + requestContext.getHeaderString("Host") + "/msk/";
 
+				System.out.println("URL ----> " + url);
 				try {
 					location = new java.net.URI(url);
 				} catch (Exception e) {

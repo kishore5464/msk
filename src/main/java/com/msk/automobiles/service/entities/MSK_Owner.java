@@ -26,8 +26,24 @@ public class MSK_Owner implements Serializable {
 	private String email;
 	private String mobile;
 	private String password;
-	private Integer access_code;
+	private String access_code;
 	private Date created_date;
+
+	public MSK_Owner() {
+		super();
+	}
+
+	public MSK_Owner(Integer id, String name, String email, String mobile, String password, String access_code,
+			Date created_date) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.mobile = mobile;
+		this.password = password;
+		this.access_code = access_code;
+		this.created_date = created_date;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -77,11 +93,11 @@ public class MSK_Owner implements Serializable {
 	}
 
 	@Column(name = "access_code")
-	public Integer getAccess_code() {
+	public String getAccess_code() {
 		return access_code;
 	}
 
-	public void setAccess_code(Integer access_code) {
+	public void setAccess_code(String access_code) {
 		this.access_code = access_code;
 	}
 
