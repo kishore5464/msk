@@ -16,35 +16,23 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="../js/carbrands.js"></script>
 
 </head>
 <body cz-shortcut-listen="true">
-
-
-<app-header><nav _ class="navbar navbar-inverse">
-  <div _ class="container-fluid">
-    <div class="navbar-header">
-      <a _ class="navbar-brand" href="/">MSK Automotive</a>
-    </div>
-    <ul _ class="nav navbar-nav">
-      <li _><a _>Home</a></li>    
-      <li _><a _>Add car</a></li>
-    </ul>
-    
-  </div>
-</nav></app-header>
-
+<%@include file="/WEB-INF/common/header.jsp"%>
 
 <div class="col-lg-12">
+
 <div class="container">
 <c:forEach var="brands" varStatus="counter"  items="${it.data.brands}">
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
       <div class="thumbnail car_brand">
-       <c:if test="${brands == 'noimage'}">
-         <img class="" style="width:150px;height:100px" src="http://personalityanalysistest.com/template/images/logo.png">
+       <c:if test="${brands.logo == 'noimage'}">
+         <img class="" style="height:100px" src="../images/nologo.png">
        </c:if>
-        <c:if test="${brands != 'noimage'}">
-        <img class="zz" style="width:150px;height:100px" src="${brands.logo}">
+        <c:if test="${brands.logo != 'noimage'}">
+        <img class="zz" style="height:100px" src="${brands.logo}">
         </c:if>
         <div class="caption">
           <h5 id="thumbnail-label" class="brand_name">${brands.brand}</h5>
@@ -53,6 +41,18 @@
       <span id="brand_id" style="display:none">${brands.brand_id}</span>
     </div>
 </c:forEach>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
+      <div class="thumbnail addbrand">
+
+        
+        <img class="zz" style="width:150px;height:100px" src="../images/addcar.png">
+        
+        <div class="caption">
+          <h5 id="thumbnail-label" class="">Add Brand</h5>
+        </div>
+      </div>
+      
+    </div>
 </div>
 </div>
 
@@ -69,19 +69,35 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          <h4 class="modal-title">Add Brand</h4>
         </div>
+        <form action="msk/add-car-brand" method="POST">
         <div class="modal-body">
+        
+        <div class="form-group">
+        <label for="email">Brand Name:</label>
+        <input type="text"  class="form-control" name="brand" placeholder="brandname" required>
+        </div>
+        <input type="text" style="display:none" id="new_logo" name="logo">
+        
+        <div class="form-group">
+         <label for="email">Upload Logo</label>
          <input id="inputFileToLoad" type="file" onchange="loadImageFileAsURL();" />
-<input type="hidden" id="textAreaFileContents" name="companyLogo" />
+          <input type="hidden" id="textAreaFileContents"  />
+       </div>
+       
+          
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default upload" data-dismiss="modal">Upload</button>
+        <button type="submit" style="display:none" class="btn btn-default submit_logo">Upload</button>
+          <button type="button" class="btn btn-default upload">Uploadddd</button>
         </div>
+        </form>
       </div>
       
     </div>
   </div>
+
 
 
 
@@ -106,6 +122,17 @@
     <script type="text/javascript">
     
     $(document).ready(function(){
+    	
+    	
+    	
+    	$(document).on('click','.addbrand',function(){
+    		
+    		console.log("fffffffffff");
+    		
+    		$("#myModal").modal("show");
+    		
+    	});
+    	
     	
 		
     		$(document).on('click','.car_brand',function(){
@@ -138,11 +165,12 @@
     	});
     	
     	$(".upload").click(function(){
-		$("#image").val($("#textAreaFileContents").text());
-		console.log("image--"+$("#textAreaFileContents").text());
-		console.log("id---"+brandId);
+		$("#new_logo").val($("#textAreaFileContents").text());
+
 		$(".brandid").val(brandId);
-		$("#subImage").trigger("click");
+		
+		$('.submit_logo').trigger('click');
+		
     	});
     		
     		

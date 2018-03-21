@@ -1,5 +1,7 @@
 package com.msk.automobiles.service.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -17,6 +19,8 @@ import com.msk.automobiles.business.interfaces.Get_Business_Interface;
 import com.msk.automobiles.business.interfaces.Insert_Business_Interface;
 import com.msk.automobiles.business.interfaces.Update_Business_Interface;
 import com.msk.automobiles.exception.CustomGenericException;
+import com.msk.automobiles.service.pojos.Car_Brands_Pojo;
+import com.msk.automobiles.service.pojos.Car_Models_Pojo;
 import com.msk.automobiles.service.pojos.Service_Card_Pojo;
 
 import net.minidev.json.JSONObject;
@@ -42,32 +46,52 @@ public class AddingController {
 	@Path("/add-car-brand")
 	public Response add_car_brand(@FormParam("brand") String brand, @FormParam("logo") String logo,
 			@Context HttpServletRequest request) {
-		String status = null;
+		JSONObject mix = new JSONObject();
+		JSONObject data = new JSONObject();
+
+		Viewable view = null;
 
 		try {
 			insert_Business_Interface.insertCarBrand(brand, logo);
-			status = "success";
+
+			List<Car_Brands_Pojo> brands = get_Business_Interface.getAllBrands();
+
+			data.put("brands", brands);
+
+			mix.put("data", data);
+
+			view = new Viewable("/car_brands", mix);
+
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
 		}
 
-		return Response.ok().entity(status).build();
+		return Response.ok().entity(view).build();
 	}
 
 	@POST
 	@Path("/add-car-model")
 	public Response add_car_models(@FormParam("brand_id") String brand_id, @FormParam("model") String model,
 			@FormParam("image") String image, @Context HttpServletRequest request) {
-		String status = null;
+		JSONObject mix = new JSONObject();
+		JSONObject data = new JSONObject();
+
+		Viewable view = null;
 
 		try {
 			insert_Business_Interface.insertCarModel(brand_id, model, image);
-			status = "success";
+			List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id);
+
+			data.put("models", models);
+
+			mix.put("data", data);
+
+			view = new Viewable("/car_models", mix);
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
 		}
 
-		return Response.ok().entity(status).build();
+		return Response.ok().entity(view).build();
 	}
 
 	@POST

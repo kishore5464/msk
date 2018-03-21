@@ -25,6 +25,15 @@
     
     $(document).ready(function(){
     	
+    	
+    	
+     $(".addcarmodal").click(function(){
+    		
+    		$("#addcarmyModal").modal("show");
+    		modelsId=$(this).prev('span').text();
+    	});
+    	
+    	
     		var modelsId;
     		
     	$(".choose").click(function(){
@@ -108,22 +117,7 @@
     }
     </style>
 <body>
-
-<h6>&&&&&&&&&&&&&&&&&&&&&&&&&</h6>
-<h6>${it.data}</h6>
-<h6>#################</h6>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Bike WebSiteName</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a>Home</a></li>    
-      <li><a>Add Bike</a></li>
-    </ul>
-    <button class="btn btn-danger navbar-btn" style="float:right"><a href="#" style="color:#ffff">Logout</a></button>
-  </div>
-</nav>
+<%@include file="/WEB-INF/common/header.jsp"%>
 
 <div class="col-lg-12">
 <div class="container">
@@ -132,10 +126,10 @@
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
       <div class="thumbnail car_models">
          <c:if test="${models.image == 'noimage'}">
-         <img class="" style="width:100%;max-height:100px" src="http://personalityanalysistest.com/template/images/logo.png">
+         <img class="" style="max-height:100px" src="http://personalityanalysistest.com/template/images/logo.png">
          </c:if>
         <c:if test="${models.image != 'noimage'}">
-        <img class="zz" style="width:100%;max-height:100px" src="${models.image}">
+        <img class="zz" style="height:100px" src="${models.image}">
         </c:if>
         <div class="caption">
           <h5 id="thumbnail-label" class="models_name">${models.model}</h5>
@@ -143,16 +137,29 @@
       </div>
       <span id="models_id" style="display:none">${models.model_id}</span>
       <span id="brand_id" style="display:none">${models.brand_id}</span>
-       <button type="button" class="choose">Choose Image</button>
+     <!--   <button type="button" class="choose">Choose Image</button> -->
     </div>
 </c:forEach>
+
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
+      <div class="thumbnail addcarmodal">
+
+        
+        <img class="zz" style="width:150px;height:100px" src="../images/addcar.png">
+        
+        <div class="caption">
+          <h5 id="thumbnail-label" class="">Add Modal</h5>
+        </div>
+      </div>
+      
+    </div>
 </div>
 </div>
 
 
 
 <!-- Modal content-->
-	<div class="modal fade" id="myModal" role="dialog">
+<!-- 	<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
       
@@ -171,7 +178,53 @@
       </div>
       
     </div>
+  </div> -->
+  
+  
+  
+  
+ <div class="modal fade" id="addcarmyModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Car Modal</h4>
+        </div>
+        
+        <form action="msk/add-car-model" method="POST">
+        <div class="modal-body">
+        
+        <input type="text" style="display:none" name="brand_id"  value="${it.data.brand_id}">
+        
+        <div class="form-group">
+        <label for="email">Modal Name:</label>
+        <input type="text"  class="form-control" name="model" placeholder="brandname" required>
+        </div>
+        <input type="text" style="display:none" id="new_logo" name="image">
+        
+        <div class="form-group">
+         <label for="email">Car Image</label>
+         <input id="inputFileToLoad" type="file" onchange="loadImageFileAsURL();" />
+          <input type="hidden" id="textAreaFileContents"  />
+       </div>
+       
+          
+        </div>
+        <div class="modal-footer">
+        <button type="submit" style="display:none" class="btn btn-default submit_logo">Upload</button>
+          <button type="button" class="btn btn-default newcar_upload">Uploadddd</button>
+        </div>
+        </form>
+      </div>
+      
+    </div>
   </div>
+  
+  
+  
+  
 <!-- Model Content End -->
 <form name="submitForm" method="POST" id="menuurl" action=""
 		style="display: none;">
@@ -189,5 +242,20 @@
 			<input type="button" id="subImage" > 
     </form>
     
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	
+	$(".newcar_upload").click(function(){
+		
+	$("#new_logo").val($("#textAreaFileContents").text());
 
+	$('.submit_logo').trigger('click');
+	
+	});
+	
+	
+});
+
+</script>
 </body></html>

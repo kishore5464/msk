@@ -53,17 +53,19 @@ public class HomeController {
 	public Viewable index() {
 		return new Viewable("/index");
 	}
-	
+
 	@GET
 	@Path("/login")
 	public Viewable login() {
 		return new Viewable("/login");
 	}
+
 	@GET
 	@Path("/customer_details")
 	public Viewable customer_details() {
 		return new Viewable("/customer_details");
 	}
+
 	@POST
 	@Path("/login")
 	public Response login_cred(@FormParam("username") String username, @FormParam("password") String password,
@@ -87,52 +89,6 @@ public class HomeController {
 
 				view = new Viewable("/login.jsp", mix);
 			}
-		} catch (Exception e) {
-			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
-		}
-
-		return Response.ok().entity(view).build();
-	}
-
-	@GET
-	@Path("/car-brand")
-	public Response car_brand() {
-		JSONObject mix = new JSONObject();
-		JSONObject data = new JSONObject();
-
-		Viewable view = null;
-		try {
-			List<Car_Brands_Pojo> brands = get_Business_Interface.getAllBrands();
-
-			data.put("brands", brands);
-
-			mix.put("data", data);
-
-			view = new Viewable("/car_brands", mix);
-
-		} catch (Exception e) {
-			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
-		}
-
-		return Response.ok().entity(view).build();
-	}
-
-	@POST
-	@Path("/{brand}/car-models")
-	public Response car_models(@FormParam("brand_id") String brand_id, @Context HttpServletRequest request) {
-		JSONObject mix = new JSONObject();
-		JSONObject data = new JSONObject();
-
-		Viewable view = null;
-		try {
-			List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id);
-
-			data.put("models", models);
-
-			mix.put("data", data);
-
-			view = new Viewable("/car_models", mix);
-
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
 		}

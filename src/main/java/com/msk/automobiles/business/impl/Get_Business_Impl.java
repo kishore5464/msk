@@ -14,6 +14,7 @@ import com.msk.automobiles.service.entities.Car_Models;
 import com.msk.automobiles.service.entities.Customer_Details;
 import com.msk.automobiles.service.entities.Location;
 import com.msk.automobiles.service.entities.MSK_Owner;
+import com.msk.automobiles.service.entities.Parts;
 import com.msk.automobiles.service.entities.Service_Invoice_Card;
 import com.msk.automobiles.service.entities.Service_Type;
 import com.msk.automobiles.service.pojos.Car_Brands_Pojo;
@@ -21,6 +22,7 @@ import com.msk.automobiles.service.pojos.Car_Models_Pojo;
 import com.msk.automobiles.service.pojos.Customer_Details_Pojo;
 import com.msk.automobiles.service.pojos.Location_Pojo;
 import com.msk.automobiles.service.pojos.Service_Type_Pojo;
+import com.msk.automobiles.service.pojos.Spare_Parts_Pojo;
 import com.msk.automobiles.util.Encrypt_Decrypt;
 
 @Service
@@ -41,7 +43,7 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				car_Brands_Pojo.setBrand_id(Integer.toString(brands.get(i).getId()));
 				car_Brands_Pojo.setBrand(brands.get(i).getBrand().replace("+", " "));
 
-				if (brands.get(i).getLogo() == null) {
+				if (brands.get(i).getLogo() == null || brands.get(i).getLogo().equals("")) {
 					car_Brands_Pojo.setLogo("noimage");
 				} else {
 					car_Brands_Pojo.setLogo(brands.get(i).getLogo());
@@ -68,7 +70,7 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				car_Models_Pojo.setModel_id(Integer.toString(models.get(i).getId()));
 				car_Models_Pojo.setModel(models.get(i).getModel().replace("+", " "));
 
-				if (models.get(i).getImage() == null) {
+				if (models.get(i).getImage() == null || models.get(i).getImage().equals("")) {
 					car_Models_Pojo.setImage("noimage");
 				} else {
 					car_Models_Pojo.setImage(models.get(i).getImage());
@@ -195,6 +197,16 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		}
 
 		return service_card_id;
+	}
+
+	@Override
+	public List<Spare_Parts_Pojo> getSparePartsInStock() {
+		// TODO Auto-generated method stub
+		List<Parts> spare_parts = get_DAO_Interface.getSparePartsInStock();
+		List<Spare_Parts_Pojo> spare_Parts_Pojos = new ArrayList<Spare_Parts_Pojo>();
+		
+		
+		return spare_Parts_Pojos;
 	}
 
 }
