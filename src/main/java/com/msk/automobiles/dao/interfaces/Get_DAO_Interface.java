@@ -42,4 +42,6 @@ public interface Get_DAO_Interface {
 
 	List<Parts> getSparePartsInStock(String stock_status);
 
+	List<Parts> getSparePartsInStockById(String spare_part_id);
+
 }

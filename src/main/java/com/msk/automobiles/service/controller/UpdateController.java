@@ -1,6 +1,11 @@
 package com.msk.automobiles.service.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +15,9 @@ import org.springframework.stereotype.Controller;
 import com.msk.automobiles.business.interfaces.Get_Business_Interface;
 import com.msk.automobiles.business.interfaces.Insert_Business_Interface;
 import com.msk.automobiles.business.interfaces.Update_Business_Interface;
+import com.msk.automobiles.exception.CustomGenericException;
+
+//import net.minidev.json.JSONObject;
 
 @Configuration
 @PropertySource("classpath:/application_path.properties")
@@ -27,6 +35,23 @@ public class UpdateController {
 
 	@Autowired
 	Update_Business_Interface update_Business_Interface;
+
+	@PUT
+	@Path("/update-existing-part")
+	public Response update_parts(@FormParam("spare_part_id") String spare_part_id,
+			@FormParam("quantity") String quantity, @FormParam("price_per_unit") String price_per_unit,
+			@Context HttpServletRequest request) {
+		String status = null;
+
+		try {
+			update_Business_Interface.updateSparePartsInStock(spare_part_id, quantity, price_per_unit);
+			status = "success";
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+
+		return Response.ok().entity(status).build();
+	}
 
 	/*@PUT
 	@Path("/update-customer-detail")

@@ -10,6 +10,7 @@ import com.msk.automobiles.dao.interfaces.Update_DAO_Interface;
 import com.msk.automobiles.service.entities.Car_Brands;
 import com.msk.automobiles.service.entities.Car_Models;
 import com.msk.automobiles.service.entities.MSK_Owner;
+import com.msk.automobiles.service.entities.Parts;
 
 @Repository
 public class Update_DAO_Impl implements Update_DAO_Interface {
@@ -45,6 +46,17 @@ public class Update_DAO_Impl implements Update_DAO_Interface {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(msk_Owner);
+		transaction.commit();
+		session.flush();
+		session.close();
+	}
+
+	@Override
+	public void updateSparePartsInStock(Parts parts) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		session.saveOrUpdate(parts);
 		transaction.commit();
 		session.flush();
 		session.close();

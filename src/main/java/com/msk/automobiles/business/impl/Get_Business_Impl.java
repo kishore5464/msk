@@ -213,8 +213,8 @@ public class Get_Business_Impl implements Get_Business_Interface {
 
 				spare_Parts_Pojo.setId(Integer.toString(i + 1));
 				spare_Parts_Pojo.setBrand(get_DAO_Interface.getBrandById(models.get(0).getCar_Brands().getId()).get(0)
-						.getBrand().replace(" ", "+"));
-				spare_Parts_Pojo.setModel(models.get(0).getModel().replace(" ", "+"));
+						.getBrand().replace("+", " "));
+				spare_Parts_Pojo.setModel(models.get(0).getModel().replace("+", " "));
 				spare_Parts_Pojo.setSpare_part_id(Integer.toString(spare_parts.get(i).getId()));
 				spare_Parts_Pojo.setSpare_part_name(spare_parts.get(i).getPart());
 				spare_Parts_Pojo.setQuantity(Integer.toString(spare_parts.get(i).getQuantity()));

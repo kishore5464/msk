@@ -221,4 +221,17 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 		return parts;
 	}
 
+	@Override
+	public List<Parts> getSparePartsInStockById(String spare_part_id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Parts where id = '" + spare_part_id + "' ");
+		List<Parts> parts = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return parts;
+	}
+
 }

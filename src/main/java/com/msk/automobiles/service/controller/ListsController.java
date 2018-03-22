@@ -173,6 +173,33 @@ public class ListsController {
 		return Response.ok().entity(mix.toString()).build();
 	}
 
+	// TO VIEW ALL SPARE PARTS EXIST INSTOCK
+	@GET
+	@Path("/spare-parts")
+	public Response spare_parts(
+			/* @FormParam("stock_status") String stock_status, */@Context HttpServletRequest request) {
+		JSONObject mix = new JSONObject();
+		JSONObject data = new JSONObject();
+
+		Viewable view = null;
+
+		try {
+			// System.out.println("STOCK STATUS --> " + stock_status);
+			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock("INSTOCK");
+
+			// System.out.println("SPARE PARTS OF " + stock_status.toUpperCase()
+			// + " --> " + spare_Parts_Pojos);
+			data.put("spare_parts", spare_Parts_Pojos);
+			mix.put("data", data);
+
+			view = new Viewable("/customer_detail", mix);
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+
+		return Response.ok().entity(view).build();
+	}
+
 	@GET
 	@Path("/customer-detail")
 	public Response customer_detail() {
@@ -184,31 +211,6 @@ public class ListsController {
 			List<Customer_Details_Pojo> existing_customer = get_Business_Interface.getExistingCustomerDetails();
 
 			data.put("customer", existing_customer);
-			mix.put("data", data);
-
-			view = new Viewable("/customer_detail", mix);
-		} catch (Exception e) {
-			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
-		}
-
-		return Response.ok().entity(view).build();
-	}
-
-	// TO VIEW ALL SPARE PARTS EXIST INSTOCK
-	@GET
-	@Path("/spare-parts")
-	public Response spare_parts(@FormParam("stock_status") String stock_status, @Context HttpServletRequest request) {
-		JSONObject mix = new JSONObject();
-		JSONObject data = new JSONObject();
-
-		Viewable view = null;
-
-		try {
-			System.out.println("STOCK STATUS --> " + stock_status);
-			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock(stock_status);
-
-			System.out.println("SPARE PARTS OF " + stock_status.toUpperCase() + " --> " + spare_Parts_Pojos);
-			data.put("spare_parts", spare_Parts_Pojos);
 			mix.put("data", data);
 
 			view = new Viewable("/customer_detail", mix);
