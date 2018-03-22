@@ -174,7 +174,7 @@ public class ListsController {
 	}
 
 	// TO VIEW ALL SPARE PARTS EXIST INSTOCK
-	@GET
+	@POST
 	@Path("/spare-parts")
 	public Response spare_parts(
 			/* @FormParam("stock_status") String stock_status, */@Context HttpServletRequest request) {
@@ -192,15 +192,15 @@ public class ListsController {
 			data.put("spare_parts", spare_Parts_Pojos);
 			mix.put("data", data);
 
-			view = new Viewable("/customer_detail", mix);
+			// view = new Viewable("/customer_detail", mix);
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
 		}
 
-		return Response.ok().entity(view).build();
+		return Response.ok().entity(mix.toString()).build();
 	}
 
-	@GET
+	@POST
 	@Path("/customer-detail")
 	public Response customer_detail() {
 		JSONObject mix = new JSONObject();
@@ -213,12 +213,12 @@ public class ListsController {
 			data.put("customer", existing_customer);
 			mix.put("data", data);
 
-			view = new Viewable("/customer_detail", mix);
+			// view = new Viewable("/customer_detail", mix);
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
 		}
 
-		return Response.ok().entity(view).build();
+		return Response.ok().entity(mix.toString()).build();
 	}
 
 	@GET
