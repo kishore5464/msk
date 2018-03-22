@@ -137,7 +137,7 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				List<Service_Invoice_Card> service_Invoice_Cards = get_DAO_Interface
 						.getSericeInvoiceCard(customer_Details.get(i).getId());
 				customer_Details_Pojo.setCurrent_service_date(dateFormat
-						.format(service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getExpire_date()));
+						.format(service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getService_expire_date()));
 
 				customer_Details_Pojos.add(customer_Details_Pojo);
 			}
