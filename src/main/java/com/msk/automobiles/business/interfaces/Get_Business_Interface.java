@@ -27,4 +27,6 @@ public interface Get_Business_Interface {
 
 	List<Spare_Parts_Pojo> getSparePartsInStock(String stock_status);
 
+	List<String> getSparePartsAtParticularModel(String model_id);
+
 }

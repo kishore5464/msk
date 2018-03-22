@@ -28,6 +28,7 @@ import net.minidev.json.JSONObject;
 @PropertySource("classpath:/application_path.properties")
 @Controller
 @Path("/")
+@SuppressWarnings("deprecation")
 public class HomeController {
 
 	@Autowired

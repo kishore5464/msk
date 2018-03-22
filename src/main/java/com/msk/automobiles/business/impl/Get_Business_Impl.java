@@ -229,4 +229,20 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		return spare_Parts_Pojos;
 	}
 
+	@Override
+	public List<String> getSparePartsAtParticularModel(String model_id) {
+		// TODO Auto-generated method stub
+		List<Parts> parts = get_DAO_Interface.getSparePartsAtParticularModel(model_id);
+		List<String> parts_list = new ArrayList<String>();
+
+		if (!parts.isEmpty()) {
+			for (int i = 0; i < parts.size(); i++) {
+				String part = parts.get(0).getPart();
+				parts_list.add(part);
+			}
+		}
+
+		return parts_list;
+	}
+
 }

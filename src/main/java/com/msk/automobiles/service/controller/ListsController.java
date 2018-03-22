@@ -99,7 +99,7 @@ public class ListsController {
 	// CAR PARTS FROM CLICKING PARTS IN INDEX PAGE
 	// TO ADD NEW PART IN PARTICULAR BRAND
 	@POST
-	@Path("/parts-brand")
+	@Path("/check-brand-stock")
 	public Response parts_car_brand() {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
@@ -120,7 +120,7 @@ public class ListsController {
 	// TO ADD NEW PART IN PARTICULAR MODEL
 	// FROM PARTS CAR BRAND
 	@POST
-	@Path("/parts-models")
+	@Path("/check-model-stock")
 	public Response parts_car_models(@FormParam("brand_id") String brand_id, @Context HttpServletRequest request) {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
@@ -133,6 +133,32 @@ public class ListsController {
 
 			if (!models.isEmpty()) {
 				data.put("brand_id", models.get(0).getBrand_id());
+			}
+
+			mix.put("data", data);
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+
+		return Response.ok().entity(mix.toString()).build();
+	}
+
+	@POST
+	@Path("/check-part-stock")
+	public Response exists_model_parts(@FormParam("model_id") String model_id, @Context HttpServletRequest request) {
+		JSONObject mix = new JSONObject();
+		JSONObject data = new JSONObject();
+		try {
+			System.out.println("MODEL ID --> " + model_id);
+
+			List<String> parts = get_Business_Interface.getSparePartsAtParticularModel(model_id);
+
+			System.out.println("PARTS --> " + parts);
+
+			if (!parts.isEmpty()) {
+				data.put("parts", parts);
+			} else {
+				data.put("parts", "empty");
 			}
 
 			mix.put("data", data);
@@ -229,7 +255,7 @@ public class ListsController {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 
-		Viewable view = null;
+		// Viewable view = null;
 		try {
 			List<Customer_Details_Pojo> existing_customer = get_Business_Interface.getExistingCustomerDetails();
 
