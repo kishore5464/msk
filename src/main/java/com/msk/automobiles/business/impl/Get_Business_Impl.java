@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.msk.automobiles.business.interfaces.Get_Business_Interface;
 import com.msk.automobiles.dao.interfaces.Get_DAO_Interface;
+import com.msk.automobiles.dao.interfaces.Update_DAO_Interface;
 import com.msk.automobiles.service.entities.Car_Brands;
 import com.msk.automobiles.service.entities.Car_Models;
 import com.msk.automobiles.service.entities.Customer_Details;
@@ -30,6 +31,9 @@ public class Get_Business_Impl implements Get_Business_Interface {
 
 	@Autowired
 	Get_DAO_Interface get_DAO_Interface;
+
+	@Autowired
+	Update_DAO_Interface update_DAO_Interface;
 
 	@Override
 	public List<Car_Brands_Pojo> getAllBrands(String type) {
@@ -259,6 +263,8 @@ public class Get_Business_Impl implements Get_Business_Interface {
 			Encrypt_Decrypt encrypt_Decrypt = new Encrypt_Decrypt();
 			String access = encrypt_Decrypt.decrypt(msk_Owners.get(0).getAccess_code());
 			if (access.equals(access_code)) {
+				msk_Owners.get(0).setAccess_code("0");
+				update_DAO_Interface.updateMSKOwner(msk_Owners.get(0));
 				status = "success";
 			}
 		}

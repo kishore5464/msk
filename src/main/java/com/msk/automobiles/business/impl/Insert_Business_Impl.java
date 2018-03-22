@@ -212,7 +212,6 @@ public class Insert_Business_Impl implements Insert_Business_Interface {
 				secret = "" + random.nextInt(999999);
 
 				msk_Owners.get(0).setAccess_code(encrypt_Decrypt.encrypt(secret));
-
 				update_DAO_Interface.updateMSKOwner(msk_Owners.get(0));
 
 				mailSenderService.sendAccessCode(msk_Owners.get(0).getEmail(), secret);
