@@ -249,4 +249,21 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		return parts_list;
 	}
 
+	@Override
+	public String getVerifyAccessCode(String username, String access_code) {
+		// TODO Auto-generated method stub
+		List<MSK_Owner> msk_Owners = get_DAO_Interface.getMSKOwnerDetail(username);
+		String status = "failure";
+
+		if (!msk_Owners.isEmpty()) {
+			Encrypt_Decrypt encrypt_Decrypt = new Encrypt_Decrypt();
+			String access = encrypt_Decrypt.decrypt(msk_Owners.get(0).getAccess_code());
+			if (access.equals(access_code)) {
+				status = "success";
+			}
+		}
+
+		return status;
+	}
+
 }
