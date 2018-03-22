@@ -95,7 +95,7 @@ public class ListsController {
 	}
 
 	@GET
-	@Path("/parts-car-brand")
+	@Path("/car-brand-parts")
 	public Response parts_car_brand() {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
@@ -113,7 +113,7 @@ public class ListsController {
 	}
 
 	@POST
-	@Path("/parts-car-models")
+	@Path("/car-models-parts")
 	public Response parts_car_models(@FormParam("brand_id") String brand_id, @Context HttpServletRequest request) {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
@@ -141,13 +141,9 @@ public class ListsController {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 		try {
-			List<Car_Models_Pojo> models = get_Business_Interface.getModels(model_id);
+			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock();
 
-			data.put("models", models);
-
-			if (!models.isEmpty()) {
-				data.put("brand_id", models.get(0).getBrand_id());
-			}
+			data.put("in_stock_parts", spare_Parts_Pojos);
 
 			mix.put("data", data);
 		} catch (Exception e) {
