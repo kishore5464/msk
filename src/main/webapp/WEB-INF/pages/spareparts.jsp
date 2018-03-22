@@ -164,9 +164,10 @@
   
   <tr class="customershead">
     <td>
-    <div class="form-group group group1 form-feilds inputstyle ui-widget" style="max-width:116px">
-    <input name="location" value="" required="" class="location_name ui-autocomplete-input" autocomplete="off" placeholder="Brand Name">
-    <span class="highlight"></span> <span class="bar barpass"></span>
+    <div class="form-group group group1 form-feilds inputstyle" style="max-width:116px">
+
+
+
     </div>
     </td>
     
