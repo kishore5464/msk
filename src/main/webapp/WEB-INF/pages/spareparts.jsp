@@ -17,10 +17,12 @@
   <link rel="stylesheet" href="../css/carbrands.css">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/bootstrap-select.min.css">
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="../css/carbrands.css">
 
   <script src="../js/jquery-3.2.1.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
 
 #customers {
@@ -161,7 +163,7 @@
     <td>
     <div class="form-group group group1 form-feilds inputstyle ui-widget" style="max-width:126px">
    
-      <select class="selectpicker" data-show-subtext="true" data-live-search="true" id="notice_period" name="notice" required>
+      <select class="selectpicker modallist" data-show-subtext="true" data-live-search="true" id="car_modals" name="notice" required>
       <option value="" selected disabled>Select Modal</option>     
       </select>
       
@@ -169,19 +171,20 @@
     </td>
     <td>
     <div class="form-group group group1 form-feilds inputstyle ui-widget" style="max-width:180px">
-    <input name="location" value="" required="" class="location_name ui-autocomplete-input" autocomplete="off" placeholder="Part Name" style="width:322px">
+    <input name="location" value="" required="" class="parts_name" autocomplete="off" placeholder="Part Name" style="width:322px">
     <span class="highlight"></span> <span class="bar barpass"></span>
     </div>
+    <button class="btn btn-success chk_stock" value="check" style="float:right">check stock</button>
     </td>
      <td>
      <div class="form-group group group1 form-feilds inputstyle inputstyle2 ui-widget" style="max-width:50px">
-    <input name="location" value="" required="" class="location_name ui-autocomplete-input" autocomplete="off" placeholder="quantity" style="max-width:110px">
+    <input name="location"  disabled value="" required="" class="disableoption ui-autocomplete-input" autocomplete="off" placeholder="quantity" style="max-width:110px">
     <span class="highlight"></span> <span class="bar barpass barpass2"></span>
     </div>
      </td>
       <td>
       <div class="form-group group group1 form-feilds inputstyle inputstyle2 ui-widget" style="max-width:50px">
-    <input name="location" value="" required="" class="location_name ui-autocomplete-input" autocomplete="off" placeholder="price" style="max-width:110px">
+    <input name="location" disabled value="" required="" class="disableoption location_name ui-autocomplete-input" autocomplete="off" placeholder="price" style="max-width:110px">
     <span class="highlight"></span> <span class="bar barpass barpass2"></span>
     </div>
       </td>

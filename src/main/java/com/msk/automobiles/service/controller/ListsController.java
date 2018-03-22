@@ -103,10 +103,9 @@ public class ListsController {
 	public Response parts_car_brand() {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
-		
-		
+
 		System.out.println("PaRTSSSSSSSSS BRNAD SERVLETTTTTTTTT");
-		
+
 		try {
 			List<Car_Brands_Pojo> brands = get_Business_Interface.getAllBrands("parts");
 
@@ -179,18 +178,23 @@ public class ListsController {
 	@Path("/exists-parts")
 	public Response exists_parts(@FormParam("model_id") String model_id, @FormParam("part") String part,
 			@Context HttpServletRequest request) {
+		
+		System.out.println("model_id=======>"+model_id);
+		System.out.println("part=======>"+part);
+		
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 		try {
 			System.out.println("MODEL ID --> " + model_id);
 			System.out.println("PART --> " + part);
 
-			List<Spare_Parts_Pojo> spare_parts = get_Business_Interface.getSparePartsInStock("INSTOCK");
+			Spare_Parts_Pojo spare_Parts_Pojo = get_Business_Interface.getSparePartsAtParticularModelParts(model_id,
+					part);
 
-			System.out.println("SPARE PARTS --> " + spare_parts);
+			System.out.println("SPARE PARTS --> " + spare_Parts_Pojo);
 
-			if (!spare_parts.isEmpty()) {
-				data.put("spare_parts", spare_parts);
+			if (!spare_Parts_Pojo.getId().equals("0")) {
+				data.put("spare_parts", spare_Parts_Pojo);
 			} else {
 				data.put("spare_parts", "empty");
 			}
