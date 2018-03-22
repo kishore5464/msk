@@ -174,16 +174,17 @@
     <input name="location" value="" required="" class="parts_name" autocomplete="off" placeholder="Part Name" style="width:322px">
     <span class="highlight"></span> <span class="bar barpass"></span>
     </div>
+    <button class="btn btn-success chk_stock" value="check" style="float:right">check stock</button>
     </td>
      <td>
      <div class="form-group group group1 form-feilds inputstyle inputstyle2 ui-widget" style="max-width:50px">
-    <input name="location" value="" required="" class="location_name ui-autocomplete-input" autocomplete="off" placeholder="quantity" style="max-width:110px">
+    <input name="location"  disabled value="" required="" class="disableoption ui-autocomplete-input" autocomplete="off" placeholder="quantity" style="max-width:110px">
     <span class="highlight"></span> <span class="bar barpass barpass2"></span>
     </div>
      </td>
       <td>
       <div class="form-group group group1 form-feilds inputstyle inputstyle2 ui-widget" style="max-width:50px">
-    <input name="location" value="" required="" class="location_name ui-autocomplete-input" autocomplete="off" placeholder="price" style="max-width:110px">
+    <input name="location" disabled value="" required="" class="disableoption location_name ui-autocomplete-input" autocomplete="off" placeholder="price" style="max-width:110px">
     <span class="highlight"></span> <span class="bar barpass barpass2"></span>
     </div>
       </td>

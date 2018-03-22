@@ -39,12 +39,12 @@ public class UpdateController {
 	@PUT
 	@Path("/update-existing-part")
 	public Response update_parts(@FormParam("spare_part_id") String spare_part_id,
-			@FormParam("quantity") String quantity, @FormParam("price_per_unit") String price_per_unit,
+			@FormParam("quantity") String quantity, @FormParam("amount") String amount,
 			@Context HttpServletRequest request) {
 		String status = null;
 
 		try {
-			update_Business_Interface.updateSparePartsInStock(spare_part_id, quantity, price_per_unit);
+			update_Business_Interface.updateSparePartsInStock(spare_part_id, quantity, amount);
 			status = "success";
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());

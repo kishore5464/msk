@@ -248,4 +248,18 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 		return parts;
 	}
 
+	@Override
+	public List<Parts> getSparePartsAtParticularModelParts(Integer model_id, String part) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session
+				.createQuery(" from Parts where car_models_id = '" + model_id + "' and part = '" + part + "'");
+		List<Parts> parts = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return parts;
+	}
+
 }

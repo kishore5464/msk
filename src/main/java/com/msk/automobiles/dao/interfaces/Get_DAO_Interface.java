@@ -46,4 +46,6 @@ public interface Get_DAO_Interface {
 
 	List<Parts> getSparePartsAtParticularModel(String model_id);
 
+	List<Parts> getSparePartsAtParticularModelParts(Integer model_id, String part);
+
 }

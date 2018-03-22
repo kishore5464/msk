@@ -2,7 +2,7 @@
 
 
 $.ajax({
-        url: 'msk/parts-brand',
+        url: 'msk/check-brand-stock',
         method : 'post',
         datatype: 'text',
         success: function(response) {
@@ -45,7 +45,7 @@ $.ajax({
 							    .val('whatever');
 			  
 							$.ajax({
-						          url: 'msk/parts-models',
+						          url: 'msk/check-model-stock',
 						          type: 'POST',
 						          dataType: 'text',
 						          data: {'brand_id':selectedbrand},
@@ -81,27 +81,25 @@ $(document).on("change",".modallist",function(){
 	  
 	  var selectedbrand=$(this).val();
 	  
-	  console.log("selectedbrand======>"+selectedbrand);
+	  console.log("modal selectedbrand======>"+selectedbrand);
 
 
 	$.ajax({
-        url: 'exists-partss',
+        url: 'msk/check-part-stock',
         type: 'POST',
         dataType: 'text',
-        data: {'brand_id':selectedbrand},
+        data: {'model_id':selectedbrand},
         success: function(responseText) {
-      	  
-      	  console.log("output========>"+responseText);
-      	  
+  	  
       	  var output=JSON.parse(responseText);
-      	  
-      	
-      	 var availableTags = [];
+   	  
+     	var availableTags = [];
 	        
-         $.each(output.nameeeeeee, function(key, value) {
+         $.each(output.data.parts, function(key, value) {
            
-             availableTags.push(value.nameeeeeee);
+            availableTags.push(value);
              
+        	 console.log("eeeee------>"+value);
             
            });
          
@@ -119,5 +117,46 @@ $(document).on("change",".modallist",function(){
     });
 
 });
+
+
+$(document).on("click",".chk_stock",function(){
+	
+	
+	
+	
+	$.ajax({
+        url: 'msk/exists-parts',
+        type: 'POST',
+        dataType: 'text',
+        data: {'model_id':$('.modallist').val(),'part':$('.parts_name').val()},
+        success: function(responseText) {
+      	  
+      	  console.log("output========>"+responseText);
+      	 var output=JSON.parse(responseText);
+      	 
+      	 console.log("output====>"+output.data.spare_parts);
+      	 
+         if(output.data.spare_parts == "empty"){
+        	 
+        	 $('.disableoption').removeAttr("disabled");
+        	 
+         }
+         else{
+        	 $('.disableoption').removeAttr("disabled");
+        	 
+        	 
+        	 
+         }
+    
+        },
+        error: function() {
+        	console.log("error ajax");
+        	
+        }
+    });
+	
+});
+
+
       
      

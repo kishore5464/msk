@@ -29,4 +29,6 @@ public interface Get_Business_Interface {
 
 	List<String> getSparePartsAtParticularModel(String model_id);
 
+	Spare_Parts_Pojo getSparePartsAtParticularModelParts(String model_id, String part);
+
 }
