@@ -198,6 +198,7 @@ public class ListsController {
 		}
 
 		return Response.ok().entity(mix.toString()).build();
+		
 	}
 
 	@POST
