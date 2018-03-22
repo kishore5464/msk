@@ -1,0 +1,476 @@
+package com.fbt.talentex.jobseeker.util;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fbt.talentex.jobseeker.business.interfaces.QualityPackBusiness;
+import com.fbt.talentex.jobseeker.dao.entities.BetaValueMaster;
+import com.fbt.talentex.jobseeker.dao.entities.DegreeMaster;
+import com.fbt.talentex.jobseeker.dao.entities.JobRoleMaster;
+import com.fbt.talentex.jobseeker.dao.entities.JobSeeker;
+import com.fbt.talentex.jobseeker.dao.entities.JobSeekerBasicQp;
+import com.fbt.talentex.jobseeker.dao.entities.JobSeekerDegree;
+import com.fbt.talentex.jobseeker.dao.entities.JobSeekerPreferedJobrole;
+import com.fbt.talentex.jobseeker.dao.entities.JobSeekerSchool;
+import com.fbt.talentex.jobseeker.dao.interfaces.CourseDataAccess;
+import com.fbt.talentex.jobseeker.dao.interfaces.GenericDataAccess;
+import com.fbt.talentex.jobseeker.dao.interfaces.JobRoleDataAccess;
+import com.fbt.talentex.jobseeker.dao.interfaces.ProfileDataAccess;
+
+@Service
+public class QualityPackService implements QualityPackBusiness {
+	
+	@Autowired
+	ProfileDataAccess profileDataAccess;
+	
+	@Autowired
+	JobRoleDataAccess jobRoleDataAccess;
+	
+	@Autowired
+	CourseDataAccess courseDataAccess;
+	
+	@Autowired
+	GenericDataAccess genericDataAccess;
+	
+	@Override
+	public void jobSeekerBasicQpCalculation(Integer jobseekerId) {
+		// TODO Auto-generated method stub
+		String collegeGrade = null;
+		Integer schoolGrade = 0, count = 0;
+		Double ugPercentage = 0.0, pgPercentage = 0.0, acadamic = 0.0, finalQp = 0.0;
+		Integer diplomaCount = 0, hscCount = 0, degreeNumber = 0;
+		Double sslcPercentage = 0.0, hscPercentage = 0.0, diplomaPercentage = 0.0;
+		Double schoolLatency = 0.0, degreeLantency = 0.0, betaValueWeightage = 0.0;
+		// jobseeker school classification for qpcalculation
+
+		List<JobSeekerSchool> alrJobSeekerSchool = profileDataAccess
+				.getJobSeekerSchool(jobseekerId);
+		if (!alrJobSeekerSchool.isEmpty()) {
+			for (JobSeekerSchool jobSeekerSchool : alrJobSeekerSchool) {
+				if (jobSeekerSchool.getStandard().equalsIgnoreCase("sslc")) {
+					sslcPercentage = jobSeekerSchool.getPercentage();
+					if(sslcPercentage<=10)
+					{
+						sslcPercentage = sslcPercentage * 10;
+					}
+					
+				}
+
+				if (jobSeekerSchool.getStandard().equalsIgnoreCase("hsc")) {
+					hscCount = 1;
+					hscPercentage = jobSeekerSchool.getPercentage();
+					if(hscPercentage<=10)
+					{
+						hscPercentage = hscPercentage * 10;
+					}
+				}
+
+				else if (jobSeekerSchool.getStandard().equalsIgnoreCase(
+						"diploma")) {
+					diplomaCount = 1;
+					diplomaPercentage = jobSeekerSchool.getPercentage();
+					if(diplomaPercentage<=10)
+					{
+						diplomaPercentage = diplomaPercentage * 10;
+					}
+				}
+
+			}
+
+			if (hscCount == 1 && diplomaCount == 1) {
+				schoolGrade = 1;
+			}
+
+			else if (hscCount == 1 && diplomaCount == 0) {
+				schoolGrade = 2;
+			}
+
+			else if (hscCount == 0 && diplomaCount == 1) {
+				schoolGrade = 3;
+			}
+
+			schoolLatency = getJobSeekerSchool(sslcPercentage, hscPercentage,
+					diplomaPercentage, schoolGrade);
+
+		}
+
+		// jobseeker degree classification for qpcalculation
+
+		List<JobSeekerDegree> alrJobSeekerDegree = profileDataAccess
+				.getJobSeekerDegree(jobseekerId);
+		List<DegreeMaster> alrDegreeMasters = null;
+		if (!alrJobSeekerDegree.isEmpty()) {
+			for (JobSeekerDegree jobSeekerDegree : alrJobSeekerDegree) {
+				alrDegreeMasters = profileDataAccess.getDegreeMasters(jobSeekerDegree.getDegreeId());
+				if (jobSeekerDegree.getCollegeMaster().getType()
+						.equalsIgnoreCase("engg")) {
+					if (alrDegreeMasters.get(0).getGraduation()
+							.equalsIgnoreCase("ug")) {
+						collegeGrade = "A";
+						ugPercentage = jobSeekerDegree.getPercentage();
+						if(ugPercentage<=10)
+						{
+							ugPercentage = ugPercentage * 10;
+						}
+					}
+
+					if (alrDegreeMasters.get(0).getGraduation()
+							.equalsIgnoreCase("pg")) {
+						collegeGrade = "B";
+						pgPercentage = jobSeekerDegree.getPercentage();
+						if(pgPercentage<=10)
+						{
+							pgPercentage = pgPercentage * 10;
+						}
+					}
+				}
+
+				else if (jobSeekerDegree.getCollegeMaster().getType()
+						.equalsIgnoreCase("arts")) {
+					if (alrDegreeMasters.get(0).getGraduation()
+							.equalsIgnoreCase("ug")) {
+						collegeGrade = "C";
+						ugPercentage = jobSeekerDegree.getPercentage();
+						if(ugPercentage<=10)
+						{
+							ugPercentage = ugPercentage * 10;
+						}
+					}
+
+					if (alrDegreeMasters.get(0).getGraduation()
+							.equalsIgnoreCase("pg")) {
+						collegeGrade = "D";
+						pgPercentage = jobSeekerDegree.getPercentage();
+						if(pgPercentage<=10)
+						{
+							pgPercentage = pgPercentage * 10;
+						}
+					}
+
+				}
+			}
+
+			degreeLantency = getJobSeekerDegree(ugPercentage, pgPercentage,
+					collegeGrade);
+
+			if (alrJobSeekerDegree.size() == 2) {
+				for (JobSeekerDegree jobSeekerDegree : alrJobSeekerDegree) {
+					alrDegreeMasters = profileDataAccess.getDegreeMasters(jobSeekerDegree.getDegreeId());
+					if (alrDegreeMasters.get(0).getGraduation()
+							.equalsIgnoreCase("pg")) {
+						degreeNumber = jobSeekerDegree.getDegreeId();
+					}
+				}
+			}
+
+			else if (alrJobSeekerDegree.size() == 1) {
+				for (JobSeekerDegree jobSeekerDegree : alrJobSeekerDegree) {
+					if (alrDegreeMasters.get(0).getGraduation()
+							.equalsIgnoreCase("ug")) {
+						degreeNumber = jobSeekerDegree.getDegreeId();
+					}
+				}
+			}
+
+			else {
+				degreeNumber = 7;
+			}
+		}
+
+		// jobseeker final basic qpcalculation
+
+		if (collegeGrade.equalsIgnoreCase("A")
+				|| collegeGrade.equalsIgnoreCase("C")) {
+			if (schoolGrade == 1) {
+				acadamic = (((0.5 * ugPercentage) + (0.2 * diplomaPercentage)
+						+ (0.2 * hscPercentage) + (0.2 * sslcPercentage)) * degreeLantency)
+						* schoolLatency;
+			}
+
+			else if (schoolGrade == 2) {
+				acadamic = (((0.5 * ugPercentage) + (0.3 * hscPercentage) + (0.2 * sslcPercentage)) * degreeLantency)
+						* schoolLatency;
+			}
+
+			else if (schoolGrade == 3) {
+				acadamic = (((0.5 * ugPercentage) + (0.3 * diplomaPercentage) + (0.2 * sslcPercentage)) * degreeLantency)
+						* schoolLatency;
+			}
+		}
+
+		else if (collegeGrade.equalsIgnoreCase("B")
+				|| collegeGrade.equalsIgnoreCase("D")) {
+			if (schoolGrade == 1) {
+				acadamic = (((0.3 * pgPercentage) + (0.3 * ugPercentage)
+						+ (0.15 * diplomaPercentage) + (0.15 * hscPercentage) + (0.1 * sslcPercentage)) * degreeLantency)
+						* schoolLatency;
+			}
+
+			else if (schoolGrade == 2) {
+				acadamic = (((0.3 * pgPercentage) + (0.3 * ugPercentage)
+						+ (0.25 * hscPercentage) + (0.15 * sslcPercentage)) * degreeLantency)
+						* schoolLatency;
+
+			}
+
+			else if (schoolGrade == 3) {
+				acadamic = (((0.3 * pgPercentage) + (0.3 * ugPercentage)
+						+ (0.25 * diplomaPercentage) + (0.15 * sslcPercentage)) * degreeLantency)
+						* schoolLatency;
+			}
+		}
+		
+		// jobseeker jobrole define and put into jobseeker qp table
+
+		List<JobRoleMaster> alrjoJobRoleMaster = jobRoleDataAccess
+				.getJobroleMaster();
+
+		List<BetaValueMaster> alrBetaValueMaster = genericDataAccess
+				.getDegreeBetaValueMaster();
+
+		JobSeekerBasicQp jobSeekerBasicQp;
+
+		JobSeeker jobSeeker;
+
+		JobRoleMaster jobRoleMasters;
+
+		List<JobSeekerBasicQp> alrJobSeekerBasicQps = jobRoleDataAccess
+				.getRecommendedJobseekerJobrole(jobseekerId);
+		for (JobRoleMaster jobRoleMaster : alrjoJobRoleMaster) {
+			for (BetaValueMaster betaValueMaster : alrBetaValueMaster) {
+				if (betaValueMaster.getDegreeMaster().getDno() == degreeNumber
+						&& betaValueMaster.getJobRoleTechnologyMaster()
+								.getId() == jobRoleMaster.getId()) {
+					count++;
+					betaValueWeightage = betaValueMaster.getWeightage();
+				}
+			}
+
+			if (count == 0) {
+				betaValueWeightage = 0.3;
+			}
+
+			finalQp = acadamic * betaValueWeightage * 0.23;
+			if (alrJobSeekerBasicQps.isEmpty()) {
+				jobSeekerBasicQp = new JobSeekerBasicQp();
+				jobSeeker = new JobSeeker();
+				jobSeekerBasicQp.setJobRoleMasterId(jobRoleMaster.getId());
+				jobSeeker.setId(jobseekerId);
+				jobSeekerBasicQp.setJobSeeker(jobSeeker);
+				jobSeekerBasicQp.setJobSeekerQp(finalQp);
+				profileDataAccess.addorupdateJobseekerQp(jobSeekerBasicQp);
+			} else if (!alrJobSeekerBasicQps.isEmpty()) {
+				for (JobSeekerBasicQp jobSeekerBasicQp2 : alrJobSeekerBasicQps) {
+					if (jobRoleMaster.getId().equals(
+							jobSeekerBasicQp2.getJobRoleMasterId())) {
+						jobSeekerBasicQp = new JobSeekerBasicQp();
+						jobSeeker = new JobSeeker();
+						jobSeekerBasicQp.setJobRoleMasterId(jobRoleMaster.getId());
+						jobSeeker.setId(jobseekerId);
+						jobSeekerBasicQp.setJobSeeker(jobSeeker);
+						jobSeekerBasicQp.setJobSeekerQp(finalQp);
+						jobSeekerBasicQp.setId(jobSeekerBasicQp2.getId());
+						profileDataAccess.addorupdateJobseekerQp(jobSeekerBasicQp);
+
+					}
+
+					/*
+					 * else { jobSeekerBasicQp = new JobSeekerBasicQp();
+					 * jobRoleMasters = new JobRoleMaster(); jobSeeker = new
+					 * JobSeeker(); jobRoleMasters.setId(jobRoleMaster.getId());
+					 * jobSeekerBasicQp.setJobRoleMaster(jobRoleMasters);
+					 * jobSeeker.setId(userid);
+					 * jobSeekerBasicQp.setJobSeeker(jobSeeker);
+					 * jobSeekerBasicQp.setJobSeekerQp(finalQp);
+					 * jobseekerJobroleDataFetch
+					 * .putJobseekerQp(jobSeekerBasicQp);
+					 * 
+					 * }
+					 */
+
+				}
+			}
+
+		}
+
+	}
+
+	@Override
+	public void jobSeekerExamQpCalculation(Integer userid) {
+		// TODO Auto-generated method stub
+		
+
+	}
+
+	public Double getJobSeekerSchool(Double sslcPercentage,
+			Double hscPercentage, Double diplomaPercentage, Integer schoolGrade) {
+
+		Double schoolLatency = 0.0, sslcLatency = 0.0, hscLatency = 0.0, diplomaLatency = 0.0;
+
+		if (sslcPercentage >= 60) {
+			sslcLatency = 75 + (0.625 * (sslcPercentage - 60));
+		}
+
+		else if (sslcPercentage >= 35 && sslcPercentage <= 59) {
+			sslcLatency = 3 * (sslcPercentage - 34);
+		}
+
+		else {
+			sslcLatency = 0.0;
+		}
+
+		sslcLatency = sslcLatency / 100;
+
+		if (schoolGrade == 1) {
+			if (hscPercentage >= 60) {
+				hscLatency = 75 + (0.625 * (hscPercentage - 60));
+			}
+
+			else if (hscPercentage >= 35 && hscPercentage <= 59) {
+				hscLatency = 3 * (hscPercentage - 34);
+			}
+
+			else {
+				hscLatency = 0.0;
+			}
+
+			if (diplomaPercentage >= 60) {
+				diplomaLatency = 75 + (0.625 * (diplomaPercentage - 60));
+			}
+
+			else if (diplomaPercentage >= 35 && diplomaPercentage <= 59) {
+				diplomaLatency = 3 * (diplomaPercentage - 34);
+			}
+
+			else {
+				diplomaLatency = 0.0;
+			}
+
+			hscLatency = hscLatency / 100;
+			diplomaLatency = diplomaLatency / 100;
+			schoolLatency = (sslcLatency + hscLatency + diplomaLatency) / 3;
+		}
+
+		else if (schoolGrade == 2) {
+			if (hscPercentage >= 60) {
+				hscLatency = 75 + (0.625 * (hscPercentage - 60));
+			}
+
+			else if (hscPercentage >= 35 && hscPercentage <= 59) {
+				hscLatency = 3 * (hscPercentage - 34);
+			}
+
+			else {
+				hscLatency = 0.0;
+			}
+
+			hscLatency = hscLatency / 100;
+			schoolLatency = (sslcLatency + hscLatency) / 2;
+
+		}
+
+		else if (schoolGrade == 3) {
+			if (diplomaPercentage >= 60) {
+				diplomaLatency = 75 + (0.625 * (diplomaPercentage - 60));
+			}
+
+			else if (diplomaPercentage >= 35 && diplomaPercentage <= 59) {
+				diplomaLatency = 3 * (diplomaPercentage - 34);
+			}
+
+			else {
+				diplomaLatency = 0.0;
+			}
+
+			diplomaLatency = diplomaLatency / 100;
+			schoolLatency = (sslcLatency + diplomaLatency) / 2;
+		}
+
+		return schoolLatency;
+	}
+
+	public Double getJobSeekerDegree(Double ugPercentage, Double pgPercentage,
+			String collegeGrade) {
+
+		Double degreeLatency = 0.0;
+		Double ugLatency = 0.0, pgLatency = 0.0;
+		if (ugPercentage <= 10) {
+			ugPercentage = ugPercentage * 10;
+		}
+		if (pgPercentage <= 10) {
+			pgPercentage = pgPercentage * 10;
+		}
+
+		if (ugPercentage >= 60) {
+			ugLatency = 75 + (0.625 * (ugPercentage - 60));
+		} else if (ugPercentage >= 55 && ugPercentage <= 59) {
+			ugLatency = 30 + (9 * (ugPercentage - 55));
+		}
+
+		else if (ugPercentage >= 50 && ugPercentage <= 54) {
+			ugLatency = 6 * (ugPercentage - 50);
+		}
+
+		else {
+			ugLatency = 0.0;
+		}
+
+		ugLatency = ugLatency / 100;
+		degreeLatency = ugLatency;
+
+		if (collegeGrade.equalsIgnoreCase("B")
+				|| collegeGrade.equalsIgnoreCase("D")) {
+
+			if (pgPercentage >= 60) {
+				pgLatency = 75 + (0.625 * (pgPercentage - 60));
+			} else if (pgPercentage >= 55 && pgPercentage <= 59) {
+				pgLatency = 30 + (9 * (pgPercentage - 55));
+			}
+
+			else if (pgPercentage >= 50 && pgPercentage <= 54) {
+				pgLatency = 6 * (pgPercentage - 50);
+			}
+
+			else {
+				pgLatency = 0.0;
+			}
+			pgLatency = pgLatency / 100;
+			degreeLatency = (ugLatency + pgLatency) / 2;
+		}
+
+		return degreeLatency;
+	}
+
+	@Override
+	public List<Integer> jobGlobalRank(Integer jobseekerId) {
+		// TODO Auto-generated method stub
+		List<JobSeekerPreferedJobrole> alrJobSeekerPreferedJobrolescheck = jobRoleDataAccess.getJobSeekerPreferedJobRole(jobseekerId);
+		List<Integer> alrIntegers = new ArrayList<Integer>();
+		if(!alrJobSeekerPreferedJobrolescheck.isEmpty())
+		{
+		Integer count = jobRoleDataAccess
+				.getJobseekerPreferedJobroleQP(alrJobSeekerPreferedJobrolescheck.get(0).getJobSeekerQp(), alrJobSeekerPreferedJobrolescheck.get(0).getJobRoleMasterId());
+		Integer preferedRoleCount = jobRoleDataAccess
+				.getJobseekerPreferedJobrole( alrJobSeekerPreferedJobrolescheck.get(0).getJobRoleMasterId());
+		Integer percetailRank = null;
+		if(count > 1)
+		{
+			Double percetailRank1 = count.doubleValue();
+			Double  preferedRoleCount1 = preferedRoleCount.doubleValue();
+			percetailRank1 = (percetailRank1/preferedRoleCount1)*100;
+			percetailRank = percetailRank1.intValue();	
+		}
+		else
+		{
+			percetailRank = 100;
+		}
+			alrIntegers.add(count);
+			alrIntegers.add(percetailRank);
+		}
+		return alrIntegers;
+	}
+
+}
