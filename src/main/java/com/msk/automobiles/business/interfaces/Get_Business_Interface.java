@@ -25,6 +25,6 @@ public interface Get_Business_Interface {
 
 	String getServiceCardNo();
 
-	List<Spare_Parts_Pojo> getSparePartsInStock();
+	List<Spare_Parts_Pojo> getSparePartsInStock(String stock_status);
 
 }

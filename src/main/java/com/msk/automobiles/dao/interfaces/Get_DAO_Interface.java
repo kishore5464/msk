@@ -40,6 +40,6 @@ public interface Get_DAO_Interface {
 
 	String getLocationByCityId(String location_id);
 
-	List<Parts> getSparePartsInStock();
+	List<Parts> getSparePartsInStock(String stock_status);
 
 }

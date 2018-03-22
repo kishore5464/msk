@@ -5,6 +5,7 @@ public class Spare_Parts_Pojo {
 	private String id;
 	private String brand;
 	private String model;
+	private String spare_part_id;
 	private String spare_part_name;
 	private String quantity;
 	private String price_per_unit;
@@ -15,12 +16,13 @@ public class Spare_Parts_Pojo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Spare_Parts_Pojo(String id, String brand, String model, String spare_part_name, String quantity,
-			String price_per_unit, String total_price) {
+	public Spare_Parts_Pojo(String id, String brand, String model, String spare_part_id, String spare_part_name,
+			String quantity, String price_per_unit, String total_price) {
 		super();
 		this.id = id;
 		this.brand = brand;
 		this.model = model;
+		this.setSpare_part_id(spare_part_id);
 		this.spare_part_name = spare_part_name;
 		this.quantity = quantity;
 		this.price_per_unit = price_per_unit;
@@ -83,11 +85,19 @@ public class Spare_Parts_Pojo {
 		this.total_price = total_price;
 	}
 
+	public String getSpare_part_id() {
+		return spare_part_id;
+	}
+
+	public void setSpare_part_id(String spare_part_id) {
+		this.spare_part_id = spare_part_id;
+	}
+
 	@Override
 	public String toString() {
-		return "Spare_Parts_Pojo [id=" + id + ",brand=" + brand + ", model=" + model + ", spare_part_name="
-				+ spare_part_name + ", quantity=" + quantity + ", price_per_unit=" + price_per_unit + ", total_price="
-				+ total_price + "]";
+		return "Spare_Parts_Pojo [id=" + id + ", brand=" + brand + ", model=" + model + ", spare_part_id="
+				+ spare_part_id + ", spare_part_name=" + spare_part_name + ", quantity=" + quantity
+				+ ", price_per_unit=" + price_per_unit + ", total_price=" + total_price + "]";
 	}
 
 }

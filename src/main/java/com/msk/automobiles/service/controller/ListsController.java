@@ -44,6 +44,7 @@ public class ListsController {
 	@Autowired
 	Update_Business_Interface update_Business_Interface;
 
+	// CAR BRAND FROM SERVICE
 	@GET
 	@Path("/car-brand")
 	public Response car_brand() {
@@ -67,6 +68,7 @@ public class ListsController {
 		return Response.ok().entity(view).build();
 	}
 
+	// CAR BRAND AND ITS MODEL FROM SERVICE
 	@POST
 	@Path("/{brand}/car-models")
 	public Response car_models(@FormParam("brand_id") String brand_id, @Context HttpServletRequest request) {
@@ -94,14 +96,17 @@ public class ListsController {
 		return Response.ok().entity(view).build();
 	}
 
+	// CAR PARTS FROM CLICKING PARTS IN INDEX PAGE
+	// TO ADD NEW PART IN PARTICULAR BRAND
 	@GET
-	@Path("/parts-car-brand")
+	@Path("/parts-brand")
 	public Response parts_car_brand() {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 		try {
 			List<Car_Brands_Pojo> brands = get_Business_Interface.getAllBrands();
 
+			System.out.println("BRAND --> " + brands);
 			data.put("brands", brands);
 
 			mix.put("data", data);
@@ -112,14 +117,18 @@ public class ListsController {
 		return Response.ok().entity(mix.toString()).build();
 	}
 
+	// TO ADD NEW PART IN PARTICULAR MODEL
+	// FROM PARTS CAR BRAND
 	@POST
-	@Path("/parts-car-models")
+	@Path("/parts-models")
 	public Response parts_car_models(@FormParam("brand_id") String brand_id, @Context HttpServletRequest request) {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 		try {
+			System.out.println("BRAND ID --> " + brand_id);
 			List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id);
 
+			System.out.println("MODELS --> " + models);
 			data.put("models", models);
 
 			if (!models.isEmpty()) {
@@ -134,6 +143,8 @@ public class ListsController {
 		return Response.ok().entity(mix.toString()).build();
 	}
 
+	// TO ADD NEW PART IN PARTICULAR MODEL AND PART
+	// FROM PARTS CAR MODEL
 	@POST
 	@Path("/exists-parts")
 	public Response exists_parts(@FormParam("model_id") String model_id, @FormParam("part") String part,
@@ -141,12 +152,17 @@ public class ListsController {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 		try {
-			List<Car_Models_Pojo> models = get_Business_Interface.getModels(model_id);
+			System.out.println("MODEL ID --> " + model_id);
+			System.out.println("PART --> " + part);
 
-			data.put("models", models);
+			List<Spare_Parts_Pojo> spare_parts = get_Business_Interface.getSparePartsInStock("INSTOCK");
 
-			if (!models.isEmpty()) {
-				data.put("brand_id", models.get(0).getBrand_id());
+			System.out.println("SPARE PARTS --> " + spare_parts);
+
+			if (!spare_parts.isEmpty()) {
+				data.put("spare_parts", spare_parts);
+			} else {
+				data.put("spare_parts", "empty");
 			}
 
 			mix.put("data", data);
@@ -178,17 +194,20 @@ public class ListsController {
 		return Response.ok().entity(view).build();
 	}
 
+	// TO VIEW ALL SPARE PARTS EXIST INSTOCK
 	@GET
 	@Path("/spare-parts")
-	public Response spare_parts() {
+	public Response spare_parts(@FormParam("stock_status") String stock_status, @Context HttpServletRequest request) {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 
 		Viewable view = null;
 
 		try {
-			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock();
+			System.out.println("STOCK STATUS --> " + stock_status);
+			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock(stock_status);
 
+			System.out.println("SPARE PARTS OF " + stock_status.toUpperCase() + " --> " + spare_Parts_Pojos);
 			data.put("spare_parts", spare_Parts_Pojos);
 			mix.put("data", data);
 

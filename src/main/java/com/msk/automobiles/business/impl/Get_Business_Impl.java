@@ -200,9 +200,9 @@ public class Get_Business_Impl implements Get_Business_Interface {
 	}
 
 	@Override
-	public List<Spare_Parts_Pojo> getSparePartsInStock() {
+	public List<Spare_Parts_Pojo> getSparePartsInStock(String stock_status) {
 		// TODO Auto-generated method stub
-		List<Parts> spare_parts = get_DAO_Interface.getSparePartsInStock();
+		List<Parts> spare_parts = get_DAO_Interface.getSparePartsInStock(stock_status);
 		List<Spare_Parts_Pojo> spare_Parts_Pojos = new ArrayList<Spare_Parts_Pojo>();
 
 		if (!spare_parts.isEmpty()) {
@@ -215,6 +215,7 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				spare_Parts_Pojo.setBrand(get_DAO_Interface.getBrandById(models.get(0).getCar_Brands().getId()).get(0)
 						.getBrand().replace(" ", "+"));
 				spare_Parts_Pojo.setModel(models.get(0).getModel().replace(" ", "+"));
+				spare_Parts_Pojo.setSpare_part_id(Integer.toString(spare_parts.get(i).getId()));
 				spare_Parts_Pojo.setSpare_part_name(spare_parts.get(i).getPart());
 				spare_Parts_Pojo.setQuantity(Integer.toString(spare_parts.get(i).getQuantity()));
 				spare_Parts_Pojo.setPrice_per_unit(Double.toString(spare_parts.get(i).getAmount()));
