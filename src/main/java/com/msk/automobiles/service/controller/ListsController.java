@@ -129,7 +129,7 @@ public class ListsController {
 			data.put("spare_parts", spare_Parts_Pojos);
 			mix.put("data", data);
 
-			view = new Viewable("/customer_detail", mix);
+			view = new Viewable("/spareparts", mix);
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
 		}
