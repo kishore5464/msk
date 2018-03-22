@@ -3,6 +3,7 @@ package com.msk.automobiles.business.impl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,12 @@ import com.msk.automobiles.service.entities.Car_Models;
 import com.msk.automobiles.service.entities.Customer_Contact_Details;
 import com.msk.automobiles.service.entities.Customer_Details;
 import com.msk.automobiles.service.entities.Location;
+import com.msk.automobiles.service.entities.MSK_Owner;
 import com.msk.automobiles.service.entities.Parts;
 import com.msk.automobiles.service.entities.Service_Invoice_Card;
 import com.msk.automobiles.service.pojos.Service_Card_Pojo;
+import com.msk.automobiles.util.Encrypt_Decrypt;
+import com.msk.automobiles.util.MailSenderService;
 
 @Service
 public class Insert_Business_Impl implements Insert_Business_Interface {
@@ -31,6 +35,9 @@ public class Insert_Business_Impl implements Insert_Business_Interface {
 
 	@Autowired
 	Update_DAO_Interface update_DAO_Interface;
+
+	@Autowired
+	MailSenderService mailSenderService;
 
 	@Override
 	public void insertOrUpdateBrandLogo(String brand_id, String logo) {
@@ -182,6 +189,38 @@ public class Insert_Business_Impl implements Insert_Business_Interface {
 		parts.setAmount(Double.parseDouble(amount));
 
 		insert_DAO_Interface.insertSparePart(parts);
+	}
+
+	@Override
+	public String insertAccessCodeAndSend(String username) {
+		// TODO Auto-generated method stub
+		List<MSK_Owner> msk_Owners = get_DAO_Interface.getMSKOwnerDetail(username);
+		String status = "failure";
+
+		if (!msk_Owners.isEmpty()) {
+			String secret;
+
+			Encrypt_Decrypt encrypt_Decrypt = new Encrypt_Decrypt();
+
+			if (!msk_Owners.get(0).getAccess_code().equals("0")) {
+				mailSenderService.sendAccessCode(msk_Owners.get(0).getEmail(),
+						encrypt_Decrypt.decrypt(msk_Owners.get(0).getAccess_code()));
+
+				status = "success";
+			} else {
+				Random random = new Random();
+				secret = "" + random.nextInt(999999);
+
+				msk_Owners.get(0).setAccess_code(encrypt_Decrypt.encrypt(secret));
+				update_DAO_Interface.updateMSKOwner(msk_Owners.get(0));
+
+				mailSenderService.sendAccessCode(msk_Owners.get(0).getEmail(), secret);
+
+				status = "success";
+			}
+		}
+
+		return status;
 	}
 
 }

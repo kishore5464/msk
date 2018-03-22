@@ -40,6 +40,12 @@ public interface Get_DAO_Interface {
 
 	String getLocationByCityId(String location_id);
 
-	List<Parts> getSparePartsInStock(String parts_status);
+	List<Parts> getSparePartsInStock(String stock_status);
+
+	List<Parts> getSparePartsInStockById(String spare_part_id);
+
+	List<Parts> getSparePartsAtParticularModel(String model_id);
+
+	List<Parts> getSparePartsAtParticularModelParts(Integer model_id, String part);
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.msk.automobiles.business.interfaces.Get_Business_Interface;
 import com.msk.automobiles.dao.interfaces.Get_DAO_Interface;
+import com.msk.automobiles.dao.interfaces.Update_DAO_Interface;
 import com.msk.automobiles.service.entities.Car_Brands;
 import com.msk.automobiles.service.entities.Car_Models;
 import com.msk.automobiles.service.entities.Customer_Details;
@@ -31,8 +32,11 @@ public class Get_Business_Impl implements Get_Business_Interface {
 	@Autowired
 	Get_DAO_Interface get_DAO_Interface;
 
+	@Autowired
+	Update_DAO_Interface update_DAO_Interface;
+
 	@Override
-	public List<Car_Brands_Pojo> getAllBrands() {
+	public List<Car_Brands_Pojo> getAllBrands(String type) {
 		// TODO Auto-generated method stub
 		List<Car_Brands> brands = get_DAO_Interface.getAllBrands();
 		List<Car_Brands_Pojo> uiCar_Brands = new ArrayList<Car_Brands_Pojo>();
@@ -43,10 +47,12 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				car_Brands_Pojo.setBrand_id(Integer.toString(brands.get(i).getId()));
 				car_Brands_Pojo.setBrand(brands.get(i).getBrand().replace("+", " "));
 
-				if (brands.get(i).getLogo() == null || brands.get(i).getLogo().equals("")) {
-					car_Brands_Pojo.setLogo("noimage");
-				} else {
-					car_Brands_Pojo.setLogo(brands.get(i).getLogo());
+				if (type.equals("service")) {
+					if (brands.get(i).getLogo() == null || brands.get(i).getLogo().equals("")) {
+						car_Brands_Pojo.setLogo("noimage");
+					} else {
+						car_Brands_Pojo.setLogo(brands.get(i).getLogo());
+					}
 				}
 
 				uiCar_Brands.add(car_Brands_Pojo);
@@ -57,7 +63,7 @@ public class Get_Business_Impl implements Get_Business_Interface {
 	}
 
 	@Override
-	public List<Car_Models_Pojo> getModels(String car_brands_id) {
+	public List<Car_Models_Pojo> getModels(String car_brands_id, String type) {
 		// TODO Auto-generated method stub
 		List<Car_Models> models = get_DAO_Interface.getModelsByBrandId(Integer.parseInt(car_brands_id));
 		List<Car_Models_Pojo> uiCar_Models_Pojos = new ArrayList<Car_Models_Pojo>();
@@ -70,10 +76,12 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				car_Models_Pojo.setModel_id(Integer.toString(models.get(i).getId()));
 				car_Models_Pojo.setModel(models.get(i).getModel().replace("+", " "));
 
-				if (models.get(i).getImage() == null || models.get(i).getImage().equals("")) {
-					car_Models_Pojo.setImage("noimage");
-				} else {
-					car_Models_Pojo.setImage(models.get(i).getImage());
+				if (type.equals("service")) {
+					if (models.get(i).getImage() == null || models.get(i).getImage().equals("")) {
+						car_Models_Pojo.setImage("noimage");
+					} else {
+						car_Models_Pojo.setImage(models.get(i).getImage());
+					}
 				}
 
 				uiCar_Models_Pojos.add(car_Models_Pojo);
@@ -129,7 +137,7 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				List<Service_Invoice_Card> service_Invoice_Cards = get_DAO_Interface
 						.getSericeInvoiceCard(customer_Details.get(i).getId());
 				customer_Details_Pojo.setCurrent_service_date(dateFormat
-						.format(service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getExpire_date()));
+						.format(service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getService_expire_date()));
 
 				customer_Details_Pojos.add(customer_Details_Pojo);
 			}
@@ -200,9 +208,9 @@ public class Get_Business_Impl implements Get_Business_Interface {
 	}
 
 	@Override
-	public List<Spare_Parts_Pojo> getSparePartsInStock() {
+	public List<Spare_Parts_Pojo> getSparePartsInStock(String stock_status) {
 		// TODO Auto-generated method stub
-		List<Parts> spare_parts = get_DAO_Interface.getSparePartsInStock("INSTOCK");
+		List<Parts> spare_parts = get_DAO_Interface.getSparePartsInStock(stock_status);
 		List<Spare_Parts_Pojo> spare_Parts_Pojos = new ArrayList<Spare_Parts_Pojo>();
 
 		if (!spare_parts.isEmpty()) {
@@ -213,8 +221,9 @@ public class Get_Business_Impl implements Get_Business_Interface {
 
 				spare_Parts_Pojo.setId(Integer.toString(i + 1));
 				spare_Parts_Pojo.setBrand(get_DAO_Interface.getBrandById(models.get(0).getCar_Brands().getId()).get(0)
-						.getBrand().replace(" ", "+"));
-				spare_Parts_Pojo.setModel(models.get(0).getModel().replace(" ", "+"));
+						.getBrand().replace("+", " "));
+				spare_Parts_Pojo.setModel(models.get(0).getModel().replace("+", " "));
+				spare_Parts_Pojo.setSpare_part_id(Integer.toString(spare_parts.get(i).getId()));
 				spare_Parts_Pojo.setSpare_part_name(spare_parts.get(i).getPart());
 				spare_Parts_Pojo.setQuantity(Integer.toString(spare_parts.get(i).getQuantity()));
 				spare_Parts_Pojo.setPrice_per_unit(Double.toString(spare_parts.get(i).getAmount()));
@@ -226,6 +235,67 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		}
 
 		return spare_Parts_Pojos;
+	}
+
+	@Override
+	public List<String> getSparePartsAtParticularModel(String model_id) {
+		// TODO Auto-generated method stub
+		List<Parts> parts = get_DAO_Interface.getSparePartsAtParticularModel(model_id);
+		List<String> parts_list = new ArrayList<String>();
+
+		if (!parts.isEmpty()) {
+			for (int i = 0; i < parts.size(); i++) {
+				String part = parts.get(i).getPart();
+				parts_list.add(part);
+			}
+		}
+
+		return parts_list;
+	}
+
+	@Override
+	public String getVerifyAccessCode(String username, String access_code) {
+		// TODO Auto-generated method stub
+		List<MSK_Owner> msk_Owners = get_DAO_Interface.getMSKOwnerDetail(username);
+		String status = "failure";
+
+		if (!msk_Owners.isEmpty()) {
+			Encrypt_Decrypt encrypt_Decrypt = new Encrypt_Decrypt();
+			String access = encrypt_Decrypt.decrypt(msk_Owners.get(0).getAccess_code());
+			if (access.equals(access_code)) {
+				msk_Owners.get(0).setAccess_code("0");
+				update_DAO_Interface.updateMSKOwner(msk_Owners.get(0));
+				status = "success";
+			}
+		}
+
+		return status;
+	}
+
+	public Spare_Parts_Pojo getSparePartsAtParticularModelParts(String model_id, String part) {
+		// TODO Auto-generated method stub
+		List<Parts> spare_parts = get_DAO_Interface.getSparePartsAtParticularModelParts(Integer.parseInt(model_id),
+				part);
+		Spare_Parts_Pojo spare_Parts_Pojo = new Spare_Parts_Pojo();
+
+		if (!spare_parts.isEmpty()) {
+			List<Car_Models> models = get_DAO_Interface.getModelById(spare_parts.get(0).getCar_Models().getId());
+
+			spare_Parts_Pojo.setBrand(get_DAO_Interface.getBrandById(models.get(0).getCar_Brands().getId()).get(0)
+					.getBrand().replace("+", " "));
+			spare_Parts_Pojo.setId("1");
+			spare_Parts_Pojo.setModel(models.get(0).getModel().replace("+", " "));
+			spare_Parts_Pojo.setPrice_per_unit(Double.toString(spare_parts.get(0).getAmount()));
+			spare_Parts_Pojo.setQuantity(Integer.toString(spare_parts.get(0).getQuantity()));
+			spare_Parts_Pojo.setSpare_part_id(Integer.toString(spare_parts.get(0).getId()));
+			spare_Parts_Pojo.setSpare_part_name(spare_parts.get(0).getPart());
+			spare_Parts_Pojo.setTotal_price(
+					Double.toString((spare_parts.get(0).getQuantity() * spare_parts.get(0).getAmount())));
+		} else {
+			spare_Parts_Pojo.setId("0");
+		}
+
+		return spare_Parts_Pojo;
 	}
 
 }

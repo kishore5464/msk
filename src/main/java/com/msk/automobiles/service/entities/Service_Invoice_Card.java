@@ -41,9 +41,8 @@ public class Service_Invoice_Card implements Serializable {
 	private Integer kilometer;
 	private Card_Type card_type;
 	private Card_Status card_status;
-	private Date from_date;
-	private Date expire_date;
 	private Date current_service_date;
+	private Date service_expire_date;
 	private Date created_date;
 
 	public Service_Invoice_Card() {
@@ -53,7 +52,7 @@ public class Service_Invoice_Card implements Serializable {
 	public Service_Invoice_Card(Integer id, String service_id, Customer_Details customer_Details,
 			Service_Type service_Type, String service_detail, String tool_kit, String spare_wheel, String jack,
 			String jack_handler, String car_perfume, String clock, String cd_player, Integer kilometer,
-			Card_Type card_type, Card_Status card_status, Date from_date, Date expire_date, Date current_service_date,
+			Card_Type card_type, Card_Status card_status, Date service_expire_date, Date current_service_date,
 			Date created_date) {
 		super();
 		this.id = id;
@@ -71,9 +70,8 @@ public class Service_Invoice_Card implements Serializable {
 		this.kilometer = kilometer;
 		this.card_type = card_type;
 		this.card_status = card_status;
-		this.from_date = from_date;
-		this.expire_date = expire_date;
-		this.setCurrent_service_date(current_service_date);
+		this.setService_expire_date(service_expire_date);
+		this.current_service_date = current_service_date;
 		this.created_date = created_date;
 	}
 
@@ -219,26 +217,6 @@ public class Service_Invoice_Card implements Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "from_date")
-	public Date getFrom_date() {
-		return from_date;
-	}
-
-	public void setFrom_date(Date from_date) {
-		this.from_date = from_date;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "expire_date")
-	public Date getExpire_date() {
-		return expire_date;
-	}
-
-	public void setExpire_date(Date expire_date) {
-		this.expire_date = expire_date;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "current_service_date")
 	public Date getCurrent_service_date() {
 		return current_service_date;
@@ -246,6 +224,16 @@ public class Service_Invoice_Card implements Serializable {
 
 	public void setCurrent_service_date(Date current_service_date) {
 		this.current_service_date = current_service_date;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "service_expire_date")
+	public Date getService_expire_date() {
+		return service_expire_date;
+	}
+
+	public void setService_expire_date(Date service_expire_date) {
+		this.service_expire_date = service_expire_date;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

@@ -18,4 +18,6 @@ public interface Insert_Business_Interface {
 
 	void insertSparePart(String model_id, String part, String quantity, String amount);
 
+	String insertAccessCodeAndSend(String username);
+
 }

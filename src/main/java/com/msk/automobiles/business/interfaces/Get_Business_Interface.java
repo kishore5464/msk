@@ -11,9 +11,9 @@ import com.msk.automobiles.service.pojos.Spare_Parts_Pojo;
 
 public interface Get_Business_Interface {
 
-	List<Car_Brands_Pojo> getAllBrands();
+	List<Car_Brands_Pojo> getAllBrands(String type);
 
-	List<Car_Models_Pojo> getModels(String car_brands_id);
+	List<Car_Models_Pojo> getModels(String car_brands_id, String type);
 
 	String getMSKOwnerDetail(String username, String password);
 
@@ -25,6 +25,12 @@ public interface Get_Business_Interface {
 
 	String getServiceCardNo();
 
-	List<Spare_Parts_Pojo> getSparePartsInStock();
+	List<Spare_Parts_Pojo> getSparePartsInStock(String stock_status);
+
+	List<String> getSparePartsAtParticularModel(String model_id);
+
+	String getVerifyAccessCode(String username, String access_code);
+
+	Spare_Parts_Pojo getSparePartsAtParticularModelParts(String model_id, String part);
 
 }
