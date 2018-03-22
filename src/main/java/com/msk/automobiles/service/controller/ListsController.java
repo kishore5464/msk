@@ -53,7 +53,7 @@ public class ListsController {
 
 		Viewable view = null;
 		try {
-			List<Car_Brands_Pojo> brands = get_Business_Interface.getAllBrands();
+			List<Car_Brands_Pojo> brands = get_Business_Interface.getAllBrands("service");
 
 			data.put("brands", brands);
 
@@ -77,7 +77,7 @@ public class ListsController {
 
 		Viewable view = null;
 		try {
-			List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id);
+			List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id, "service");
 
 			data.put("models", models);
 
@@ -103,8 +103,12 @@ public class ListsController {
 	public Response parts_car_brand() {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
+		
+		
+		System.out.println("PaRTSSSSSSSSS BRNAD SERVLETTTTTTTTT");
+		
 		try {
-			List<Car_Brands_Pojo> brands = get_Business_Interface.getAllBrands();
+			List<Car_Brands_Pojo> brands = get_Business_Interface.getAllBrands("parts");
 
 			System.out.println("BRAND --> " + brands);
 			data.put("brands", brands);
@@ -126,7 +130,7 @@ public class ListsController {
 		JSONObject data = new JSONObject();
 		try {
 			System.out.println("BRAND ID --> " + brand_id);
-			List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id);
+			List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id, "parts");
 
 			System.out.println("MODELS --> " + models);
 			data.put("models", models);

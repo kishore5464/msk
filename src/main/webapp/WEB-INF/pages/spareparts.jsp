@@ -11,13 +11,16 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/bootstrap.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="../css/carbrands.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/bootstrap-select.min.css">
+<link rel="stylesheet" href="../css/carbrands.css">
+
+  <script src="../js/jquery-3.2.1.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
 <style>
 
 #customers {
@@ -82,7 +85,7 @@
 .barpass { position:relative; display:block; width:247px; }
 .barpass2 { position:relative; display:block; width:110px; }
 
-.bar:before, .bar:after 	{
+/* .bar:before, .bar:after 	{
   content:'';
   height:2px; 
   width:0;
@@ -92,30 +95,10 @@
   transition:0.2s ease all; 
   -moz-transition:0.2s ease all; 
   -webkit-transition:0.2s ease all;
-}
-.bar:before {
-  left:50%;
-}
-.bar:after {
-  right:50%; 
-}
+} */
 
-/* active state */
-.inputstyle input:focus ~ .bar:before, input:focus ~ .bar:after {
-  width:50%;
-}
 
-/* HIGHLIGHTER ================================== */
-.highlight {
-  position:absolute;
-  height:60%; 
-  width:100px; 
-  top:25%; 
-  left:0;
-  pointer-events:none;
-  opacity:0.5;
-}
-
+/* 
 /* active state */
 .inputstyle input:focus ~ .highlight {
   -webkit-animation:inputHighlighter 0.3s ease;
@@ -136,7 +119,7 @@
 @keyframes inputHighlighter {
 	from { background:#5264AE; }
   to 	{ width:0; background:transparent; }
-}
+} */
 
 </style>
 
@@ -164,22 +147,29 @@
   
   <tr class="customershead">
     <td>
-    <div class="form-group group group1 form-feilds inputstyle" style="max-width:116px">
+    <div class="form-group group group1 form-feilds inputstyle" style="max-width:126px">
 
 
+     <select class="selectpicker brandlist" data-show-subtext="true" data-live-search="true" id="car_brands" name="notice" required>
+      <option value="" selected disabled>Select Brand</option>
+     
+      </select>
 
     </div>
     </td>
     
     <td>
-   <div class="form-group group group1 form-feilds inputstyle ui-widget" style="max-width:116px">
-    <input name="location" value="" required="" class="location_name ui-autocomplete-input" autocomplete="off" placeholder="Modal Name">
-    <span class="highlight"></span> <span class="bar barpass"></span>
+    <div class="form-group group group1 form-feilds inputstyle ui-widget" style="max-width:126px">
+   
+      <select class="selectpicker" data-show-subtext="true" data-live-search="true" id="notice_period" name="notice" required>
+      <option value="" selected disabled>Select Modal</option>     
+      </select>
+      
     </div>
     </td>
     <td>
-    <div class="form-group group group1 form-feilds inputstyle ui-widget" style="max-width:116px">
-    <input name="location" value="" required="" class="location_name ui-autocomplete-input" autocomplete="off" placeholder="Part Name">
+    <div class="form-group group group1 form-feilds inputstyle ui-widget" style="max-width:180px">
+    <input name="location" value="" required="" class="location_name ui-autocomplete-input" autocomplete="off" placeholder="Part Name" style="width:322px">
     <span class="highlight"></span> <span class="bar barpass"></span>
     </div>
     </td>
@@ -223,60 +213,6 @@
   </tr>
   </c:forEach> 
   
-  <!-- <tr>
-   <td>1</td>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-     <td>Germany</td>
-      <td>Germany</td>
-      
-  </tr>
-  <tr>
-   <td>1</td>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-     <td>Germany</td>
-      <td>Germany</td>
-      
-  </tr>
-  <tr>
-   <td>1</td>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-     <td>Germany</td>
-      <td>Germany</td>
-      
-  </tr>
-  <tr>
-   <td>1</td>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-     <td>Germany</td>
-      <td>Germany</td>
-      
-  </tr>
-  <tr>
-   <td>1</td>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-     <td>Germany</td>
-      <td>Germany</td>
-      
-  </tr>
-  <tr>
-   <td>1</td>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-     <td>Germany</td>
-      <td>Germany</td>
-      
-  </tr> -->
  
 </table>
    
@@ -307,6 +243,9 @@
 		  <input type="hidden" name="image" id="image" value=""> 
 			<input type="button" id="subImage" > 
     </form>
+    
+    <script src="../js/spareparts.js"></script>
+    <script src="../js/bootstrap-select.min.js"></script>
     
 <script type="text/javascript">
 $(document).ready(function(){

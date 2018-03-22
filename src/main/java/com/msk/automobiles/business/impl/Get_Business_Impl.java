@@ -32,7 +32,7 @@ public class Get_Business_Impl implements Get_Business_Interface {
 	Get_DAO_Interface get_DAO_Interface;
 
 	@Override
-	public List<Car_Brands_Pojo> getAllBrands() {
+	public List<Car_Brands_Pojo> getAllBrands(String type) {
 		// TODO Auto-generated method stub
 		List<Car_Brands> brands = get_DAO_Interface.getAllBrands();
 		List<Car_Brands_Pojo> uiCar_Brands = new ArrayList<Car_Brands_Pojo>();
@@ -43,10 +43,12 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				car_Brands_Pojo.setBrand_id(Integer.toString(brands.get(i).getId()));
 				car_Brands_Pojo.setBrand(brands.get(i).getBrand().replace("+", " "));
 
-				if (brands.get(i).getLogo() == null || brands.get(i).getLogo().equals("")) {
-					car_Brands_Pojo.setLogo("noimage");
-				} else {
-					car_Brands_Pojo.setLogo(brands.get(i).getLogo());
+				if (type.equals("service")) {
+					if (brands.get(i).getLogo() == null || brands.get(i).getLogo().equals("")) {
+						car_Brands_Pojo.setLogo("noimage");
+					} else {
+						car_Brands_Pojo.setLogo(brands.get(i).getLogo());
+					}
 				}
 
 				uiCar_Brands.add(car_Brands_Pojo);
@@ -57,7 +59,7 @@ public class Get_Business_Impl implements Get_Business_Interface {
 	}
 
 	@Override
-	public List<Car_Models_Pojo> getModels(String car_brands_id) {
+	public List<Car_Models_Pojo> getModels(String car_brands_id, String type) {
 		// TODO Auto-generated method stub
 		List<Car_Models> models = get_DAO_Interface.getModelsByBrandId(Integer.parseInt(car_brands_id));
 		List<Car_Models_Pojo> uiCar_Models_Pojos = new ArrayList<Car_Models_Pojo>();
@@ -70,10 +72,12 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				car_Models_Pojo.setModel_id(Integer.toString(models.get(i).getId()));
 				car_Models_Pojo.setModel(models.get(i).getModel().replace("+", " "));
 
-				if (models.get(i).getImage() == null || models.get(i).getImage().equals("")) {
-					car_Models_Pojo.setImage("noimage");
-				} else {
-					car_Models_Pojo.setImage(models.get(i).getImage());
+				if (type.equals("service")) {
+					if (models.get(i).getImage() == null || models.get(i).getImage().equals("")) {
+						car_Models_Pojo.setImage("noimage");
+					} else {
+						car_Models_Pojo.setImage(models.get(i).getImage());
+					}
 				}
 
 				uiCar_Models_Pojos.add(car_Models_Pojo);
