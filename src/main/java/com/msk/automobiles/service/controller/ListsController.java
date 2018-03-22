@@ -98,7 +98,7 @@ public class ListsController {
 
 	// CAR PARTS FROM CLICKING PARTS IN INDEX PAGE
 	// TO ADD NEW PART IN PARTICULAR BRAND
-	@GET
+	@POST
 	@Path("/parts-brand")
 	public Response parts_car_brand() {
 		JSONObject mix = new JSONObject();
@@ -197,8 +197,30 @@ public class ListsController {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
 		}
 
-		return Response.ok().entity(mix.toString()).build();
-		
+		return Response.ok().entity(view).build();
+	}
+
+	@GET
+	@Path("/spare-parts")
+	public Response spare_partsGet(
+			/* @FormParam("stock_status") String stock_status, */@Context HttpServletRequest request) {
+		JSONObject mix = new JSONObject();
+		JSONObject data = new JSONObject();
+
+		Viewable view = null;
+
+		try {
+			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock("INSTOCK");
+
+			data.put("spare_parts", spare_Parts_Pojos);
+			mix.put("data", data);
+
+			view = new Viewable("/spareparts", mix);
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+
+		return Response.ok().entity(view).build();
 	}
 
 	@POST
