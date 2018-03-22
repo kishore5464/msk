@@ -54,7 +54,7 @@ public class AddingController {
 		try {
 			insert_Business_Interface.insertCarBrand(brand, logo);
 
-			List<Car_Brands_Pojo> brands = get_Business_Interface.getAllBrands();
+			List<Car_Brands_Pojo> brands = get_Business_Interface.getAllBrands("service");
 
 			data.put("brands", brands);
 
@@ -80,7 +80,7 @@ public class AddingController {
 
 		try {
 			insert_Business_Interface.insertCarModel(brand_id, model, image);
-			List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id);
+			List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id, "service");
 
 			data.put("models", models);
 
