@@ -20,6 +20,7 @@ import com.msk.automobiles.service.entities.Location;
 import com.msk.automobiles.service.entities.MSK_Owner;
 import com.msk.automobiles.service.entities.Parts;
 import com.msk.automobiles.service.entities.Service_Invoice_Card;
+import com.msk.automobiles.service.entities.Stock_Status;
 import com.msk.automobiles.service.pojos.Service_Card_Pojo;
 import com.msk.automobiles.util.Encrypt_Decrypt;
 import com.msk.automobiles.util.MailSenderService;
@@ -187,6 +188,7 @@ public class Insert_Business_Impl implements Insert_Business_Interface {
 		parts.setPart(part);
 		parts.setQuantity(Integer.parseInt(quantity));
 		parts.setAmount(Double.parseDouble(amount));
+		parts.setParts_status(Stock_Status.INSTOCK);
 
 		insert_DAO_Interface.insertSparePart(parts);
 	}

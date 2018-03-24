@@ -174,19 +174,23 @@
     <input name="location" value="" required="" class="parts_name" autocomplete="off" placeholder="Part Name" style="width:322px">
     <span class="highlight"></span> <span class="bar barpass"></span>
     </div>
+    
     <button class="btn btn-success chk_stock" value="check" style="float:right">check stock</button>
+    <img src="../images/loading.gif" id="loading" width="30px" style="float:right;display:none">
     </td>
      <td>
-     <div class="form-group group group1 form-feilds inputstyle inputstyle2 ui-widget" style="max-width:50px">
-    <input name="location"  disabled value="" required="" class="disableoption ui-autocomplete-input" autocomplete="off" placeholder="quantity" style="max-width:110px">
+     <div class="form-group group group1 form-feilds inputstyle inputstyle2 ui-widget" style="width:64px">
+    <input name="quantity"  id="quantity" disabled value="" required="" class="disableoption" autocomplete="off" placeholder="quantity" style="max-width:110px;position:relative;top:-15px">
     <span class="highlight"></span> <span class="bar barpass barpass2"></span>
     </div>
      </td>
       <td>
       <div class="form-group group group1 form-feilds inputstyle inputstyle2 ui-widget" style="max-width:50px">
-    <input name="location" disabled value="" required="" class="disableoption location_name ui-autocomplete-input" autocomplete="off" placeholder="price" style="max-width:110px">
+    <input name="price" id="price" disabled value="" required="" class="disableoption" autocomplete="off" placeholder="price" style="max-width:110px">
     <span class="highlight"></span> <span class="bar barpass barpass2"></span>
+   
     </div>
+      <button class="btn btn-success" id="add_btn" value="check" style="float:right">ADD</button>
       </td>
       
   </tr>
@@ -246,6 +250,28 @@
 		  <input type="hidden" name="image" id="image" value=""> 
 			<input type="button" id="subImage" > 
     </form>
+    
+    
+    <form  method="POST" action="msk/update-spare-part" style="display: none;">
+		  <input type="hidden" name="spare_part_id" id="sparepart_id" class="" value="">
+		  <input type="hidden" name="part" id="part_name" value=""> 
+		   <input type="hidden" name="quantity" id="tot_quantity" value=""> 
+		    <input type="hidden" name="amount" id="tot_amout" value=""> 
+		    
+			
+			<input type="submit" id="update_submit_parts">
+    </form>
+    
+        <form  method="POST" action="msk/add-spare-part" style="display: none;">
+		
+		 <input type="hidden" name="model_id" id="model_id" value=""> 
+		  <input type="hidden" name="part" id="part_name2" value=""> 
+		   <input type="hidden" name="quantity" id="tot_quantity2" value=""> 
+		    <input type="hidden" name="amount" id="tot_amout2" value=""> 
+		    
+			
+			<input type="submit" id="add_submit_parts">
+      </form>
     
     <script src="../js/spareparts.js"></script>
     <script src="../js/bootstrap-select.min.js"></script>
