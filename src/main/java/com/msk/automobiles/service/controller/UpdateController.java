@@ -48,23 +48,6 @@ public class UpdateController {
 			@FormParam("quantity") String quantity, @FormParam("amount") String amount,
 			@Context HttpServletRequest request) {
 
-<<<<<<< HEAD
-		try {
-			update_Business_Interface.updateSparePartsInStock(spare_part_id, quantity, amount);
-			status = "success";
-		} catch (Exception e) {
-			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
-		}
-
-		return Response.ok().entity(status).build();
-	}
-
-	@PUT
-	@Path("/update-password")
-	public Response update_password(@FormParam("username") String username, @FormParam("password") String password,
-			@Context HttpServletRequest request) {
-		String status = null;
-=======
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 
@@ -79,7 +62,6 @@ public class UpdateController {
 
 			// System.out.println("STOCK STATUS --> " + stock_status);
 			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock("INSTOCK");
->>>>>>> abb4a864f6d2361a5297d0cd5ee79137748d910b
 
 			// System.out.println("SPARE PARTS OF " + stock_status.toUpperCase()
 			// + " --> " + spare_Parts_Pojos);
@@ -100,34 +82,12 @@ public class UpdateController {
 	 * @Path("/update-customer-detail") public Response
 	 * add_customer_detail(@FormParam("model_id") String model_id,
 	 * 
-<<<<<<< HEAD
-	 * @FormParam("first_name") String first_name, @FormParam("last_name")
-	 * String last_name,
-=======
 	 * @FormParam("first_name") String first_name, @FormParam("last_name") String
 	 * last_name,
->>>>>>> abb4a864f6d2361a5297d0cd5ee79137748d910b
 	 * 
 	 * @FormParam("mobile") String mobile, @FormParam("email") String
 	 * email, @FormParam("dob") String dob,
 	 * 
-<<<<<<< HEAD
-	 * @FormParam("registration_no") String
-	 * registration_no, @FormParam("gst_no") String gst_no,
-	 * 
-	 * @FormParam("customer_id") String
-	 * customer_id, @FormParam("address_line_1") String address_line_1,
-	 * 
-	 * @FormParam("address_line_2") String
-	 * address_line_2, @FormParam("location_id") String location_id,
-	 * 
-	 * @FormParam("pincode") String pincode, @Context HttpServletRequest
-	 * request) { JSONObject mix = new JSONObject(); JSONObject data = new
-	 * JSONObject();
-	 * 
-	 * try { // data } catch (Exception e) { throw new CustomGenericException(""
-	 * + e.hashCode(), e.getMessage()); }
-=======
 	 * @FormParam("registration_no") String registration_no, @FormParam("gst_no")
 	 * String gst_no,
 	 * 
@@ -142,27 +102,17 @@ public class UpdateController {
 	 * 
 	 * try { // data } catch (Exception e) { throw new CustomGenericException("" +
 	 * e.hashCode(), e.getMessage()); }
->>>>>>> abb4a864f6d2361a5297d0cd5ee79137748d910b
 	 * 
 	 * return Response.ok().entity(mix.toString()).build(); }
 	 * 
 	 * @PUT
 	 * 
-<<<<<<< HEAD
-	 * @Path("/update-invoice") public Response
-	 * update_invoice(@FormParam("username") String
-=======
 	 * @Path("/update-password") public Response
 	 * update_password(@FormParam("username") String
->>>>>>> abb4a864f6d2361a5297d0cd5ee79137748d910b
 	 * username, @FormParam("password") String password,
 	 * 
 	 * @Context HttpServletRequest request) { String status = null;
 	 * 
-<<<<<<< HEAD
-	 * try { update_Business_Interface.updateMSKOwnerPassword(username,
-	 * password); status = "success"; } catch (Exception e) { throw new
-=======
 	 * try { update_Business_Interface.updateMSKOwnerPassword(username, password);
 	 * status = "success"; } catch (Exception e) { throw new
 	 * CustomGenericException("" + e.hashCode(), e.getMessage()); }
@@ -179,7 +129,6 @@ public class UpdateController {
 	 * 
 	 * try { update_Business_Interface.updateMSKOwnerPassword(username, password);
 	 * status = "success"; } catch (Exception e) { throw new
->>>>>>> abb4a864f6d2361a5297d0cd5ee79137748d910b
 	 * CustomGenericException("" + e.hashCode(), e.getMessage()); }
 	 * 
 	 * return Response.ok().entity(status).build(); }
