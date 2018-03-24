@@ -78,7 +78,7 @@ public class HomeController {
 		String status = null;
 
 		try {
-			String page_type = "invoice";
+			String page_type = "spare";
 
 			String msk_Owner = get_Business_Interface.getMSKOwnerDetail(username, password);
 

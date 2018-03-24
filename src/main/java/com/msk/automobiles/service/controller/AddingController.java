@@ -78,18 +78,20 @@ public class AddingController {
 
 		Viewable view = null;
 
-		try {
-			insert_Business_Interface.insertCarModel(brand_id, model, image);
-			List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id, "service");
+		// try {
+		System.out.println(brand_id);
+		insert_Business_Interface.insertCarModel(brand_id, model, image);
+		List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id, "service");
 
-			data.put("models", models);
+		data.put("models", models);
 
-			mix.put("data", data);
+		mix.put("data", data);
 
-			view = new Viewable("/car_models", mix);
-		} catch (Exception e) {
-			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
-		}
+		view = new Viewable("/car_models", mix);
+		/*
+		 * } catch (Exception e) { throw new CustomGenericException("" + e.hashCode(),
+		 * e.getMessage()); }
+		 */
 
 		return Response.ok().entity(view).build();
 	}
