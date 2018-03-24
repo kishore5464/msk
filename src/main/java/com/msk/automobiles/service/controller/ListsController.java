@@ -179,10 +179,6 @@ public class ListsController {
 	public Response exists_parts(@FormParam("model_id") String model_id, @FormParam("part") String part,
 			@Context HttpServletRequest request) {
 
-<<<<<<< HEAD
-		System.out.println("model_id=======>" + model_id);
-		System.out.println("part=======>" + part);
-
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 		try {
@@ -193,11 +189,6 @@ public class ListsController {
 			System.out.println("MODEL ID --> " + model_id);
 			System.out.println("PART --> " + part);
 
-=======
-		JSONObject mix = new JSONObject();
-		JSONObject data = new JSONObject();
-		try {
->>>>>>> abb4a864f6d2361a5297d0cd5ee79137748d910b
 			Spare_Parts_Pojo spare_Parts_Pojo = get_Business_Interface.getSparePartsAtParticularModelParts(model_id,
 					part);
 
@@ -216,29 +207,28 @@ public class ListsController {
 	}
 
 	// TO VIEW ALL SPARE PARTS EXIST INSTOCK
-	/*@POST
-	@Path("/spare-parts")
-	public Response spare_parts(
-			 @FormParam("stock_status") String stock_status, @Context HttpServletRequest request) {
-		JSONObject mix = new JSONObject();
-		JSONObject data = new JSONObject();
-
-		Viewable view = null;
-
-		try {
-			// System.out.println("STOCK STATUS --> " + stock_status);
-			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock("INSTOCK");
-
-			data.put("spare_parts", spare_Parts_Pojos);
-			mix.put("data", data);
-
-			view = new Viewable("/spareparts", mix);
-		} catch (Exception e) {
-			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
-		}
-
-		return Response.ok().entity(view).build();
-	}*/
+	/*
+	 * @POST
+	 * 
+	 * @Path("/spare-parts") public Response spare_parts(
+	 * 
+	 * @FormParam("stock_status") String stock_status, @Context
+	 * HttpServletRequest request) { JSONObject mix = new JSONObject();
+	 * JSONObject data = new JSONObject();
+	 * 
+	 * Viewable view = null;
+	 * 
+	 * try { // System.out.println("STOCK STATUS --> " + stock_status);
+	 * List<Spare_Parts_Pojo> spare_Parts_Pojos =
+	 * get_Business_Interface.getSparePartsInStock("INSTOCK");
+	 * 
+	 * data.put("spare_parts", spare_Parts_Pojos); mix.put("data", data);
+	 * 
+	 * view = new Viewable("/spareparts", mix); } catch (Exception e) { throw
+	 * new CustomGenericException("" + e.hashCode(), e.getMessage()); }
+	 * 
+	 * return Response.ok().entity(view).build(); }
+	 */
 
 	@GET
 	@Path("/spare-parts")
