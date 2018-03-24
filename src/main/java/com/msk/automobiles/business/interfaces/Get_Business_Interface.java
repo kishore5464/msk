@@ -29,10 +29,8 @@ public interface Get_Business_Interface {
 
 	List<String> getSparePartsAtParticularModel(String model_id);
 
-<<<<<<< HEAD
 	String getVerifyAccessCode(String username, String access_code);
-=======
+
 	Spare_Parts_Pojo getSparePartsAtParticularModelParts(String model_id, String part);
->>>>>>> 1cd9c0baa408783731c66bb6cc13182707d101a3
 
 }

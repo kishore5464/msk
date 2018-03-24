@@ -254,7 +254,6 @@ public class Get_Business_Impl implements Get_Business_Interface {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public String getVerifyAccessCode(String username, String access_code) {
 		// TODO Auto-generated method stub
 		List<MSK_Owner> msk_Owners = get_DAO_Interface.getMSKOwnerDetail(username);
@@ -271,7 +270,8 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		}
 
 		return status;
-=======
+	}
+
 	public Spare_Parts_Pojo getSparePartsAtParticularModelParts(String model_id, String part) {
 		// TODO Auto-generated method stub
 		List<Parts> spare_parts = get_DAO_Interface.getSparePartsAtParticularModelParts(Integer.parseInt(model_id),
@@ -296,7 +296,6 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		}
 
 		return spare_Parts_Pojo;
->>>>>>> 1cd9c0baa408783731c66bb6cc13182707d101a3
 	}
 
 }

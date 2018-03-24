@@ -209,11 +209,11 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 	}
 
 	@Override
-	public List<Parts> getSparePartsInStock(String stock_status) {
+	public List<Parts> getSparePartsInStock(String parts_status) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
-		Query query = session.createQuery(" from Parts where parts_status = '" + stock_status + "' ");
+		Query query = session.createQuery(" from Parts where parts_status = '" + parts_status + "' ");
 		List<Parts> parts = query.list();
 		transaction.commit();
 		session.flush();

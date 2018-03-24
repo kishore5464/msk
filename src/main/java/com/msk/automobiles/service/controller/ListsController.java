@@ -178,13 +178,17 @@ public class ListsController {
 	@Path("/exists-parts")
 	public Response exists_parts(@FormParam("model_id") String model_id, @FormParam("part") String part,
 			@Context HttpServletRequest request) {
-		
-		System.out.println("model_id=======>"+model_id);
-		System.out.println("part=======>"+part);
-		
+
+		System.out.println("model_id=======>" + model_id);
+		System.out.println("part=======>" + part);
+
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 		try {
+			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock("INSTOCK");
+
+			data.put("in_stock_parts", spare_Parts_Pojos);
+
 			System.out.println("MODEL ID --> " + model_id);
 			System.out.println("PART --> " + part);
 
