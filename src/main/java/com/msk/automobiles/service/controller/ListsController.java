@@ -200,43 +200,47 @@ public class ListsController {
 	}
 
 	// TO VIEW ALL SPARE PARTS EXIST INSTOCK
-	/*@POST
+	/*
+	 * @POST
+	 * 
+	 * @Path("/spare-parts") public Response spare_parts(
+	 * 
+	 * @FormParam("stock_status") String stock_status, @Context HttpServletRequest
+	 * request) { JSONObject mix = new JSONObject(); JSONObject data = new
+	 * JSONObject();
+	 * 
+	 * Viewable view = null;
+	 * 
+	 * try { // System.out.println("STOCK STATUS --> " + stock_status);
+	 * List<Spare_Parts_Pojo> spare_Parts_Pojos =
+	 * get_Business_Interface.getSparePartsInStock("INSTOCK");
+	 * 
+	 * data.put("spare_parts", spare_Parts_Pojos); mix.put("data", data);
+	 * 
+	 * view = new Viewable("/spareparts", mix); } catch (Exception e) { throw new
+	 * CustomGenericException("" + e.hashCode(), e.getMessage()); }
+	 * 
+	 * return Response.ok().entity(view).build(); }
+	 */
+
+	@POST
 	@Path("/spare-parts")
-	public Response spare_parts(
-			 @FormParam("stock_status") String stock_status, @Context HttpServletRequest request) {
+	public Response spare_partsGet(@FormParam("stock_status") String stock_status,
+			@Context HttpServletRequest request) {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 
 		Viewable view = null;
+		
+		System.out.println("stock_status=============>"+stock_status);
 
 		try {
-			// System.out.println("STOCK STATUS --> " + stock_status);
-			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock("INSTOCK");
+			System.out.println(stock_status);
+			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock(stock_status);
 
 			data.put("spare_parts", spare_Parts_Pojos);
-			mix.put("data", data);
+			data.put("stock_status", stock_status);
 
-			view = new Viewable("/spareparts", mix);
-		} catch (Exception e) {
-			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
-		}
-
-		return Response.ok().entity(view).build();
-	}*/
-
-	@GET
-	@Path("/spare-parts")
-	public Response spare_partsGet(
-			/* @FormParam("stock_status") String stock_status, */@Context HttpServletRequest request) {
-		JSONObject mix = new JSONObject();
-		JSONObject data = new JSONObject();
-
-		Viewable view = null;
-
-		try {
-			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock("INSTOCK");
-
-			data.put("spare_parts", spare_Parts_Pojos);
 			mix.put("data", data);
 
 			view = new Viewable("/spareparts", mix);

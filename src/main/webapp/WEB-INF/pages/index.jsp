@@ -201,7 +201,7 @@ h4{
 			
 		 	<a href="car-brand">	<button type="button" class="btn btn-primary btn-lg btn1">Service</button></a> 
 			
-			<a href="spare-parts"><button type="button" class="btn btn-primary btn-lg btn1">Spare Parts</button></a>&nbsp;&nbsp;&nbsp;
+			<button type="button" class="btn btn-primary btn-lg btn1 spare_btn">Spare Parts</button>&nbsp;&nbsp;&nbsp;
 				
 			</div>
 		</div></center>
@@ -214,4 +214,17 @@ h4{
 	
 </div>
 
+<form action="msk/spare-parts" method="post" style="display:none">
+<input type="hidden" name="stock_status" value="instock">
+<input type="submit" class="sparebtn">
+</form>
+<script>
+$(document).ready(function(){
+	$('.spare_btn').click(function(){
+		
+		$('.sparebtn').trigger('click');	
+	})
+	
+})
+</script>
 </body></html>

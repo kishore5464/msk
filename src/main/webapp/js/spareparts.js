@@ -191,5 +191,27 @@ $(document).on("click",".add_spare",function(){
 });
 
 
+$(document).on("click",".stock",function(){
+	
+	var click_status = $(this).text().toLowerCase().trim().replace(' ','');
+	
+	$('.stockvalue').val(click_status);
+	
+	$('.spare_submit').trigger('click');
+
+	
+});
+
+
+var page_stockstatus = $('.page_stockstatus').text();
+
+if(page_stockstatus == 'outstock'){
+	console.log("iffffff");
+	$('.outstock').addClass('active');
+}
+else if(page_stockstatus == 'instock'){
+	console.log("elsseeeeeeeeee");
+	$('.instock').addClass('active');
+}
       
      
