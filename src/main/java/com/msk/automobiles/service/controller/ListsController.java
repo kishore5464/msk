@@ -178,20 +178,12 @@ public class ListsController {
 	@Path("/exists-parts")
 	public Response exists_parts(@FormParam("model_id") String model_id, @FormParam("part") String part,
 			@Context HttpServletRequest request) {
-		
-		System.out.println("model_id=======>"+model_id);
-		System.out.println("part=======>"+part);
-		
+
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 		try {
-			System.out.println("MODEL ID --> " + model_id);
-			System.out.println("PART --> " + part);
-
 			Spare_Parts_Pojo spare_Parts_Pojo = get_Business_Interface.getSparePartsAtParticularModelParts(model_id,
 					part);
-
-			System.out.println("SPARE PARTS --> " + spare_Parts_Pojo);
 
 			if (!spare_Parts_Pojo.getId().equals("0")) {
 				data.put("spare_parts", spare_Parts_Pojo);
@@ -208,10 +200,10 @@ public class ListsController {
 	}
 
 	// TO VIEW ALL SPARE PARTS EXIST INSTOCK
-	@POST
+	/*@POST
 	@Path("/spare-parts")
 	public Response spare_parts(
-			/* @FormParam("stock_status") String stock_status, */@Context HttpServletRequest request) {
+			 @FormParam("stock_status") String stock_status, @Context HttpServletRequest request) {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 
@@ -221,8 +213,6 @@ public class ListsController {
 			// System.out.println("STOCK STATUS --> " + stock_status);
 			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock("INSTOCK");
 
-			// System.out.println("SPARE PARTS OF " + stock_status.toUpperCase()
-			// + " --> " + spare_Parts_Pojos);
 			data.put("spare_parts", spare_Parts_Pojos);
 			mix.put("data", data);
 
@@ -232,7 +222,7 @@ public class ListsController {
 		}
 
 		return Response.ok().entity(view).build();
-	}
+	}*/
 
 	@GET
 	@Path("/spare-parts")
