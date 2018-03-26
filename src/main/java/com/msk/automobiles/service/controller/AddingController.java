@@ -81,6 +81,8 @@ public class AddingController {
 
 		// try {
 		System.out.println(brand_id);
+		System.out.println(model);
+		
 		insert_Business_Interface.insertCarModel(brand_id, model, image);
 		List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id, "service");
 

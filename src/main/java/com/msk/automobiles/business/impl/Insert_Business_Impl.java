@@ -67,16 +67,23 @@ public class Insert_Business_Impl implements Insert_Business_Interface {
 	@Override
 	public void insertCarBrand(String brand, String logo) {
 		// TODO Auto-generated method stub
-		Car_Brands car_Brands = new Car_Brands();
-		car_Brands.setBrand(brand);
-		car_Brands.setLogo(logo);
+		List<Car_Brands> brands = get_DAO_Interface.getByBrand(brand);
+	
+		if (brands.isEmpty())
+		{
+			Car_Brands car_Brands = new Car_Brands();
+			car_Brands.setBrand(brand);
+			car_Brands.setLogo(logo);
 
-		insert_DAO_Interface.insertCarBrand(car_Brands);
+			insert_DAO_Interface.insertCarBrand(car_Brands);	
+		}
 	}
 
 	@Override
 	public void insertCarModel(String brand_id, String model, String image) {
 		// TODO Auto-generated method stub
+//		get_DAO_Interface.getModelsByBrandId(brand_id);
+		
 		Car_Brands car_Brands = new Car_Brands();
 		car_Brands.setId(Integer.parseInt(brand_id));
 

@@ -44,6 +44,30 @@ public class ListsController {
 	@Autowired
 	Update_Business_Interface update_Business_Interface;
 
+	@POST
+	@Path("/upload-model")
+	public void upload_model(@FormParam("brand_id") String brand_id, @FormParam("model_id") String model_id,
+			@FormParam("image") String image, @Context HttpServletRequest request) {
+		JSONObject mix = new JSONObject();
+		JSONObject data = new JSONObject();
+
+		Viewable view = null;
+
+		System.out.println("LKKKKKK");
+		System.out.println(model_id);
+		System.out.println(brand_id);
+		System.out.println("KJLLLLLLlll");
+		// System.out.println(image);
+
+		try {
+			insert_Business_Interface.insertOrUpdateModelLogo(model_id, image);
+
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+
+	}
+
 	// CAR BRAND FROM SERVICE
 	@GET
 	@Path("/car-brand")
@@ -212,9 +236,16 @@ public class ListsController {
 	 * 
 	 * @Path("/spare-parts") public Response spare_parts(
 	 * 
+	 * <<<<<<< HEAD
+	 * 
 	 * @FormParam("stock_status") String stock_status, @Context
 	 * HttpServletRequest request) { JSONObject mix = new JSONObject();
-	 * JSONObject data = new JSONObject();
+	 * JSONObject data = new JSONObject(); =======
+	 * 
+	 * @FormParam("stock_status") String stock_status, @Context
+	 * HttpServletRequest request) { JSONObject mix = new JSONObject();
+	 * JSONObject data = new JSONObject(); >>>>>>>
+	 * 4669879970db332192cdf3e490a5e294e1f3f19f
 	 * 
 	 * Viewable view = null;
 	 * 
@@ -224,8 +255,11 @@ public class ListsController {
 	 * 
 	 * data.put("spare_parts", spare_Parts_Pojos); mix.put("data", data);
 	 * 
-	 * view = new Viewable("/spareparts", mix); } catch (Exception e) { throw
-	 * new CustomGenericException("" + e.hashCode(), e.getMessage()); }
+	 * <<<<<<< HEAD view = new Viewable("/spareparts", mix); } catch (Exception
+	 * e) { throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+	 * } ======= view = new Viewable("/spareparts", mix); } catch (Exception e)
+	 * { throw new CustomGenericException("" + e.hashCode(), e.getMessage()); }
+	 * >>>>>>> 4669879970db332192cdf3e490a5e294e1f3f19f
 	 * 
 	 * return Response.ok().entity(view).build(); }
 	 */
@@ -239,11 +273,15 @@ public class ListsController {
 
 		Viewable view = null;
 
+		System.out.println("stock_status=============>" + stock_status);
+
 		try {
 			System.out.println(stock_status);
 			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock(stock_status);
 
 			data.put("spare_parts", spare_Parts_Pojos);
+			data.put("stock_status", stock_status);
+
 			mix.put("data", data);
 
 			view = new Viewable("/spareparts", mix);
