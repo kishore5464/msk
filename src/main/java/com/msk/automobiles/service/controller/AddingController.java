@@ -22,6 +22,7 @@ import com.msk.automobiles.exception.CustomGenericException;
 import com.msk.automobiles.service.pojos.Car_Brands_Pojo;
 import com.msk.automobiles.service.pojos.Car_Models_Pojo;
 import com.msk.automobiles.service.pojos.Service_Card_Pojo;
+import com.msk.automobiles.service.pojos.Spare_Parts_Pojo;
 
 import net.minidev.json.JSONObject;
 
@@ -80,6 +81,8 @@ public class AddingController {
 
 		// try {
 		System.out.println(brand_id);
+		System.out.println(model);
+		
 		insert_Business_Interface.insertCarModel(brand_id, model, image);
 		List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id, "service");
 
@@ -126,14 +129,31 @@ public class AddingController {
 
 	@POST
 	@Path("/add-spare-part")
-	public void add_spare_part(@FormParam("model_id") String model_id, @FormParam("part") String part,
+	public Response add_spare_part(@FormParam("model_id") String model_id, @FormParam("part") String part,
 			@FormParam("quantity") String quantity, @FormParam("amount") String amount,
 			@Context HttpServletRequest request) {
+		JSONObject mix = new JSONObject();
+		JSONObject data = new JSONObject();
+
+		Viewable view = null;
+
 		try {
+			System.out.println(model_id);
+			System.out.println(part);
+			System.out.println(quantity);
+			System.out.println(amount);
 			insert_Business_Interface.insertSparePart(model_id, part, quantity, amount);
+
+			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock("INSTOCK");
+
+			data.put("spare_parts", spare_Parts_Pojos);
+			mix.put("data", data);
+			view = new Viewable("/spareparts", mix);
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
 		}
+
+		return Response.ok().entity(view).build();
 	}
 
 	@POST

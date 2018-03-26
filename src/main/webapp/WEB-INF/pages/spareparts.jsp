@@ -6,7 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <title>Bike</title>
+  <title>Car</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,109 +19,12 @@
 <link rel="stylesheet" href="../css/bootstrap-select.min.css">
  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="../css/carbrands.css">
-
+<link rel="stylesheet" href="../css/spareparts.css">
   <script src="../js/jquery-3.2.1.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
 
-#customers {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-#customers td, #customers th {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-#customers tr:nth-child(even){background-color: #f2f2f2;}
-
-#customers tr:hover {background-color: #ddd;}
-.customershead:hover {background-color: #F2F3F2 !important;}
-
-#customers th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #4CAF50;
-    color: white;
-}
-
-
-.inputstyle input {
-  font-size:18px;
-  padding:10px 10px 10px 5px;
-  display:block;
-      background-color: #f3f3f2;
-  border:none;
-  border-bottom:1px solid #757575;
-}
-.inputstyle input:focus 		{ outline:none; }
-
-/* LABEL ======================================= */
-.group label 				 {
-  color:#999; 
-  font-size:16px;
-  font-weight:normal;
-  position:absolute;
-  pointer-events:none;
-  left:5px;
-  top:10px;
-  transition:0.2s ease all; 
-  -moz-transition:0.2s ease all; 
-  -webkit-transition:0.2s ease all;
-}
-
-/* active state */
-.inputstyle input:focus ~ label, input:valid ~ label 		{
-  top:-20px;
-  font-size:14px;
-  color:#5264AE;
-}
-
-/* BOTTOM BARS ================================= */
-.bar 	{ position:relative; display:block; width:300px; }
-.bar1 	{ position:relative; display:block; width:138px; }
-.barpass { position:relative; display:block; width:247px; }
-.barpass2 { position:relative; display:block; width:110px; }
-
-/* .bar:before, .bar:after 	{
-  content:'';
-  height:2px; 
-  width:0;
-  bottom:1px; 
-  position:absolute;
-  background:#5264AE; 
-  transition:0.2s ease all; 
-  -moz-transition:0.2s ease all; 
-  -webkit-transition:0.2s ease all;
-} */
-
-
-/* 
-/* active state */
-.inputstyle input:focus ~ .highlight {
-  -webkit-animation:inputHighlighter 0.3s ease;
-  -moz-animation:inputHighlighter 0.3s ease;
-  animation:inputHighlighter 0.3s ease;
-}
-
-/* ANIMATIONS ================ */
-
-@-webkit-keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
-@-moz-keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
-@keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-} */
 
 </style>
 
@@ -174,27 +77,38 @@
     <input name="location" value="" required="" class="parts_name" autocomplete="off" placeholder="Part Name" style="width:322px">
     <span class="highlight"></span> <span class="bar barpass"></span>
     </div>
+    
     <button class="btn btn-success chk_stock" value="check" style="float:right">check stock</button>
+    <img src="../images/loading.gif" id="loading" width="30px" style="float:right;display:none">
     </td>
      <td>
-     <div class="form-group group group1 form-feilds inputstyle inputstyle2 ui-widget" style="max-width:50px">
-    <input name="location"  disabled value="" required="" class="disableoption ui-autocomplete-input" autocomplete="off" placeholder="quantity" style="max-width:110px">
+     <div class="form-group group group1 form-feilds inputstyle inputstyle2 ui-widget" style="width:64px">
+    <input name="quantity"  id="quantity" disabled value="" required="" class="disableoption" autocomplete="off" placeholder="quantity" style="max-width:110px;position:relative;top:-15px">
     <span class="highlight"></span> <span class="bar barpass barpass2"></span>
     </div>
      </td>
       <td>
       <div class="form-group group group1 form-feilds inputstyle inputstyle2 ui-widget" style="max-width:50px">
-    <input name="location" disabled value="" required="" class="disableoption location_name ui-autocomplete-input" autocomplete="off" placeholder="price" style="max-width:110px">
+    <input name="price" id="price" disabled value="" required="" class="disableoption" autocomplete="off" placeholder="price" style="max-width:110px">
     <span class="highlight"></span> <span class="bar barpass barpass2"></span>
+   
     </div>
+      <button class="btn btn-success" id="add_btn" value="check" style="float:right">ADD</button>
       </td>
       
   </tr>
  
 </table>
 
+<div id='cssmenu' style="margin-top:5%">
+<ul>
+   <li class="instock"><a class="stock">In Stock</a></li>
+   <li class="outstock"><a class="stock">Outstock</a></li>
 
-<table id="customers" style="margin-top:5%">
+</ul>
+</div>
+
+<table id="customers">
   <tr>
     <th>S.No</th>
     <th>Brand</th>
@@ -223,12 +137,6 @@
 </div>
 
 
-
-  
-  
-  
-  
-  
   
 <!-- Model Content End -->
 <form name="submitForm" method="POST" id="menuurl" action=""
@@ -247,6 +155,36 @@
 			<input type="button" id="subImage" > 
     </form>
     
+    
+    <form  method="POST" action="msk/update-spare-part" style="display: none;">
+		  <input type="hidden" name="spare_part_id" id="sparepart_id" class="" value="">
+		  <input type="hidden" name="part" id="part_name" value=""> 
+		   <input type="hidden" name="quantity" id="tot_quantity" value=""> 
+		    <input type="hidden" name="amount" id="tot_amout" value=""> 
+		    
+			
+			<input type="submit" id="update_submit_parts">
+    </form>
+    
+        <form  method="POST" action="msk/add-spare-part" style="display: none;">
+		
+		 <input type="hidden" name="model_id" id="model_id" value=""> 
+		  <input type="hidden" name="part" id="part_name2" value=""> 
+		   <input type="hidden" name="quantity" id="tot_quantity2" value=""> 
+		    <input type="hidden" name="amount" id="tot_amout2" value=""> 
+		    
+			
+			<input type="submit" id="add_submit_parts">
+      </form>
+      
+ <form action="msk/spare-parts" method="post" style="display:none">
+<input type="hidden" name="stock_status"  class ="stockvalue">
+<input type="submit" class="spare_submit">
+</form>
+    <div style="display:none">
+    <div class="page_data">${it.data}</div>
+    <div class="page_stockstatus">${it.data.stock_status}</div>
+    </div>
     <script src="../js/spareparts.js"></script>
     <script src="../js/bootstrap-select.min.js"></script>
     

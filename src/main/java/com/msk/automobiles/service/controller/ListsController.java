@@ -44,6 +44,30 @@ public class ListsController {
 	@Autowired
 	Update_Business_Interface update_Business_Interface;
 
+	@POST
+	@Path("/upload-model")
+	public void upload_model(@FormParam("brand_id") String brand_id, @FormParam("model_id") String model_id,
+			@FormParam("image") String image, @Context HttpServletRequest request) {
+		JSONObject mix = new JSONObject();
+		JSONObject data = new JSONObject();
+
+		Viewable view = null;
+
+		System.out.println("LKKKKKK");
+		System.out.println(model_id);
+		System.out.println(brand_id);
+		System.out.println("KJLLLLLLlll");
+		// System.out.println(image);
+
+		try {
+			insert_Business_Interface.insertOrUpdateModelLogo(model_id, image);
+
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+
+	}
+
 	// CAR BRAND FROM SERVICE
 	@GET
 	@Path("/car-brand")
@@ -179,9 +203,6 @@ public class ListsController {
 	public Response exists_parts(@FormParam("model_id") String model_id, @FormParam("part") String part,
 			@Context HttpServletRequest request) {
 
-		System.out.println("model_id=======>" + model_id);
-		System.out.println("part=======>" + part);
-
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 		try {
@@ -194,8 +215,6 @@ public class ListsController {
 
 			Spare_Parts_Pojo spare_Parts_Pojo = get_Business_Interface.getSparePartsAtParticularModelParts(model_id,
 					part);
-
-			System.out.println("SPARE PARTS --> " + spare_Parts_Pojo);
 
 			if (!spare_Parts_Pojo.getId().equals("0")) {
 				data.put("spare_parts", spare_Parts_Pojo);
@@ -212,45 +231,57 @@ public class ListsController {
 	}
 
 	// TO VIEW ALL SPARE PARTS EXIST INSTOCK
+	/*
+	 * @POST
+	 * 
+	 * @Path("/spare-parts") public Response spare_parts(
+	 * 
+	 * <<<<<<< HEAD
+	 * 
+	 * @FormParam("stock_status") String stock_status, @Context
+	 * HttpServletRequest request) { JSONObject mix = new JSONObject();
+	 * JSONObject data = new JSONObject(); =======
+	 * 
+	 * @FormParam("stock_status") String stock_status, @Context
+	 * HttpServletRequest request) { JSONObject mix = new JSONObject();
+	 * JSONObject data = new JSONObject(); >>>>>>>
+	 * 4669879970db332192cdf3e490a5e294e1f3f19f
+	 * 
+	 * Viewable view = null;
+	 * 
+	 * try { // System.out.println("STOCK STATUS --> " + stock_status);
+	 * List<Spare_Parts_Pojo> spare_Parts_Pojos =
+	 * get_Business_Interface.getSparePartsInStock("INSTOCK");
+	 * 
+	 * data.put("spare_parts", spare_Parts_Pojos); mix.put("data", data);
+	 * 
+	 * <<<<<<< HEAD view = new Viewable("/spareparts", mix); } catch (Exception
+	 * e) { throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+	 * } ======= view = new Viewable("/spareparts", mix); } catch (Exception e)
+	 * { throw new CustomGenericException("" + e.hashCode(), e.getMessage()); }
+	 * >>>>>>> 4669879970db332192cdf3e490a5e294e1f3f19f
+	 * 
+	 * return Response.ok().entity(view).build(); }
+	 */
+
 	@POST
 	@Path("/spare-parts")
-	public Response spare_parts(
-			/* @FormParam("stock_status") String stock_status, */@Context HttpServletRequest request) {
+	public Response spare_partsGet(@FormParam("stock_status") String stock_status,
+			@Context HttpServletRequest request) {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 
 		Viewable view = null;
 
-		try {
-			// System.out.println("STOCK STATUS --> " + stock_status);
-			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock("INSTOCK");
-
-			// System.out.println("SPARE PARTS OF " + stock_status.toUpperCase()
-			// + " --> " + spare_Parts_Pojos);
-			data.put("spare_parts", spare_Parts_Pojos);
-			mix.put("data", data);
-
-			view = new Viewable("/spareparts", mix);
-		} catch (Exception e) {
-			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
-		}
-
-		return Response.ok().entity(view).build();
-	}
-
-	@GET
-	@Path("/spare-parts")
-	public Response spare_partsGet(
-			/* @FormParam("stock_status") String stock_status, */@Context HttpServletRequest request) {
-		JSONObject mix = new JSONObject();
-		JSONObject data = new JSONObject();
-
-		Viewable view = null;
+		System.out.println("stock_status=============>" + stock_status);
 
 		try {
-			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock("INSTOCK");
+			System.out.println(stock_status);
+			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock(stock_status);
 
 			data.put("spare_parts", spare_Parts_Pojos);
+			data.put("stock_status", stock_status);
+
 			mix.put("data", data);
 
 			view = new Viewable("/spareparts", mix);
