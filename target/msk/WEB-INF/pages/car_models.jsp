@@ -137,7 +137,7 @@
       </div>
       <span id="models_id" style="display:none">${models.model_id}</span>
       <span id="brand_id" style="display:none">${models.brand_id}</span>
-     <!--   <button type="button" class="choose">Choose Image</button> -->
+   <button type="button" class="choose">Choose Image</button>
     </div>
 </c:forEach>
 
@@ -159,7 +159,7 @@
 
 
 <!-- Modal content-->
-<!-- 	<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
       
@@ -178,7 +178,7 @@
       </div>
       
     </div>
-  </div> -->
+  </div>
   
   
   
@@ -245,10 +245,12 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	
+	$("#textAreaFileContents").text('');
 	$(".newcar_upload").click(function(){
 		
 	$("#new_logo").val($("#textAreaFileContents").text());
+	
+	console.log("triggggggggggggggggggggg");
 
 	$('.submit_logo').trigger('click');
 	
