@@ -230,17 +230,18 @@ public class ListsController {
 	 * return Response.ok().entity(view).build(); }
 	 */
 
-	@GET
+	@POST
 	@Path("/spare-parts")
-	public Response spare_partsGet(
-			/* @FormParam("stock_status") String stock_status, */@Context HttpServletRequest request) {
+	public Response spare_partsGet(@FormParam("stock_status") String stock_status,
+			@Context HttpServletRequest request) {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 
 		Viewable view = null;
 
 		try {
-			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock("INSTOCK");
+			System.out.println(stock_status);
+			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock(stock_status);
 
 			data.put("spare_parts", spare_Parts_Pojos);
 			mix.put("data", data);
