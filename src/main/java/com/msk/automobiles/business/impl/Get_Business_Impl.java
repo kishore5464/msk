@@ -22,6 +22,7 @@ import com.msk.automobiles.service.pojos.Car_Brands_Pojo;
 import com.msk.automobiles.service.pojos.Car_Models_Pojo;
 import com.msk.automobiles.service.pojos.Customer_Details_Pojo;
 import com.msk.automobiles.service.pojos.Location_Pojo;
+import com.msk.automobiles.service.pojos.Notifcation_Pojo;
 import com.msk.automobiles.service.pojos.Service_Type_Pojo;
 import com.msk.automobiles.service.pojos.Spare_Parts_Pojo;
 import com.msk.automobiles.util.Encrypt_Decrypt;
@@ -296,6 +297,12 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		}
 
 		return spare_Parts_Pojo;
+	}
+
+	@Override
+	public List<Notifcation_Pojo> getServiceNotification() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
