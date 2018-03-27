@@ -54,6 +54,20 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 	}
 
 	@Override
+	public List<Car_Models> getModelsByBrandIdAndModel(Integer car_brands_id, String model) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(
+				" from Car_Models where car_brands_id = '" + car_brands_id + "' and model = '" + model + "'");
+		List<Car_Models> car_Models = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return car_Models;
+	}
+
+	@Override
 	public List<MSK_Owner> getMSKOwnerDetail(String username) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
@@ -260,6 +274,19 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 		session.flush();
 		session.close();
 		return parts;
+	}
+
+	@Override
+	public List<Customer_Details> getExistingCustomerModelDetails(Integer car_models_id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Customer_Details where car_models_id = '" + car_models_id + "'");
+		List<Customer_Details> customer_Details = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return customer_Details;
 	}
 
 }

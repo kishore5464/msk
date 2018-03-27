@@ -127,10 +127,10 @@
 
 <div class="col-lg-12">
 <div class="container">
-
+<h5>${it.data}</h5>
 <c:forEach var="models" varStatus="counter"  items="${it.data.models}">
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div class="thumbnail car_models">
+      <div class="thumbnail car_models" id="${models.model_id}">
          <c:if test="${models.image == 'noimage'}">
          <img class="" style="max-height:100px" src="http://personalityanalysistest.com/template/images/logo.png">
          </c:if>
@@ -143,7 +143,7 @@
       </div>
       <span id="models_id" style="display:none">${models.model_id}</span>
       <span id="brand_id" style="display:none">${models.brand_id}</span>
-   <button type="button" class="choose">Choose Image</button>
+   <!-- <button type="button" class="choose">Choose Image</button> -->
     </div>
 </c:forEach>
 
@@ -163,32 +163,6 @@
 </div>
 
 
-
-<!-- Modal content-->
-	<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-         <input id="inputFileToLoad" type="file" onchange="loadImageFileAsURL();" />
-<input type="hidden" id="textAreaFileContents" name="companyLogo" />
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default upload" data-dismiss="modal">Upload</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-  
-  
-  
-  
  <div class="modal fade" id="addcarmyModal" role="dialog">
     <div class="modal-dialog">
     
@@ -221,7 +195,7 @@
         <div class="modal-footer">
          <input type="submit" style="display:none" class="submit_logo">
            
-          <button type="button" class="btn btn-default newcar_upload">Uploadddd</button>
+          <button type="button" class="btn btn-default newcar_upload">Upload</button>
         </div>
         </form>
       </div>
@@ -250,6 +224,11 @@
 			 <input type="submit" id="subImage" > 
     </form>
     
+    <form action="msk/customer-detail" method="post" style="display:none">
+    <input type="text" name="modal_id" id="modalid">
+    <input type="submit" class="modalid_submit">
+    </form>
+    
 <script type="text/javascript">
 $(document).ready(function(){
 	
@@ -260,9 +239,19 @@ $(document).ready(function(){
 	
 	console.log("triggggggggggggggggggggg");
 
-//$('.submit_logo').trigger('click');
+   $('.submit_logo').trigger('click');
 	
-	});
+	})
+	
+	$('.car_models').click(function(){
+		
+		$('#modalid').val($(this).attr('id'));
+		
+		$('.modalid_submit').trigger('click');
+		
+		
+		
+	})
 	
 	
 });
