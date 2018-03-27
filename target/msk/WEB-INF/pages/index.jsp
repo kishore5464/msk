@@ -201,11 +201,11 @@ h4{
 			
 		 	<a href="car-brand">	<button type="button" class="btn btn-primary btn-lg btn1">Service</button></a> 
 			
-<<<<<<< HEAD
+<!-- <<<<<<< HEAD -->
 			<a href="login"><button type="button" class="btn btn-primary btn-lg btn1">Spare Parts</button></a>&nbsp;&nbsp;&nbsp;
-=======
+<!-- =======
 			<button type="button" class="btn btn-primary btn-lg btn1 spare_btn">Spare Parts</button>&nbsp;&nbsp;&nbsp;
->>>>>>> 4669879970db332192cdf3e490a5e294e1f3f19f
+>>>>>>> 4669879970db332192cdf3e490a5e294e1f3f19f -->
 				
 			</div>
 		</div></center>

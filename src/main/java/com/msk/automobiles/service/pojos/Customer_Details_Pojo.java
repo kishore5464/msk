@@ -8,7 +8,7 @@ public class Customer_Details_Pojo {
 	private String model;
 	private String registration_no;
 	private String gst_no;
-	private String current_service_date;
+	private String expire_service_date;
 
 	public Customer_Details_Pojo() {
 		super();
@@ -16,7 +16,7 @@ public class Customer_Details_Pojo {
 	}
 
 	public Customer_Details_Pojo(String customer_id, String first_name, String mobile, String model,
-			String registration_no, String gst_no, String current_service_date) {
+			String registration_no, String gst_no, String expire_service_date) {
 		super();
 		this.customer_id = customer_id;
 		this.first_name = first_name;
@@ -24,7 +24,7 @@ public class Customer_Details_Pojo {
 		this.model = model;
 		this.registration_no = registration_no;
 		this.gst_no = gst_no;
-		this.current_service_date = current_service_date;
+		this.expire_service_date = expire_service_date;
 	}
 
 	public String getCustomer_id() {
@@ -75,19 +75,19 @@ public class Customer_Details_Pojo {
 		this.gst_no = gst_no;
 	}
 
-	public String getCurrent_service_date() {
-		return current_service_date;
+	public String getExpire_service_date() {
+		return expire_service_date;
 	}
 
-	public void setCurrent_service_date(String current_service_date) {
-		this.current_service_date = current_service_date;
+	public void setExpire_service_date(String expire_service_date) {
+		this.expire_service_date = expire_service_date;
 	}
 
 	@Override
 	public String toString() {
 		return "Customer_Details_Pojo [customer_id=" + customer_id + ", first_name=" + first_name + ", mobile=" + mobile
 				+ ", model=" + model + ", registration_no=" + registration_no + ", gst_no=" + gst_no
-				+ ", current_service_date=" + current_service_date + "]";
+				+ ", expire_service_date=" + expire_service_date + "]";
 	}
 
 }

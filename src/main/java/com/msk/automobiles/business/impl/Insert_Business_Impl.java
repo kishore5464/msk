@@ -68,31 +68,32 @@ public class Insert_Business_Impl implements Insert_Business_Interface {
 	public void insertCarBrand(String brand, String logo) {
 		// TODO Auto-generated method stub
 		List<Car_Brands> brands = get_DAO_Interface.getByBrand(brand);
-	
-		if (brands.isEmpty())
-		{
+
+		if (brands.isEmpty()) {
 			Car_Brands car_Brands = new Car_Brands();
 			car_Brands.setBrand(brand);
 			car_Brands.setLogo(logo);
 
-			insert_DAO_Interface.insertCarBrand(car_Brands);	
+			insert_DAO_Interface.insertCarBrand(car_Brands);
 		}
 	}
 
 	@Override
 	public void insertCarModel(String brand_id, String model, String image) {
 		// TODO Auto-generated method stub
-//		get_DAO_Interface.getModelsByBrandId(brand_id);
-		
-		Car_Brands car_Brands = new Car_Brands();
-		car_Brands.setId(Integer.parseInt(brand_id));
+		List<Car_Models> models = get_DAO_Interface.getModelsByBrandIdAndModel(Integer.parseInt(brand_id), model);
 
-		Car_Models car_Models = new Car_Models();
-		car_Models.setCar_Brands(car_Brands);
-		car_Models.setModel(model);
-		car_Models.setImage(image);
+		if (models.isEmpty()) {
+			Car_Brands car_Brands = new Car_Brands();
+			car_Brands.setId(Integer.parseInt(brand_id));
 
-		insert_DAO_Interface.insertCarModel(car_Models);
+			Car_Models car_Models = new Car_Models();
+			car_Models.setCar_Brands(car_Brands);
+			car_Models.setModel(model);
+			car_Models.setImage(image);
+
+			insert_DAO_Interface.insertCarModel(car_Models);
+		}
 	}
 
 	@Override

@@ -294,23 +294,25 @@ public class ListsController {
 
 	@POST
 	@Path("/customer-detail")
-	public Response customer_detail() {
+	public Response customer_detail(@FormParam("modal_id") String model_id, @Context HttpServletRequest request) {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 
-		// Viewable view = null;
-		try {
-			List<Customer_Details_Pojo> existing_customer = get_Business_Interface.getExistingCustomerDetails();
+		Viewable view = null;
+//		try {
+			System.out.println("MODEL id --> " + model_id);
+			List<Customer_Details_Pojo> existing_customer = get_Business_Interface
+					.getExistingCustomerModelDetails(model_id);
 
 			data.put("customer", existing_customer);
 			mix.put("data", data);
 
-			// view = new Viewable("/customer_detail", mix);
-		} catch (Exception e) {
-			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
-		}
+			view = new Viewable("/customer_details", mix);
+//		} catch (Exception e) {
+//			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+//		}
 
-		return Response.ok().entity(mix.toString()).build();
+		return Response.ok().entity(view).build();
 	}
 
 	@GET

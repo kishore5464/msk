@@ -18,6 +18,8 @@ public interface Get_DAO_Interface {
 
 	List<Car_Models> getModelsByBrandId(Integer car_brands_id);
 
+	List<Car_Models> getModelsByBrandIdAndModel(Integer car_brands_id, String model);
+
 	List<MSK_Owner> getMSKOwnerDetail(String username);
 
 	List<Car_Brands> getBrandById(Integer brand_id);
@@ -47,5 +49,7 @@ public interface Get_DAO_Interface {
 	List<Parts> getSparePartsAtParticularModel(String model_id);
 
 	List<Parts> getSparePartsAtParticularModelParts(Integer model_id, String part);
+
+	List<Customer_Details> getExistingCustomerModelDetails(Integer car_models_id);
 
 }

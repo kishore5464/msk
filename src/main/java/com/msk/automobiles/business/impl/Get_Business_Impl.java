@@ -68,7 +68,6 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		List<Car_Models> models = get_DAO_Interface.getModelsByBrandId(Integer.parseInt(car_brands_id));
 		List<Car_Models_Pojo> uiCar_Models_Pojos = new ArrayList<Car_Models_Pojo>();
 
-		System.out.println(models.size());
 		if (!models.isEmpty()) {
 			for (int i = 0; i < models.size(); i++) {
 				Car_Models_Pojo car_Models_Pojo = new Car_Models_Pojo();
@@ -136,7 +135,7 @@ public class Get_Business_Impl implements Get_Business_Interface {
 
 				List<Service_Invoice_Card> service_Invoice_Cards = get_DAO_Interface
 						.getSericeInvoiceCard(customer_Details.get(i).getId());
-				customer_Details_Pojo.setCurrent_service_date(dateFormat
+				customer_Details_Pojo.setExpire_service_date(dateFormat
 						.format(service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getService_expire_date()));
 
 				customer_Details_Pojos.add(customer_Details_Pojo);
@@ -296,6 +295,40 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		}
 
 		return spare_Parts_Pojo;
+	}
+
+	@Override
+	public List<Customer_Details_Pojo> getExistingCustomerModelDetails(String model_id) {
+		// TODO Auto-generated method stub
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+		List<Customer_Details> customer_Details = get_DAO_Interface
+				.getExistingCustomerModelDetails(Integer.parseInt(model_id));
+		List<Customer_Details_Pojo> customer_Details_Pojos = new ArrayList<Customer_Details_Pojo>();
+
+		if (!customer_Details.isEmpty()) {
+			for (int i = 0; i < customer_Details.size(); i++) {
+				Customer_Details_Pojo customer_Details_Pojo = new Customer_Details_Pojo();
+				customer_Details_Pojo.setCustomer_id(customer_Details.get(i).getCustomer_id());
+				customer_Details_Pojo.setFirst_name(customer_Details.get(i).getFirst_name());
+				customer_Details_Pojo.setMobile(customer_Details.get(i).getMobile());
+				customer_Details_Pojo.setGst_no(customer_Details.get(i).getGst_no());
+				customer_Details_Pojo.setRegistration_no(customer_Details.get(0).getRegistration_no());
+
+				List<Car_Models> car_Model = get_DAO_Interface
+						.getModelById(customer_Details.get(i).getCar_Models().getId());
+				customer_Details_Pojo.setModel(car_Model.get(0).getModel());
+
+				List<Service_Invoice_Card> service_Invoice_Cards = get_DAO_Interface
+						.getSericeInvoiceCard(customer_Details.get(i).getId());
+				customer_Details_Pojo.setExpire_service_date(dateFormat
+						.format(service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getService_expire_date()));
+
+				customer_Details_Pojos.add(customer_Details_Pojo);
+			}
+		}
+
+		return customer_Details_Pojos;
 	}
 
 }
