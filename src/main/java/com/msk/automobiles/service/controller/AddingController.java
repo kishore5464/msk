@@ -80,9 +80,6 @@ public class AddingController {
 		Viewable view = null;
 
 		// try {
-		System.out.println("BRAND ID --> " + brand_id);
-		System.out.println("MODEL --> " + model);
-
 		insert_Business_Interface.insertCarModel(brand_id, model, image);
 		List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id, "service");
 
@@ -164,7 +161,7 @@ public class AddingController {
 		String status = null;
 
 		try {
-			// insert_Business_Interface.insertCarBrand(brand, logo);
+
 			status = "success";
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());

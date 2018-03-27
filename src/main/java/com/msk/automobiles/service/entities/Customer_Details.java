@@ -41,6 +41,7 @@ public class Customer_Details implements Serializable {
 
 	private Set<Customer_Contact_Details> customer_Contact_Details = new HashSet<Customer_Contact_Details>();
 	private Set<Service_Invoice_Card> service_Invoice_Cards = new HashSet<Service_Invoice_Card>();
+	private Set<Notification> notifications = new HashSet<Notification>();
 
 	public Customer_Details() {
 		super();
@@ -184,6 +185,15 @@ public class Customer_Details implements Serializable {
 
 	public void setService_Invoice_Cards(Set<Service_Invoice_Card> service_Invoice_Cards) {
 		this.service_Invoice_Cards = service_Invoice_Cards;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer_Details")
+	public Set<Notification> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(Set<Notification> notifications) {
+		this.notifications = notifications;
 	}
 
 }

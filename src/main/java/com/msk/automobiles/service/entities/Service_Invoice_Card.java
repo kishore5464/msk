@@ -2,6 +2,8 @@ package com.msk.automobiles.service.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -45,6 +48,8 @@ public class Service_Invoice_Card implements Serializable {
 	private Date service_expire_date;
 	private Date created_date;
 
+	private Set<Notification> notifications = new HashSet<Notification>();
+
 	public Service_Invoice_Card() {
 		super();
 	}
@@ -52,8 +57,8 @@ public class Service_Invoice_Card implements Serializable {
 	public Service_Invoice_Card(Integer id, String service_id, Customer_Details customer_Details,
 			Service_Type service_Type, String service_detail, String tool_kit, String spare_wheel, String jack,
 			String jack_handler, String car_perfume, String clock, String cd_player, Integer kilometer,
-			Card_Type card_type, Card_Status card_status, Date service_expire_date, Date current_service_date,
-			Date created_date) {
+			Card_Type card_type, Card_Status card_status, Date current_service_date, Date service_expire_date,
+			Date created_date, Set<Notification> notifications) {
 		super();
 		this.id = id;
 		this.service_id = service_id;
@@ -70,9 +75,10 @@ public class Service_Invoice_Card implements Serializable {
 		this.kilometer = kilometer;
 		this.card_type = card_type;
 		this.card_status = card_status;
-		this.setService_expire_date(service_expire_date);
 		this.current_service_date = current_service_date;
+		this.service_expire_date = service_expire_date;
 		this.created_date = created_date;
+		this.setNotifications(notifications);
 	}
 
 	@Id
@@ -244,6 +250,15 @@ public class Service_Invoice_Card implements Serializable {
 
 	public void setCreated_date(Date created_date) {
 		this.created_date = created_date;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "service_Invoice_Card")
+	public Set<Notification> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(Set<Notification> notifications) {
+		this.notifications = notifications;
 	}
 
 }
