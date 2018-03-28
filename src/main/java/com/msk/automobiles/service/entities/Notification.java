@@ -25,6 +25,7 @@ public class Notification implements Serializable {
 	private String customer_name;
 	private Date dob;
 	private String mobile;
+	private String registration_no;
 	private String car_brand;
 	private String car_model;
 	private Date service_expire_date;
@@ -79,7 +80,7 @@ public class Notification implements Serializable {
 		this.mobile = mobile;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "dob")
 	public Date getDob() {
 		return dob;
@@ -96,6 +97,15 @@ public class Notification implements Serializable {
 
 	public void setCar_brand(String car_brand) {
 		this.car_brand = car_brand;
+	}
+
+	@Column(name = "registration_no")
+	public String getRegistration_no() {
+		return registration_no;
+	}
+
+	public void setRegistration_no(String registration_no) {
+		this.registration_no = registration_no;
 	}
 
 	@Column(name = "car_model")

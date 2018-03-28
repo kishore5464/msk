@@ -8,6 +8,7 @@ public class Notifcation_Pojo {
 	private String dob;
 	private String car_brand;
 	private String car_model;
+	private String registration_no;
 	private String service_expire_date;
 
 	public Notifcation_Pojo() {
@@ -15,16 +16,17 @@ public class Notifcation_Pojo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Notifcation_Pojo(String notification_id, String customer_name, String mobile, String car_brand,
-			String car_model, String service_expire_date, String dob) {
+	public Notifcation_Pojo(String notification_id, String customer_name, String mobile, String dob, String car_brand,
+			String car_model, String registration_no, String service_expire_date) {
 		super();
 		this.notification_id = notification_id;
 		this.customer_name = customer_name;
 		this.mobile = mobile;
+		this.dob = dob;
 		this.car_brand = car_brand;
 		this.car_model = car_model;
+		this.registration_no = registration_no;
 		this.service_expire_date = service_expire_date;
-		this.dob = dob;
 	}
 
 	public String getNotification_id() {
@@ -88,6 +90,14 @@ public class Notifcation_Pojo {
 		return "Notifcation_Pojo [notification_id=" + notification_id + ", customer_name=" + customer_name + ", mobile="
 				+ mobile + ", dob=" + dob + ", car_brand=" + car_brand + ", car_model=" + car_model
 				+ ", service_expire_date=" + service_expire_date + "]";
+	}
+
+	public String getRegistration_no() {
+		return registration_no;
+	}
+
+	public void setRegistration_no(String registration_no) {
+		this.registration_no = registration_no;
 	}
 
 }

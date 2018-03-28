@@ -1,5 +1,6 @@
 package com.msk.automobiles.business.impl;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +26,6 @@ import com.msk.automobiles.service.pojos.Car_Brands_Pojo;
 import com.msk.automobiles.service.pojos.Car_Models_Pojo;
 import com.msk.automobiles.service.pojos.Customer_Details_Pojo;
 import com.msk.automobiles.service.pojos.Location_Pojo;
-import com.msk.automobiles.service.pojos.Notifcation_Message_Pojo;
 import com.msk.automobiles.service.pojos.Notifcation_Pojo;
 import com.msk.automobiles.service.pojos.Service_Advicer_Pojo;
 import com.msk.automobiles.service.pojos.Service_Type_Pojo;
@@ -347,26 +347,34 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		// TODO Auto-generated method stub
 		List<Notification> notification = get_DAO_Interface.getAllNotificationDetails();
 		List<Notifcation_Pojo> notifcation_Pojos = new ArrayList<Notifcation_Pojo>();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 		if (!notification.isEmpty()) {
 			for (int i = 0; i < notification.size(); i++) {
-				if (notification.get(i).getService_expire_date() == new Date()) 
-				{
-					System.out.println("DATE --> "+notification.get(i).getService_expire_date());
+				System.out.println("DOB --> " + notification.get(i).getDob());
+				String c_date = dateFormat.format(new Date());
+				try {
+					System.out.println("DATE -> " + dateFormat.parse(c_date));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
-					Notifcation_Message_Pojo notifcation_Pojo = new Notifcation_Message_Pojo();
+				if (notification.get(i).getDob() == new Date()) {
+					System.out.println("DATE --> " + notification.get(i).getService_expire_date());
+
+					Notifcation_Pojo notifcation_Pojo = new Notifcation_Pojo();
 					notifcation_Pojo.setNotification_id(Integer.toString(notification.get(i).getId()));
-					notifcation_Pojo.setMessage(message);
-					/*notifcation_Pojo.setCustomer_name(notification.get(i).getCustomer_name());
+					notifcation_Pojo.setCustomer_name(notification.get(i).getCustomer_name());
 					notifcation_Pojo.setMobile(notification.get(i).getMobile());
+					notifcation_Pojo.setRegistration_no(notification.get(i).getRegistration_no());
 					notifcation_Pojo.setDob(dateFormat.format(notification.get(i).getDob()));
 					notifcation_Pojo.setCar_brand(notification.get(i).getCar_brand());
 					notifcation_Pojo.setCar_model(notification.get(i).getCar_model());
 					notifcation_Pojo
 							.setService_expire_date(dateFormat.format(notification.get(i).getService_expire_date()));
 
-					notifcation_Pojos.add(notifcation_Pojo);*/				
+					notifcation_Pojos.add(notifcation_Pojo);
 				}
 			}
 		} else {

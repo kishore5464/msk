@@ -42,6 +42,8 @@ public class NotificationController {
 
 		try {
 			List<Notifcation_Pojo> notifications = get_Business_Interface.getServiceNotification();
+			System.out.println(notifications.toString());
+			System.out.println(notifications.size());
 			data.put("notification", notifications);
 			mix.put("data", data);
 		} catch (Exception e) {
