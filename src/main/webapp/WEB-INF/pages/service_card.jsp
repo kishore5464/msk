@@ -37,6 +37,8 @@ padding: 4px 6px;
 }
 </style>
 <body>
+<%@include file="/WEB-INF/common/header.jsp"%>
+
 <div class="">
 	<h3 style="color:blue;text-align:center">Job Card - MSK Automotive</h3>
 

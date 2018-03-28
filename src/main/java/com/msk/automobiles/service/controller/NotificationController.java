@@ -2,7 +2,7 @@ package com.msk.automobiles.service.controller;
 
 import java.util.List;
 
-import javax.ws.rs.POST;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
@@ -34,7 +34,7 @@ public class NotificationController {
 	@Autowired
 	Update_Business_Interface update_Business_Interface;
 
-	@POST
+	@GET
 	@Path("/notification")
 	public Response notification() {
 		JSONObject data = new JSONObject();

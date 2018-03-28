@@ -1,29 +1,30 @@
 package com.msk.automobiles.service.pojos;
 
 public class Notifcation_Pojo {
+
 	private String notification_id;
-	private String name;
+	private String customer_name;
 	private String mobile;
-	private String model;
-	private String brand;
-	private String registration_no;
-	private String expire_date;
+	private String dob;
+	private String car_brand;
+	private String car_model;
+	private String service_expire_date;
 
 	public Notifcation_Pojo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Notifcation_Pojo(String notification_id, String name, String mobile, String model, String brand,
-			String registration_no, String expire_date) {
+	public Notifcation_Pojo(String notification_id, String customer_name, String mobile, String car_brand,
+			String car_model, String service_expire_date, String dob) {
 		super();
 		this.notification_id = notification_id;
-		this.name = name;
+		this.customer_name = customer_name;
 		this.mobile = mobile;
-		this.model = model;
-		this.brand = brand;
-		this.registration_no = registration_no;
-		this.expire_date = expire_date;
+		this.car_brand = car_brand;
+		this.car_model = car_model;
+		this.service_expire_date = service_expire_date;
+		this.dob = dob;
 	}
 
 	public String getNotification_id() {
@@ -34,12 +35,12 @@ public class Notifcation_Pojo {
 		this.notification_id = notification_id;
 	}
 
-	public String getName() {
-		return name;
+	public String getCustomer_name() {
+		return customer_name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCustomer_name(String customer_name) {
+		this.customer_name = customer_name;
 	}
 
 	public String getMobile() {
@@ -50,36 +51,43 @@ public class Notifcation_Pojo {
 		this.mobile = mobile;
 	}
 
-	public String getModel() {
-		return model;
+	public String getCar_brand() {
+		return car_brand;
 	}
 
-	public void setModel(String model) {
-		this.model = model;
+	public void setCar_brand(String car_brand) {
+		this.car_brand = car_brand;
 	}
 
-	public String getBrand() {
-		return brand;
+	public String getCar_model() {
+		return car_model;
 	}
 
-	public void setBrand(String brand) {
-		this.brand = brand;
+	public void setCar_model(String car_model) {
+		this.car_model = car_model;
 	}
 
-	public String getRegistration_no() {
-		return registration_no;
+	public String getService_expire_date() {
+		return service_expire_date;
 	}
 
-	public void setRegistration_no(String registration_no) {
-		this.registration_no = registration_no;
+	public void setService_expire_date(String service_expire_date) {
+		this.service_expire_date = service_expire_date;
 	}
 
-	public String getExpire_date() {
-		return expire_date;
+	public String getDob() {
+		return dob;
 	}
 
-	public void setExpire_date(String expire_date) {
-		this.expire_date = expire_date;
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+	@Override
+	public String toString() {
+		return "Notifcation_Pojo [notification_id=" + notification_id + ", customer_name=" + customer_name + ", mobile="
+				+ mobile + ", dob=" + dob + ", car_brand=" + car_brand + ", car_model=" + car_model
+				+ ", service_expire_date=" + service_expire_date + "]";
 	}
 
 }

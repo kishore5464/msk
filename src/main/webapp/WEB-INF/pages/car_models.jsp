@@ -127,7 +127,6 @@
 
 <div class="col-lg-12">
 <div class="container">
-<h5>${it.data}</h5>
 <c:forEach var="models" varStatus="counter"  items="${it.data.models}">
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
       <div class="thumbnail car_models" id="${models.model_id}">

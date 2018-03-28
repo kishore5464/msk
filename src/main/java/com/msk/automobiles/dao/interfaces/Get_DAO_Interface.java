@@ -8,6 +8,7 @@ import com.msk.automobiles.service.entities.Customer_Contact_Details;
 import com.msk.automobiles.service.entities.Customer_Details;
 import com.msk.automobiles.service.entities.Location;
 import com.msk.automobiles.service.entities.MSK_Owner;
+import com.msk.automobiles.service.entities.Notification;
 import com.msk.automobiles.service.entities.Parts;
 import com.msk.automobiles.service.entities.Service_Adviser;
 import com.msk.automobiles.service.entities.Service_Invoice_Card;
@@ -54,5 +55,7 @@ public interface Get_DAO_Interface {
 	List<Customer_Details> getExistingCustomerModelDetails(Integer car_models_id);
 
 	List<Service_Adviser> getServiceAdvicers();
+
+	List<Notification> getAllNotificationDetails();
 
 }

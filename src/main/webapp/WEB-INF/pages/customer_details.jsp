@@ -286,18 +286,10 @@
 
 </style>  
 <body>
+<%@include file="/WEB-INF/common/header.jsp"%>
+
 <div>
-<!-- Navigation bar Start -->
-	<div>
-		<nav class="navbar navbar-inverse">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">WebSiteName</a>
-				</div>
-			</div>
-		</nav>
-	</div>
-<!-- Navigation bar Ends -->	
+	
 	<div>
 		<h3>Customer Details</h3>
 	</div>
@@ -414,7 +406,6 @@
 				
 			</tbody> 
 		 </table> -->
-		 <h5>${it.data}</h5>
 		 <table id="table_id" class="display">
     		<thead>
 		        <tr>
@@ -438,7 +429,7 @@
 		            <td>${customer.gst_no}</td>
 		            <td>
 						<center>
-							<button class="btn btn-info service_details_btn" > View Service Details </button>
+							<button class="btn btn-info service_details_btn" >Next Service</button>
 						</center>
 					</td>
 				</tr>

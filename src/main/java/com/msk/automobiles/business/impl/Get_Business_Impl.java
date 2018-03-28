@@ -2,6 +2,7 @@ package com.msk.automobiles.business.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import com.msk.automobiles.service.entities.Car_Models;
 import com.msk.automobiles.service.entities.Customer_Details;
 import com.msk.automobiles.service.entities.Location;
 import com.msk.automobiles.service.entities.MSK_Owner;
+import com.msk.automobiles.service.entities.Notification;
 import com.msk.automobiles.service.entities.Parts;
 import com.msk.automobiles.service.entities.Service_Adviser;
 import com.msk.automobiles.service.entities.Service_Invoice_Card;
@@ -23,6 +25,7 @@ import com.msk.automobiles.service.pojos.Car_Brands_Pojo;
 import com.msk.automobiles.service.pojos.Car_Models_Pojo;
 import com.msk.automobiles.service.pojos.Customer_Details_Pojo;
 import com.msk.automobiles.service.pojos.Location_Pojo;
+import com.msk.automobiles.service.pojos.Notifcation_Message_Pojo;
 import com.msk.automobiles.service.pojos.Notifcation_Pojo;
 import com.msk.automobiles.service.pojos.Service_Advicer_Pojo;
 import com.msk.automobiles.service.pojos.Service_Type_Pojo;
@@ -315,7 +318,13 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				customer_Details_Pojo.setCustomer_id(customer_Details.get(i).getCustomer_id());
 				customer_Details_Pojo.setFirst_name(customer_Details.get(i).getFirst_name());
 				customer_Details_Pojo.setMobile(customer_Details.get(i).getMobile());
-				customer_Details_Pojo.setGst_no(customer_Details.get(i).getGst_no());
+
+				if (customer_Details.get(i).getGst_no() != null) {
+					customer_Details_Pojo.setGst_no(customer_Details.get(i).getGst_no());
+				} else {
+					customer_Details_Pojo.setGst_no("GST NO NOT AVAILABLE");
+				}
+
 				customer_Details_Pojo.setRegistration_no(customer_Details.get(0).getRegistration_no());
 
 				List<Car_Models> car_Model = get_DAO_Interface
@@ -336,7 +345,35 @@ public class Get_Business_Impl implements Get_Business_Interface {
 
 	public List<Notifcation_Pojo> getServiceNotification() {
 		// TODO Auto-generated method stub
-		return null;
+		List<Notification> notification = get_DAO_Interface.getAllNotificationDetails();
+		List<Notifcation_Pojo> notifcation_Pojos = new ArrayList<Notifcation_Pojo>();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+		if (!notification.isEmpty()) {
+			for (int i = 0; i < notification.size(); i++) {
+				if (notification.get(i).getService_expire_date() == new Date()) 
+				{
+					System.out.println("DATE --> "+notification.get(i).getService_expire_date());
+
+					Notifcation_Message_Pojo notifcation_Pojo = new Notifcation_Message_Pojo();
+					notifcation_Pojo.setNotification_id(Integer.toString(notification.get(i).getId()));
+					notifcation_Pojo.setMessage(message);
+					/*notifcation_Pojo.setCustomer_name(notification.get(i).getCustomer_name());
+					notifcation_Pojo.setMobile(notification.get(i).getMobile());
+					notifcation_Pojo.setDob(dateFormat.format(notification.get(i).getDob()));
+					notifcation_Pojo.setCar_brand(notification.get(i).getCar_brand());
+					notifcation_Pojo.setCar_model(notification.get(i).getCar_model());
+					notifcation_Pojo
+							.setService_expire_date(dateFormat.format(notification.get(i).getService_expire_date()));
+
+					notifcation_Pojos.add(notifcation_Pojo);*/				
+				}
+			}
+		} else {
+
+		}
+
+		return notifcation_Pojos;
 	}
 
 	@Override

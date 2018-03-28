@@ -5,12 +5,9 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,12 +22,12 @@ public class Notification implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-
-	private Customer_Details customer_Details;
-	private Car_Models car_Models;
-	private Service_Invoice_Card service_Invoice_Card;
-
-	private Date expire_date;
+	private String customer_name;
+	private Date dob;
+	private String mobile;
+	private String car_brand;
+	private String car_model;
+	private Date service_expire_date;
 	private Integer view_status;
 	private Date created_date;
 
@@ -39,14 +36,16 @@ public class Notification implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Notification(Integer id, Customer_Details customer_Details, Car_Models car_Models,
-			Service_Invoice_Card service_Invoice_Card, Date expire_date, Integer view_status, Date created_date) {
+	public Notification(Integer id, String customer_name, Date dob, String mobile, String car_brand, String car_model,
+			Date service_expire_date, Integer view_status, Date created_date) {
 		super();
 		this.id = id;
-		this.customer_Details = customer_Details;
-		this.car_Models = car_Models;
-		this.setService_Invoice_Card(service_Invoice_Card);
-		this.expire_date = expire_date;
+		this.customer_name = customer_name;
+		this.dob = dob;
+		this.mobile = mobile;
+		this.car_brand = car_brand;
+		this.car_model = car_model;
+		this.service_expire_date = service_expire_date;
 		this.view_status = view_status;
 		this.created_date = created_date;
 	}
@@ -62,44 +61,60 @@ public class Notification implements Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "customer_details_id")
-	public Customer_Details getCustomer_Details() {
-		return customer_Details;
+	@Column(name = "customer_name")
+	public String getCustomer_name() {
+		return customer_name;
 	}
 
-	public void setCustomer_Details(Customer_Details customer_Details) {
-		this.customer_Details = customer_Details;
+	public void setCustomer_name(String customer_name) {
+		this.customer_name = customer_name;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "model_id")
-	public Car_Models getCar_Models() {
-		return car_Models;
+	@Column(name = "mobile")
+	public String getMobile() {
+		return mobile;
 	}
 
-	public void setCar_Models(Car_Models car_Models) {
-		this.car_Models = car_Models;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "service_invoice_card_id")
-	public Service_Invoice_Card getService_Invoice_Card() {
-		return service_Invoice_Card;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "dob")
+	public Date getDob() {
+		return dob;
 	}
 
-	public void setService_Invoice_Card(Service_Invoice_Card service_Invoice_Card) {
-		this.service_Invoice_Card = service_Invoice_Card;
+	public void setDob(Date dob) {
+		this.dob = dob;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "expire_date")
-	public Date getExpire_date() {
-		return expire_date;
+	@Column(name = "car_brand")
+	public String getCar_brand() {
+		return car_brand;
 	}
 
-	public void setExpire_date(Date expire_date) {
-		this.expire_date = expire_date;
+	public void setCar_brand(String car_brand) {
+		this.car_brand = car_brand;
+	}
+
+	@Column(name = "car_model")
+	public String getCar_model() {
+		return car_model;
+	}
+
+	public void setCar_model(String car_model) {
+		this.car_model = car_model;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "service_expire_date")
+	public Date getService_expire_date() {
+		return service_expire_date;
+	}
+
+	public void setService_expire_date(Date service_expire_date) {
+		this.service_expire_date = service_expire_date;
 	}
 
 	@Column(name = "view_status")
