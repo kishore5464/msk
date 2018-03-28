@@ -1,13 +1,7 @@
 package com.msk.automobiles.service.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.server.mvc.Viewable;
@@ -20,14 +14,6 @@ import com.msk.automobiles.business.interfaces.Get_Business_Interface;
 import com.msk.automobiles.business.interfaces.Insert_Business_Interface;
 import com.msk.automobiles.business.interfaces.Update_Business_Interface;
 import com.msk.automobiles.exception.CustomGenericException;
-import com.msk.automobiles.service.pojos.Car_Brands_Pojo;
-import com.msk.automobiles.service.pojos.Car_Models_Pojo;
-import com.msk.automobiles.service.pojos.Customer_Details_Pojo;
-import com.msk.automobiles.service.pojos.Location_Pojo;
-import com.msk.automobiles.service.pojos.Service_Type_Pojo;
-import com.msk.automobiles.service.pojos.Spare_Parts_Pojo;
-
-import net.minidev.json.JSONObject;
 
 @Configuration
 @PropertySource("classpath:/application_path.properties")

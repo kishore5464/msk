@@ -16,6 +16,7 @@ import com.msk.automobiles.service.entities.Customer_Details;
 import com.msk.automobiles.service.entities.Location;
 import com.msk.automobiles.service.entities.MSK_Owner;
 import com.msk.automobiles.service.entities.Parts;
+import com.msk.automobiles.service.entities.Service_Adviser;
 import com.msk.automobiles.service.entities.Service_Invoice_Card;
 import com.msk.automobiles.service.entities.Service_Type;
 import com.msk.automobiles.service.pojos.Car_Brands_Pojo;
@@ -23,6 +24,7 @@ import com.msk.automobiles.service.pojos.Car_Models_Pojo;
 import com.msk.automobiles.service.pojos.Customer_Details_Pojo;
 import com.msk.automobiles.service.pojos.Location_Pojo;
 import com.msk.automobiles.service.pojos.Notifcation_Pojo;
+import com.msk.automobiles.service.pojos.Service_Advicer_Pojo;
 import com.msk.automobiles.service.pojos.Service_Type_Pojo;
 import com.msk.automobiles.service.pojos.Spare_Parts_Pojo;
 import com.msk.automobiles.util.Encrypt_Decrypt;
@@ -335,6 +337,26 @@ public class Get_Business_Impl implements Get_Business_Interface {
 	public List<Notifcation_Pojo> getServiceNotification() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Service_Advicer_Pojo> getServiceAdvicers() {
+		// TODO Auto-generated method stub
+		List<Service_Adviser> service_advicer_list = get_DAO_Interface.getServiceAdvicers();
+		List<Service_Advicer_Pojo> service_Advicer_Pojos = new ArrayList<Service_Advicer_Pojo>();
+
+		if (!service_advicer_list.isEmpty()) {
+			for (int i = 0; i < service_advicer_list.size(); i++) {
+				Service_Advicer_Pojo advicer_Pojo = new Service_Advicer_Pojo();
+				advicer_Pojo.setId(Integer.toString(service_advicer_list.get(i).getId()));
+				advicer_Pojo.setName(service_advicer_list.get(i).getName());
+				advicer_Pojo.setMobile(service_advicer_list.get(i).getMobile());
+
+				service_Advicer_Pojos.add(advicer_Pojo);
+			}
+		}
+
+		return service_Advicer_Pojos;
 	}
 
 }

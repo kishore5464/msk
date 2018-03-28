@@ -17,6 +17,7 @@ import com.msk.automobiles.service.entities.Customer_Details;
 import com.msk.automobiles.service.entities.Location;
 import com.msk.automobiles.service.entities.MSK_Owner;
 import com.msk.automobiles.service.entities.Parts;
+import com.msk.automobiles.service.entities.Service_Adviser;
 import com.msk.automobiles.service.entities.Service_Invoice_Card;
 import com.msk.automobiles.service.entities.Service_Type;
 
@@ -287,6 +288,19 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 		session.flush();
 		session.close();
 		return customer_Details;
+	}
+
+	@Override
+	public List<Service_Adviser> getServiceAdvicers() {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Service_Adviser ");
+		List<Service_Adviser> service_Advisers = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return service_Advisers;
 	}
 
 }

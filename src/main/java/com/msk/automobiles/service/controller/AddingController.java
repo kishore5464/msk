@@ -79,19 +79,18 @@ public class AddingController {
 
 		Viewable view = null;
 
-		// try {
-		insert_Business_Interface.insertCarModel(brand_id, model, image);
-		List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id, "service");
+		try {
+			insert_Business_Interface.insertCarModel(brand_id, model, image);
+			List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id, "service");
 
-		data.put("models", models);
+			data.put("models", models);
 
-		mix.put("data", data);
+			mix.put("data", data);
 
-		view = new Viewable("/car_models", mix);
-		/*
-		 * } catch (Exception e) { throw new CustomGenericException("" +
-		 * e.hashCode(), e.getMessage()); }
-		 */
+			view = new Viewable("/car_models", mix);
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
 
 		return Response.ok().entity(view).build();
 	}
@@ -135,16 +134,12 @@ public class AddingController {
 		Viewable view = null;
 
 		try {
-			System.out.println(model_id);
-			System.out.println(part);
-			System.out.println(quantity);
-			System.out.println(amount);
 			insert_Business_Interface.insertSparePart(model_id, part, quantity, amount);
 
 			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock("INSTOCK");
-
 			data.put("spare_parts", spare_Parts_Pojos);
 			mix.put("data", data);
+
 			view = new Viewable("/spareparts", mix);
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
@@ -156,8 +151,15 @@ public class AddingController {
 	@POST
 	@Path("/add-service-card")
 	public Response add_service_card(@FormParam("customer_detail_id") String customer_detail_id,
-			@FormParam("service_type_id") String service_type_id, @FormParam("kilometer") String kilometer,
-			@FormParam("service") String service, @Context HttpServletRequest request) {
+			@FormParam("service_type_id") String service_type_id,
+			@FormParam("service_adviser_id") String service_adviser_id, @FormParam("kilometer") String kilometer,
+			@FormParam("service_detail") String service_detail, @FormParam("tool_kit") String tool_kit,
+			@FormParam("spare_wheel") String spare_wheel, @FormParam("jack") String jack,
+			@FormParam("jack_handler") String jack_handler, @FormParam("car_perfume") String car_perfume,
+			@FormParam("clock") String clock, @FormParam("cd_player") String cd_player,
+			@FormParam("submit_type") String submit_type, @FormParam("service_expire_date") String service_expire_date,
+			@Context HttpServletRequest request) {
+
 		String status = null;
 
 		try {

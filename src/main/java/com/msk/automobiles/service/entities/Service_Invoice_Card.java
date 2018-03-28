@@ -31,8 +31,11 @@ public class Service_Invoice_Card implements Serializable {
 
 	private Integer id;
 	private String service_id;
+
 	private Customer_Details customer_Details;
 	private Service_Type service_Type;
+	private Service_Adviser service_Adviser;
+
 	private String service_detail;
 	private String tool_kit;
 	private String spare_wheel;
@@ -46,6 +49,7 @@ public class Service_Invoice_Card implements Serializable {
 	private Card_Status card_status;
 	private Date current_service_date;
 	private Date service_expire_date;
+	private Double total_amount;
 	private Date created_date;
 
 	private Set<Notification> notifications = new HashSet<Notification>();
@@ -55,15 +59,16 @@ public class Service_Invoice_Card implements Serializable {
 	}
 
 	public Service_Invoice_Card(Integer id, String service_id, Customer_Details customer_Details,
-			Service_Type service_Type, String service_detail, String tool_kit, String spare_wheel, String jack,
-			String jack_handler, String car_perfume, String clock, String cd_player, Integer kilometer,
-			Card_Type card_type, Card_Status card_status, Date current_service_date, Date service_expire_date,
-			Date created_date, Set<Notification> notifications) {
+			Service_Type service_Type, Service_Adviser service_Adviser, String service_detail, String tool_kit,
+			String spare_wheel, String jack, String jack_handler, String car_perfume, String clock, String cd_player,
+			Integer kilometer, Card_Type card_type, Card_Status card_status, Date current_service_date,
+			Date service_expire_date, Double total_amount, Date created_date, Set<Notification> notifications) {
 		super();
 		this.id = id;
 		this.service_id = service_id;
 		this.customer_Details = customer_Details;
 		this.service_Type = service_Type;
+		this.setService_Adviser(service_Adviser);
 		this.service_detail = service_detail;
 		this.tool_kit = tool_kit;
 		this.spare_wheel = spare_wheel;
@@ -77,8 +82,9 @@ public class Service_Invoice_Card implements Serializable {
 		this.card_status = card_status;
 		this.current_service_date = current_service_date;
 		this.service_expire_date = service_expire_date;
+		this.total_amount = total_amount;
 		this.created_date = created_date;
-		this.setNotifications(notifications);
+		this.notifications = notifications;
 	}
 
 	@Id
@@ -119,6 +125,16 @@ public class Service_Invoice_Card implements Serializable {
 
 	public void setService_Type(Service_Type service_Type) {
 		this.service_Type = service_Type;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "service_adviser_id")
+	public Service_Adviser getService_Adviser() {
+		return service_Adviser;
+	}
+
+	public void setService_Adviser(Service_Adviser service_Adviser) {
+		this.service_Adviser = service_Adviser;
 	}
 
 	@Column(name = "service_detail")
@@ -240,6 +256,15 @@ public class Service_Invoice_Card implements Serializable {
 
 	public void setService_expire_date(Date service_expire_date) {
 		this.service_expire_date = service_expire_date;
+	}
+
+	@Column(name = "total_amount")
+	public Double getTotal_amount() {
+		return total_amount;
+	}
+
+	public void setTotal_amount(Double total_amount) {
+		this.total_amount = total_amount;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

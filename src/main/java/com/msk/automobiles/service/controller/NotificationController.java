@@ -42,6 +42,7 @@ public class NotificationController {
 
 		try {
 			List<Notifcation_Pojo> notifications = get_Business_Interface.getServiceNotification();
+			data.put("notification", notifications);
 			mix.put("data", data);
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
