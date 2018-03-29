@@ -8,6 +8,7 @@ import com.msk.automobiles.service.pojos.Customer_Details_Pojo;
 import com.msk.automobiles.service.pojos.Location_Pojo;
 import com.msk.automobiles.service.pojos.Notifcation_Pojo;
 import com.msk.automobiles.service.pojos.Service_Advicer_Pojo;
+import com.msk.automobiles.service.pojos.Service_Card_Pojo;
 import com.msk.automobiles.service.pojos.Service_Type_Pojo;
 import com.msk.automobiles.service.pojos.Spare_Parts_Pojo;
 
@@ -40,5 +41,7 @@ public interface Get_Business_Interface {
 	List<Notifcation_Pojo> getServiceNotification();
 
 	List<Service_Advicer_Pojo> getServiceAdvicers();
+
+	Service_Card_Pojo getCustomerDetail(String customer_id);
 
 }

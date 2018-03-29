@@ -14,6 +14,7 @@ import com.msk.automobiles.dao.interfaces.Get_DAO_Interface;
 import com.msk.automobiles.dao.interfaces.Update_DAO_Interface;
 import com.msk.automobiles.service.entities.Car_Brands;
 import com.msk.automobiles.service.entities.Car_Models;
+import com.msk.automobiles.service.entities.Customer_Contact_Details;
 import com.msk.automobiles.service.entities.Customer_Details;
 import com.msk.automobiles.service.entities.Location;
 import com.msk.automobiles.service.entities.MSK_Owner;
@@ -28,6 +29,7 @@ import com.msk.automobiles.service.pojos.Customer_Details_Pojo;
 import com.msk.automobiles.service.pojos.Location_Pojo;
 import com.msk.automobiles.service.pojos.Notifcation_Pojo;
 import com.msk.automobiles.service.pojos.Service_Advicer_Pojo;
+import com.msk.automobiles.service.pojos.Service_Card_Pojo;
 import com.msk.automobiles.service.pojos.Service_Type_Pojo;
 import com.msk.automobiles.service.pojos.Spare_Parts_Pojo;
 import com.msk.automobiles.util.Encrypt_Decrypt;
@@ -333,8 +335,13 @@ public class Get_Business_Impl implements Get_Business_Interface {
 
 				List<Service_Invoice_Card> service_Invoice_Cards = get_DAO_Interface
 						.getSericeInvoiceCard(customer_Details.get(i).getId());
-				customer_Details_Pojo.setExpire_service_date(dateFormat
-						.format(service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getService_expire_date()));
+
+				if (!service_Invoice_Cards.isEmpty()) {
+					customer_Details_Pojo.setExpire_service_date(dateFormat.format(
+							service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getService_expire_date()));
+				} else {
+					customer_Details_Pojo.setExpire_service_date("SERVICE EXPIRE DATE NOT AVAILABLE");
+				}
 
 				customer_Details_Pojos.add(customer_Details_Pojo);
 			}
@@ -402,6 +409,77 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		}
 
 		return service_Advicer_Pojos;
+	}
+
+	@Override
+	public Service_Card_Pojo getCustomerDetail(String customer_id) {
+		// TODO Auto-generated method stub
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Service_Card_Pojo service_Card_Pojo = new Service_Card_Pojo();
+
+		List<Customer_Details> customer_Details_List = get_DAO_Interface.getCustomerDetailById(customer_id);
+
+		if (!customer_Details_List.isEmpty()) {
+
+			service_Card_Pojo.setCustomer_id(customer_Details_List.get(0).getCustomer_id());
+			service_Card_Pojo.setName(
+					customer_Details_List.get(0).getFirst_name() + " " + customer_Details_List.get(0).getLast_name());
+			service_Card_Pojo.setMobile(customer_Details_List.get(0).getMobile());
+			service_Card_Pojo.setRegistration_no(customer_Details_List.get(0).getRegistration_no());
+
+			if (customer_Details_List.get(0).getEngine_no() != null) {
+				service_Card_Pojo.setEngine_no(customer_Details_List.get(0).getEngine_no());
+			} else {
+				service_Card_Pojo.setEngine_no("not available");
+			}
+
+			if (customer_Details_List.get(0).getPolicy_expires_date() != null) {
+				service_Card_Pojo.setPolicy_expires_date(
+						dateFormat.format(customer_Details_List.get(0).getPolicy_expires_date()));
+			} else {
+				service_Card_Pojo.setPolicy_expires_date("not available");
+			}
+
+			service_Card_Pojo.setGst_no(customer_Details_List.get(0).getGst_no());
+
+			List<Customer_Contact_Details> customer_contact_details = get_DAO_Interface
+					.getCustomerContactDetails(customer_Details_List.get(0).getId());
+			if (!customer_contact_details.isEmpty()) {
+
+				if (customer_contact_details.get(0).getAddress_line_2() != null) {
+					service_Card_Pojo.setAddress_line(customer_contact_details.get(0).getAddress_line_1() + ", "
+							+ customer_contact_details.get(0).getAddress_line_2());
+				} else {
+					service_Card_Pojo.setAddress_line(customer_contact_details.get(0).getAddress_line_1());
+				}
+
+				service_Card_Pojo.setCity(
+						get_DAO_Interface.getLocationByCityId(customer_contact_details.get(0).getLocation().getId()));
+				service_Card_Pojo.setPincode(Integer.toString(customer_contact_details.get(0).getPincode()));
+			}
+
+			List<Service_Invoice_Card> service_Invoice_Cards = get_DAO_Interface.getServiceInvoiceCards();
+
+			if (!service_Invoice_Cards.isEmpty()) {
+				System.out.println("id ---> " + service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId());
+				if (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() < 9) {
+					service_Card_Pojo.setInvoice_no(
+							"MSKS00" + (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() + 1));
+				} else if (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() >= 9
+						&& service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() < 99) {
+					service_Card_Pojo.setInvoice_no(
+							"MSKS0" + (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() + 1));
+				} else if (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() >= 99
+						&& service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() < 999) {
+					service_Card_Pojo.setInvoice_no(
+							"MSKS" + (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() + 1));
+				}
+			} else {
+				service_Card_Pojo.setInvoice_no("MSKS001");
+			}
+		}
+
+		return service_Card_Pojo;
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.msk.automobiles.service.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.glassfish.jersey.server.mvc.Viewable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +24,7 @@ import com.msk.automobiles.exception.CustomGenericException;
 import com.msk.automobiles.service.pojos.Car_Brands_Pojo;
 import com.msk.automobiles.service.pojos.Car_Models_Pojo;
 import com.msk.automobiles.service.pojos.Service_Card_Pojo;
+import com.msk.automobiles.service.pojos.Service_Parts_Pojo;
 import com.msk.automobiles.service.pojos.Spare_Parts_Pojo;
 
 import net.minidev.json.JSONObject;
@@ -33,7 +36,6 @@ import net.minidev.json.JSONObject;
 public class AddingController {
 
 	// HERE I WROTE SERVLET FOR ADDING BRAND, MODEL, PARTS, CUSTOMER DETAILS
-
 	@Autowired
 	Get_Business_Interface get_Business_Interface;
 
@@ -164,11 +166,27 @@ public class AddingController {
 
 		try {
 
+			ObjectMapper mapper = new ObjectMapper();
+
+			String[] service_detail_Array = service_detail.replace("[", "").replace("]", "").replace("},{", "},;{")
+					.split(";");
+
+			List<Service_Parts_Pojo> service_Parts_Pojos = new ArrayList<Service_Parts_Pojo>();
+
+			for (int i = 0; i < service_detail_Array.length; i++) {
+				String value = service_detail_Array[i];
+				Service_Parts_Pojo service_Parts_Pojo = mapper.readValue(value, Service_Parts_Pojo.class);
+
+				service_Parts_Pojos.add(service_Parts_Pojo);
+			}
+
 			status = "success";
+
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
 		}
 
 		return Response.ok().entity(status).build();
 	}
+
 }

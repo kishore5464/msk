@@ -6,7 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html lang="en"><head>
   <meta charset="utf-8">
-  <title>Bike</title>
+  <title>MSK Automotive</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,8 +39,11 @@ padding: 4px 6px;
 <body>
 <%@include file="/WEB-INF/common/header.jsp"%>
 
+<h5>${it.data}</h5>
+
 <div class="">
-	<h3 style="color:blue;text-align:center">Job Card - MSK Automotive</h3>
+	<h3 style="color:blue;" align="center"><span style="padding-left: 232px;">Job Card - MSK Automotive </span><span style="padding-right: 33px;font-size: 20px;" class="pull-right">Service No: ${it.data.customer_detail.invoice_no}</span></h3>
+	<h1 align="right"></h1>
 
 
 <div class= "col-lg-12 col-xs-12" style="border: 1px solid #5757e8; border-radius: 10px;">
@@ -59,11 +62,11 @@ padding: 4px 6px;
 <div class="col-lg-6 col-xs-6" style="border-left:1px solid blue">
 <p>Customer Detail :</p>
 
-<p>Deva, +91 9790012217</p>
-<p>2/204 North Street, Chennai-600258</p>	
-<p>Reg No: 34567889</p>
-<p>Engine No: 34567889</p>
-<p>Kms: 234</p>
+<p>${it.data.customer_detail.name}, +91 ${it.data.customer_detail.mobile}</p>
+<p>${it.data.customer_detail.address_line}, ${it.data.customer_detail.city} - ${it.data.customer_detail.pincode}</p>	
+<p>Reg No: ${it.data.customer_detail.registration_no}</p>
+<p>Engine No: <span class="engNo">${it.data.customer_detail.engine_no}</span></p>
+<p>Kms: <input type="text" name="kms"></p>
 
 </div>
 </div>
@@ -328,6 +331,15 @@ padding: 4px 6px;
 <button type="button" class="choose">Close</button>
 <button type="button" class="choose">Submit</button>
 <button type="button" class="choose">Print</button>
+<script>
+$(document).ready(function(){
+	
+	if($(".engNo").text() == "not available"){
+		$(".engNo").text('');
+		$(".engNo").append('<input type="text" name="engineNo">');
+	}
+});
 
+</script>
 </body>
 </html>

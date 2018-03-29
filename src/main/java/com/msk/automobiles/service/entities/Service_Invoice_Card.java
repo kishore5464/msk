@@ -102,7 +102,7 @@ public class Service_Invoice_Card implements Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "customer_details_id")
+	@JoinColumn(name = "customer_details_id", nullable = false)
 	public Customer_Details getCustomer_Details() {
 		return customer_Details;
 	}

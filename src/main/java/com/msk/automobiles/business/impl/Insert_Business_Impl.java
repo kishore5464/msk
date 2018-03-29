@@ -102,84 +102,94 @@ public class Insert_Business_Impl implements Insert_Business_Interface {
 			String address_line_2, String location_id, String pincode) {
 		// TODO Auto-generated method stub
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
 		Service_Card_Pojo service_Card_Pojo = new Service_Card_Pojo();
 
-		List<Customer_Details> customer = get_DAO_Interface.getAllCustomerDetails();
-		Customer_Details customer_Details = new Customer_Details();
+		List<Customer_Details> customer_Details_List = get_DAO_Interface.getCustomerRegistrationNo(registration_no);
 
-		Car_Models car_Models = new Car_Models();
-		car_Models.setId(Integer.parseInt(model_id));
+		if (customer_Details_List.isEmpty()) {
+			Customer_Details customer_Details = new Customer_Details();
 
-		customer_Details.setCar_Models(car_Models);
+			Car_Models car_Models = new Car_Models();
+			car_Models.setId(Integer.parseInt(model_id));
 
-		if (!customer.isEmpty()) {
-			if (customer.get(customer.size() - 1).getId() <= 9) {
-				customer_Details.setCustomer_id("MSK 00" + customer.get(customer.size() - 1).getId());
-			} else if (customer.get(customer.size() - 1).getId() >= 10
-					&& customer.get(customer.size() - 1).getId() <= 99) {
-				customer_Details.setCustomer_id("MSK 0" + customer.get(customer.size() - 1).getId());
-			} else if (customer.get(customer.size() - 1).getId() >= 100
-					&& customer.get(customer.size() - 1).getId() <= 999) {
-				customer_Details.setCustomer_id("MSK " + customer.get(customer.size() - 1).getId());
+			customer_Details.setCar_Models(car_Models);
+
+			List<Customer_Details> customer = get_DAO_Interface.getAllCustomerDetails();
+
+			if (!customer.isEmpty()) {
+				if (customer.get(customer.size() - 1).getId() <= 9) {
+					customer_Details.setCustomer_id("MSKC00" + customer.get(customer.size() - 1).getId());
+				} else if (customer.get(customer.size() - 1).getId() >= 10
+						&& customer.get(customer.size() - 1).getId() <= 99) {
+					customer_Details.setCustomer_id("MSKC0" + customer.get(customer.size() - 1).getId());
+				} else if (customer.get(customer.size() - 1).getId() >= 100
+						&& customer.get(customer.size() - 1).getId() <= 999) {
+					customer_Details.setCustomer_id("MSKC" + customer.get(customer.size() - 1).getId());
+				}
+			} else {
+				customer_Details.setCustomer_id("MSKC001");
 			}
-		} else {
-			customer_Details.setCustomer_id("MSK 001");
-		}
 
-		customer_Details.setFirst_name(first_name);
-		customer_Details.setLast_name(last_name);
-		customer_Details.setMobile(mobile);
-		customer_Details.setEmail(email);
-		try {
-			customer_Details.setDob(dateFormat.parse(dob));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		customer_Details.setRegistration_no(registration_no);
-		customer_Details.setGst_no(gst_no);
+			customer_Details.setFirst_name(first_name);
+			customer_Details.setLast_name(last_name);
+			customer_Details.setMobile(mobile);
+			customer_Details.setEmail(email);
 
-		Customer_Contact_Details customer_Contact_Details = new Customer_Contact_Details();
-
-		Location location = new Location();
-		location.setId(Integer.parseInt(location_id));
-		customer_Contact_Details.setLocation(location);
-
-		customer_Contact_Details.setAddress_line_1(address_line_1);
-		customer_Contact_Details.setAddress_line_2(address_line_2);
-		customer_Contact_Details.setPincode(Integer.parseInt(pincode));
-
-		insert_DAO_Interface.insertCustomerDetails(customer_Details, customer_Contact_Details);
-
-		service_Card_Pojo.setAddress_line_1(address_line_1);
-		service_Card_Pojo.setAddress_line_2(address_line_2);
-		service_Card_Pojo.setCity(get_DAO_Interface.getLocationByCityId(location_id));
-		service_Card_Pojo.setFirst_name(first_name);
-		service_Card_Pojo.setGst_no(gst_no);
-
-		List<Service_Invoice_Card> service_Invoice_Cards = get_DAO_Interface.getServiceInvoiceCards();
-
-		if (!service_Invoice_Cards.isEmpty()) {
-			if (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() <= 9) {
-				service_Card_Pojo
-						.setInvoice_no("MSK 00" + service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId());
-			} else if (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() >= 10
-					&& service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() <= 99) {
-				service_Card_Pojo
-						.setInvoice_no("MSK 0" + service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId());
-			} else if (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() >= 100
-					&& service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() <= 999) {
-				service_Card_Pojo
-						.setInvoice_no("MSK " + service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId());
+			try {
+				customer_Details.setDob(dateFormat.parse(dob));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} else {
-			service_Card_Pojo.setInvoice_no("MSK 001");
-		}
 
-		service_Card_Pojo.setMobile(mobile);
-		service_Card_Pojo.setPincode(pincode);
-		service_Card_Pojo.setRegistration_no(registration_no);
+			customer_Details.setRegistration_no(registration_no);
+			customer_Details.setGst_no(gst_no);
+
+			Customer_Contact_Details customer_Contact_Details = new Customer_Contact_Details();
+
+			Location location = new Location();
+			location.setId(Integer.parseInt(location_id));
+			customer_Contact_Details.setLocation(location);
+
+			customer_Contact_Details.setAddress_line_1(address_line_1);
+			customer_Contact_Details.setAddress_line_2(address_line_2);
+			customer_Contact_Details.setPincode(Integer.parseInt(pincode));
+
+			insert_DAO_Interface.insertCustomerDetails(customer_Details, customer_Contact_Details);
+
+			if (address_line_2 != null) {
+				service_Card_Pojo.setAddress_line(address_line_1 + ", " + address_line_2);
+			} else {
+				service_Card_Pojo.setAddress_line(address_line_1);
+			}
+
+			service_Card_Pojo.setCity(get_DAO_Interface.getLocationByCityId(Integer.parseInt(location_id)));
+			service_Card_Pojo.setName(first_name + " " + last_name);
+			service_Card_Pojo.setGst_no(gst_no);
+
+			List<Service_Invoice_Card> service_Invoice_Cards = get_DAO_Interface.getServiceInvoiceCards();
+
+			if (!service_Invoice_Cards.isEmpty()) {
+				if (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() <= 9) {
+					service_Card_Pojo.setInvoice_no(
+							"MSKS00" + service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId());
+				} else if (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() >= 10
+						&& service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() <= 99) {
+					service_Card_Pojo.setInvoice_no(
+							"MSKS0" + service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId());
+				} else if (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() >= 100
+						&& service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() <= 999) {
+					service_Card_Pojo.setInvoice_no(
+							"MSKS" + service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId());
+				}
+			} else {
+				service_Card_Pojo.setInvoice_no("MSKS001");
+			}
+
+			service_Card_Pojo.setMobile(mobile);
+			service_Card_Pojo.setPincode(pincode);
+			service_Card_Pojo.setRegistration_no(registration_no);
+		}
 
 		return service_Card_Pojo;
 	}
@@ -187,18 +197,33 @@ public class Insert_Business_Impl implements Insert_Business_Interface {
 	@Override
 	public void insertSparePart(String model_id, String part, String quantity, String amount) {
 		// TODO Auto-generated method stub
-		Parts parts = new Parts();
+		List<Parts> parts_List = get_DAO_Interface.getSparePartsAtParticularModelParts(Integer.parseInt(model_id),
+				part);
+		if (!parts_List.isEmpty()) {
+			Car_Models car_Models = new Car_Models();
+			car_Models.setId(parts_List.get(0).getCar_Models().getId());
 
-		Car_Models car_Models = new Car_Models();
-		car_Models.setId(Integer.parseInt(model_id));
+			parts_List.get(0).setCar_Models(car_Models);
+			parts_List.get(0).setPart(part);
+			parts_List.get(0).setQuantity(Integer.parseInt(quantity));
+			parts_List.get(0).setParts_status(Stock_Status.INSTOCK);
+			parts_List.get(0).setAmount(Double.parseDouble(amount));
 
-		parts.setCar_Models(car_Models);
-		parts.setPart(part);
-		parts.setQuantity(Integer.parseInt(quantity));
-		parts.setAmount(Double.parseDouble(amount));
-		parts.setParts_status(Stock_Status.INSTOCK);
+			update_DAO_Interface.updateSparePartsInStock(parts_List.get(0));
+		} else {
+			Parts parts = new Parts();
 
-		insert_DAO_Interface.insertSparePart(parts);
+			Car_Models car_Models = new Car_Models();
+			car_Models.setId(Integer.parseInt(model_id));
+
+			parts.setCar_Models(car_Models);
+			parts.setPart(part);
+			parts.setQuantity(Integer.parseInt(quantity));
+			parts.setAmount(Double.parseDouble(amount));
+			parts.setParts_status(Stock_Status.INSTOCK);
+
+			insert_DAO_Interface.insertSparePart(parts);
+		}
 	}
 
 	@Override

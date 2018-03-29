@@ -144,7 +144,7 @@
 		});
 		$(".service_details_btn").click(function(){
 			$(".view_service_details").show();
-			$(".service_details_btn").hide();
+			//$(".service_details_btn").hide();
 			$(".close_btn").show();
 		});	
 		$(".close_btn").click(function(){
@@ -415,7 +415,7 @@
 		            <th>Registration No</th>
 		            <th>Last Service</th>
 		            <th>GST</th>
-		            <th>Button</th>
+		            <th>View</th>
 		        </tr>
 		    </thead>
 		    <tbody>
@@ -429,7 +429,7 @@
 		            <td>${customer.gst_no}</td>
 		            <td>
 						<center>
-							<button class="btn btn-info service_details_btn" >Next Service</button>
+						<button class="btn btn-info service_details_btn" >Next Service</button>
 						</center>
 					</td>
 				</tr>
@@ -440,5 +440,23 @@
 		 
 	</div>
 </div>	
+<form action="msk/service-card" method="post">
+<input type="hidden" name="customer_id" value="" class="cusId">
+<input type="submit" class="serviceCard" style="display: none;">
+
+</form>
+<script>
+$(document).ready(function(){
+	
+	$(".service_details_btn").click(function(){
+		var id=$(this).closest("tr").find("td:eq(0)").text();
+		$(".cusId").val(id);
+		$(".serviceCard").trigger("click");
+	});
+	
+});
+
+</script>
+
 </body>    
 </html>

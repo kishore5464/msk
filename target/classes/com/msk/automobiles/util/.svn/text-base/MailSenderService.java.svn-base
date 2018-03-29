@@ -1,0 +1,240 @@
+
+package com.fbt.talentex.jobseeker.util;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.velocity.app.VelocityEngine;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.velocity.VelocityEngineUtils;
+
+import com.fbt.talentex.jobseeker.dao.entities.User;
+
+@Configuration
+@PropertySource("classpath:/application_path.properties")
+@Service
+public class MailSenderService {
+	
+	@Autowired
+	Environment environment;
+
+	@Autowired
+	private JavaMailSender mailSender;
+
+	@Autowired
+	VelocityEngine velocityEngine;
+	
+	private final String fromEmailAddress = "info@talentex.in";
+
+	public void sendForgetPassword(final String toEmailAddress, final String passWord)
+	{
+		final String subject = "TalentEx-Reset Password";
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true);
+				message.setTo(toEmailAddress);
+				message.setFrom(new InternetAddress(fromEmailAddress));
+				message.setSubject(subject);
+				Map<String, String> model = new HashMap<String, String>();
+				model.put("toaddress", toEmailAddress);
+				model.put("password", passWord);
+				String body = VelocityEngineUtils.
+						mergeTemplateIntoString(
+								velocityEngine, "./templates/forgetPasswordEmailTemplate.vm", "UTF-8", model);
+				message.setText(body, true);
+
+			}
+		}; 
+		this.mailSender.send(preparator);
+	}
+
+	public void sendMailVerificationLink(final String toAddress,final String accessCode, final String firstName,final Integer userid){
+		final String subject = "TalentEx-Email Verification Link";
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				byte[]   idEncoded = Base64.encodeBase64(accessCode.getBytes());
+				String verifyLink="http://talentex.in/access?email="+toAddress+"&accessid="+new String(idEncoded )+"&ref="+userid+"";
+
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true);
+				message.setTo(toAddress);
+				message.setFrom(new InternetAddress(fromEmailAddress));
+				message.setSubject(subject);
+				Map<String, String> model = new HashMap<String, String>();
+				model.put("toaddress", toAddress);
+				model.put("link", verifyLink);
+				model.put("name", firstName);
+				String body = VelocityEngineUtils.
+						mergeTemplateIntoString(
+								velocityEngine, "./templates/welcome.vm", "UTF-8", model);
+				message.setText(body, true);
+			}
+		}; 
+		this.mailSender.send(preparator);
+	}
+
+	
+	public void feedbackMail(final String name,final String company,final String email,final String phone, final String comment)
+	{
+		final String subject = "TalentEx-FeedBack";
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				String[] ccid={"vignesh.b@fbtech.in","karthik@fbtech.in"};
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true);
+				message.setTo("fbtvignesh.b@gmail.com");
+				message.setBcc(ccid);
+				
+				message.setFrom(new InternetAddress(fromEmailAddress));
+				message.setSubject(subject);
+				Map<String, String> model = new HashMap<String, String>();
+				model.put("name", name);
+				model.put("company", company);
+				model.put("mail", email);
+				model.put("phone", phone);
+				model.put("comment",comment);
+				String body = VelocityEngineUtils.
+						mergeTemplateIntoString(
+								velocityEngine, "./templates/feedback.vm", "UTF-8", model);
+				message.setText(body, true);
+
+			}
+		}; 
+		this.mailSender.send(preparator);
+	}
+	
+	public void socailLink(final String refmailid,final String link,final String name,final String content)
+	{
+		try{
+		final String subject = "Invitation to join TalentEx";
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+//				String[] ccid={"vignesh.b@fbtech.in","karthik@fbtech.in"};
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true);
+				message.setTo(refmailid);
+//				message.setBcc(ccid);
+				message.setFrom(new InternetAddress(fromEmailAddress));
+				message.setSubject(subject);
+				Map<String, String> model = new HashMap<String, String>();
+				model.put("name",name);
+				model.put("link", link);
+				model.put("message", content);
+				String body = VelocityEngineUtils.
+						mergeTemplateIntoString(
+								velocityEngine, "./templates/socailshare.vm", "UTF-8", model);
+				message.setText(body, true);
+
+			}
+		}; 
+		this.mailSender.send(preparator);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void loginreport(final List<User> userobj,final String mobile,final Integer jsid)
+	{
+		final String subject = "FBT"+jsid+"-"+userobj.get(0).getFirstName()+"-"+new Date()+"";
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true);
+				message.setTo("talentex.report@gmail.com");
+				message.setFrom(new InternetAddress(fromEmailAddress));
+				message.setSubject(subject);
+				Map<String, String> model = new HashMap<String, String>();
+				model.put("name",userobj.get(0).getFirstName()+" "+userobj.get(0).getLastName());
+				model.put("email", userobj.get(0).getUsername());
+				model.put("mobile", mobile);
+				model.put("datetime",""+new Date());
+				model.put("userid", "FRID"+jsid);
+				String body = VelocityEngineUtils.
+						mergeTemplateIntoString(
+								velocityEngine, "./templates/loginreport.vm", "UTF-8", model);
+				message.setText(body, true);
+			}
+		}; 
+		this.mailSender.send(preparator);
+	}
+	
+	
+	
+public void sendFinishMail(final String toAddress,final String firstName,final String password,final String regType){
+		
+		final String subject = "Welcome to TalentEx";
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true);
+				message.setTo(toAddress);
+				message.setFrom(new InternetAddress(fromEmailAddress));
+				message.setSubject(subject);
+				Map<String, String> model = new HashMap<String, String>();
+				model.put("name", firstName);
+				
+				if(regType.equalsIgnoreCase("nbc001")){
+					
+					byte[]   emailEncoded = Base64.encodeBase64(toAddress.getBytes());
+					byte[]   passEncoded = Base64.encodeBase64(password.getBytes());
+					String link="http://talentex.in/psyexam/?loginAuth="+new String(emailEncoded)+"&loginAuthKey="
+					+new String(passEncoded)+"";
+					model.put("psylink", link);
+					String body = VelocityEngineUtils.
+							mergeTemplateIntoString(
+									velocityEngine, "./templates/profileCompleteNbc.vm", "UTF-8", model);
+					message.setText(body, true);
+
+				}else{
+					String body = VelocityEngineUtils.
+							mergeTemplateIntoString(
+									velocityEngine, "./templates/profileCompleteTemplate.vm", "UTF-8", model);
+					message.setText(body, true);
+				}
+
+			}
+		}; 
+		this.mailSender.send(preparator);
+	}
+
+public void sendExamVerificationLink(final String toAddress,final String accessCode, final String firstName){
+	final String subject = "TalentEx - Exam AccessCode";
+	MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
+		public void prepare(MimeMessage mimeMessage) throws Exception {
+			MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true);
+			message.setTo(toAddress);
+			message.setFrom(new InternetAddress(fromEmailAddress));
+			message.setSubject(subject);
+			Map<String, String> model = new HashMap<String, String>();
+			model.put("toaddress", toAddress);
+			model.put("code", accessCode);  
+			model.put("name", firstName);
+			String body = VelocityEngineUtils.
+					mergeTemplateIntoString(
+							velocityEngine, "./templates/examAccessCode.vm", "UTF-8", model);
+			message.setText(body, true);
+		}
+	}; 
+	this.mailSender.send(preparator);
+}
+	
+
+	
+}
+

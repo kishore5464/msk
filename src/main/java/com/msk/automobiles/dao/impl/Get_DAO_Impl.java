@@ -203,11 +203,11 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 	}
 
 	@Override
-	public String getLocationByCityId(String location_id) {
+	public String getLocationByCityId(Integer location_id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
-		Query query = session.createQuery(" from Location ");
+		Query query = session.createQuery(" from Location where id = '" + location_id + "'");
 		List<Location> locations = query.list();
 		String city = null;
 
@@ -315,6 +315,32 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 		session.flush();
 		session.close();
 		return notifications;
+	}
+
+	@Override
+	public List<Customer_Details> getCustomerRegistrationNo(String registration_no) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Customer_Details where registration_no = '" + registration_no + "'");
+		List<Customer_Details> customer_Details = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return customer_Details;
+	}
+
+	@Override
+	public List<Customer_Details> getCustomerDetailById(String customer_id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Customer_Details where customer_id = '" + customer_id + "'");
+		List<Customer_Details> customer_Details = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return customer_Details;
 	}
 
 }
