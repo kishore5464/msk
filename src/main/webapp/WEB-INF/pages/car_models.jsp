@@ -39,14 +39,20 @@
     	$(".choose").click(function(){
     		
     		$("#myModal").modal("show");
-    		modelsId=$(this).prev('span').text();
+    		brandId=$(this).prev('span').text();
+    		modelId=$(this).prev('span').prev('span').text();
+    		
     	});
     	
     	$(".upload").click(function(){
 		$("#image").val($("#textAreaFileContents").text());
-		console.log("image--"+$("#textAreaFileContents").text());
-		console.log("id---"+modelsId);
-		$(".brandid").val(modelsId);
+
+		$(".brandid").val(brandId);
+		$('.modalid').val(modelId);
+		
+		
+		/* modelid */
+		
 		$("#subImage").trigger("click");
     	});
     		
@@ -123,10 +129,9 @@
 
 <div class="col-lg-12">
 <div class="container">
-
 <c:forEach var="models" varStatus="counter"  items="${it.data.models}">
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2 col-xl-4 card grid-item">
-      <div class="thumbnail car_models">
+      <div class="thumbnail car_models" id="${models.model_id}">
          <c:if test="${models.image == 'noimage'}">
          <img class="" style="max-height:100px" src="http://personalityanalysistest.com/template/images/logo.png">
          </c:if>
@@ -134,12 +139,12 @@
         <img class="zz" style="height:100px" src="${models.image}">
         </c:if>
         <div class="caption">
-          <h5 id="thumbnail-label" class="models_name">${models.model}</h5>
+          <h5 id="thumbnail-label" class="models_name" title="${models.model}">${models.model}</h5>
         </div>
       </div>
       <span id="models_id" style="display:none">${models.model_id}</span>
       <span id="brand_id" style="display:none">${models.brand_id}</span>
-   <button type="button" class="choose">Choose Image</button>
+   <!-- <button type="button" class="choose">Choose Image</button> -->
     </div>
 </c:forEach>
 
@@ -159,32 +164,6 @@
 </div>
 
 
-
-<!-- Modal content-->
-	<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-         <input id="inputFileToLoad" type="file" onchange="loadImageFileAsURL();" />
-<input type="hidden" id="textAreaFileContents" name="companyLogo" />
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default upload" data-dismiss="modal">Upload</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-  
-  
-  
-  
  <div class="modal fade" id="addcarmyModal" role="dialog">
     <div class="modal-dialog">
     
@@ -195,7 +174,7 @@
           <h4 class="modal-title">Add Car Modal</h4>
         </div>
         
-        <form action="msk/add-car-model" method="POST">
+       <form action="msk/add-car-model" method="POST">
         <div class="modal-body">
         
         <input type="text" style="display:none" name="brand_id"  value="${it.data.brand_id}">
@@ -215,8 +194,9 @@
           
         </div>
         <div class="modal-footer">
-        <button type="submit" style="display:none" class="btn btn-default submit_logo">Upload</button>
-          <button type="button" class="btn btn-default newcar_upload">Uploadddd</button>
+         <input type="submit" style="display:none" class="submit_logo">
+           
+          <button type="button" class="btn btn-default newcar_upload">Upload</button>
         </div>
         </form>
       </div>
@@ -239,9 +219,15 @@
 
     </form>
 <form  method="POST" action="msk/upload-model" style="display: none;">
-		 <input type="hidden" name="models_id" class="modelsid" value="">
+		 <input type="hidden" name="model_id" class="modalid" value="">
+		 <input type="hidden" name="brand_id" class="brandid">
 		  <input type="hidden" name="image" id="image" value=""> 
-			<input type="submit" id="subImage" > 
+			 <input type="submit" id="subImage" > 
+    </form>
+    
+    <form action="msk/customer-detail" method="post" style="display:none">
+    <input type="text" name="modal_id" id="modalid">
+    <input type="submit" class="modalid_submit">
     </form>
     
 <script type="text/javascript">
@@ -254,9 +240,19 @@ $(document).ready(function(){
 	
 	console.log("triggggggggggggggggggggg");
 
-	$('.submit_logo').trigger('click');
+   $('.submit_logo').trigger('click');
 	
-	});
+	})
+	
+	$('.car_models').click(function(){
+		
+		$('#modalid').val($(this).attr('id'));
+		
+		$('.modalid_submit').trigger('click');
+		
+		
+		
+	})
 	
 	
 });

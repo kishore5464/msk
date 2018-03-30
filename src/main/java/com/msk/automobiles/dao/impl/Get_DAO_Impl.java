@@ -16,7 +16,9 @@ import com.msk.automobiles.service.entities.Customer_Contact_Details;
 import com.msk.automobiles.service.entities.Customer_Details;
 import com.msk.automobiles.service.entities.Location;
 import com.msk.automobiles.service.entities.MSK_Owner;
+import com.msk.automobiles.service.entities.Notification;
 import com.msk.automobiles.service.entities.Parts;
+import com.msk.automobiles.service.entities.Service_Adviser;
 import com.msk.automobiles.service.entities.Service_Invoice_Card;
 import com.msk.automobiles.service.entities.Service_Type;
 
@@ -46,6 +48,20 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		Query query = session.createQuery(" from Car_Models where car_brands_id = '" + car_brands_id + "'");
+		List<Car_Models> car_Models = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return car_Models;
+	}
+
+	@Override
+	public List<Car_Models> getModelsByBrandIdAndModel(Integer car_brands_id, String model) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(
+				" from Car_Models where car_brands_id = '" + car_brands_id + "' and model = '" + model + "'");
 		List<Car_Models> car_Models = query.list();
 		transaction.commit();
 		session.flush();
@@ -187,11 +203,11 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 	}
 
 	@Override
-	public String getLocationByCityId(String location_id) {
+	public String getLocationByCityId(Integer location_id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
-		Query query = session.createQuery(" from Location ");
+		Query query = session.createQuery(" from Location where id = '" + location_id + "'");
 		List<Location> locations = query.list();
 		String city = null;
 
@@ -209,11 +225,11 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 	}
 
 	@Override
-	public List<Parts> getSparePartsInStock(String stock_status) {
+	public List<Parts> getSparePartsInStock(String parts_status) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
-		Query query = session.createQuery(" from Parts where parts_status = '" + stock_status + "' ");
+		Query query = session.createQuery(" from Parts where parts_status = '" + parts_status + "' ");
 		List<Parts> parts = query.list();
 		transaction.commit();
 		session.flush();
@@ -260,6 +276,71 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 		session.flush();
 		session.close();
 		return parts;
+	}
+
+	@Override
+	public List<Customer_Details> getExistingCustomerModelDetails(Integer car_models_id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Customer_Details where car_models_id = '" + car_models_id + "'");
+		List<Customer_Details> customer_Details = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return customer_Details;
+	}
+
+	@Override
+	public List<Service_Adviser> getServiceAdvicers() {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Service_Adviser ");
+		List<Service_Adviser> service_Advisers = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return service_Advisers;
+	}
+
+	@Override
+	public List<Notification> getAllNotificationDetails() {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Notification where view_status = 0 ");
+		List<Notification> notifications = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return notifications;
+	}
+
+	@Override
+	public List<Customer_Details> getCustomerRegistrationNo(String registration_no) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Customer_Details where registration_no = '" + registration_no + "'");
+		List<Customer_Details> customer_Details = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return customer_Details;
+	}
+
+	@Override
+	public List<Customer_Details> getCustomerDetailById(String customer_id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Customer_Details where customer_id = '" + customer_id + "'");
+		List<Customer_Details> customer_Details = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return customer_Details;
 	}
 
 }

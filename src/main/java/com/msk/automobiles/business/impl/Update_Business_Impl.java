@@ -33,7 +33,7 @@ public class Update_Business_Impl implements Update_Business_Interface {
 			Encrypt_Decrypt encrypt_Decrypt = new Encrypt_Decrypt();
 			msk_Owner.get(0).setPassword(encrypt_Decrypt.encrypt(password));
 
-			update_DAO_Interface.updateMSKOwnerPassword(msk_Owner.get(0));
+			update_DAO_Interface.updateMSKOwner(msk_Owner.get(0));
 			status = "updated";
 		}
 

@@ -8,7 +8,9 @@ import com.msk.automobiles.service.entities.Customer_Contact_Details;
 import com.msk.automobiles.service.entities.Customer_Details;
 import com.msk.automobiles.service.entities.Location;
 import com.msk.automobiles.service.entities.MSK_Owner;
+import com.msk.automobiles.service.entities.Notification;
 import com.msk.automobiles.service.entities.Parts;
+import com.msk.automobiles.service.entities.Service_Adviser;
 import com.msk.automobiles.service.entities.Service_Invoice_Card;
 import com.msk.automobiles.service.entities.Service_Type;
 
@@ -17,6 +19,8 @@ public interface Get_DAO_Interface {
 	List<Car_Brands> getAllBrands();
 
 	List<Car_Models> getModelsByBrandId(Integer car_brands_id);
+
+	List<Car_Models> getModelsByBrandIdAndModel(Integer car_brands_id, String model);
 
 	List<MSK_Owner> getMSKOwnerDetail(String username);
 
@@ -38,7 +42,7 @@ public interface Get_DAO_Interface {
 
 	List<Service_Invoice_Card> getServiceInvoiceCards();
 
-	String getLocationByCityId(String location_id);
+	String getLocationByCityId(Integer location_id);
 
 	List<Parts> getSparePartsInStock(String stock_status);
 
@@ -47,5 +51,15 @@ public interface Get_DAO_Interface {
 	List<Parts> getSparePartsAtParticularModel(String model_id);
 
 	List<Parts> getSparePartsAtParticularModelParts(Integer model_id, String part);
+
+	List<Customer_Details> getExistingCustomerModelDetails(Integer car_models_id);
+
+	List<Service_Adviser> getServiceAdvicers();
+
+	List<Notification> getAllNotificationDetails();
+
+	List<Customer_Details> getCustomerRegistrationNo(String registration_no);
+
+	List<Customer_Details> getCustomerDetailById(String customer_id);
 
 }

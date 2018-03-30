@@ -1,4 +1,9 @@
 <!doctype html>
+<%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -18,26 +23,24 @@
 	<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
 	<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<<<<<<< HEAD
-=======
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+  	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+	
 
 	<link rel="stylesheet" href="../css/bootstrapValidator.css">
 	<script src="../js/bootstrapValidator.js"></script>
 
->>>>>>> de77ba63f1490b77e0f27cd1e1a3369100760635
+
 </head>
 <script>
 	$(document).ready(function(){
 		$('#myTable').dataTable();
 	});
+	$(document).ready( function () {
+	    $('#table_id').DataTable();
+	} );
 	$(document).ready(function(){
-<<<<<<< HEAD
-		$('.add').click(function(){
-		   $('.service_add').toggle();
-		   $(".add").hide();
-		});
-		
-=======
+
 		$('.add_cust').click(function(){
 		   $('.service_add').toggle();
 		   $(".add_cust").hide();
@@ -131,26 +134,17 @@
 				            
 	
 	
->>>>>>> de77ba63f1490b77e0f27cd1e1a3369100760635
 		$(".service_details_close").click(function(){
 			$(".service_add").hide();
 			$(".add").show();
 		});
-<<<<<<< HEAD
-	});
-	$(document).ready(function(){
-		$(".service_add_close").click(function(){
-			$(".service_add").hide();
-		});
-	});
-=======
 
 		$(".service_add_close").click(function(){
 			$(".service_add").hide();
 		});
 		$(".service_details_btn").click(function(){
 			$(".view_service_details").show();
-			$(".service_details_btn").hide();
+			//$(".service_details_btn").hide();
 			$(".close_btn").show();
 		});	
 		$(".close_btn").click(function(){
@@ -165,7 +159,7 @@
 				} );
 	});
 	
->>>>>>> de77ba63f1490b77e0f27cd1e1a3369100760635
+
 </script>
 <style>
 	
@@ -191,10 +185,9 @@
 		padding: 16px;
 		margin-top: 5%;
 		height:auto;
-<<<<<<< HEAD
-=======
+		width:90%;
 		background-image: url("car-bg.jpg");
->>>>>>> de77ba63f1490b77e0f27cd1e1a3369100760635
+
 	}
 	#myTable_filter{
 		margin-right:3%;
@@ -209,9 +202,7 @@
 		background-color:#333333;
 		color:white;
 	}
-	.main{
-		width:98%;
-	}
+	
 	.navbar-inverse{
 		border-radius:0px;
 	}
@@ -229,9 +220,7 @@
 		width:12%;
 	}
 	.btn{
-<<<<<<< HEAD
-		padding:3px 12px;
-=======
+
 		padding:3px 10px;
 		border-radius:0px;
 		font-weight:bol;
@@ -242,7 +231,7 @@
 		border:1px solid #31b0d5;
 		font-weight:bold;
 		color:black;
->>>>>>> de77ba63f1490b77e0f27cd1e1a3369100760635
+
 	}
 	input[type=date]{
 		border-radius:5px;
@@ -266,20 +255,16 @@
 		margin-left:2%;
 		width:14%;
 	}
-<<<<<<< HEAD
-	.Service_add_close{
-=======
+
 
 	.glyphicon-remove-circle{
 		cursor:pointer;
->>>>>>> de77ba63f1490b77e0f27cd1e1a3369100760635
 		float:right;
 		margin-right:4%;
 		margin-top:2%;
 		font-size:1.5em;
 	}
-<<<<<<< HEAD
-=======
+
 
 	.glyphicon-plus-sign,.add{
 		opacity:0.2;
@@ -298,140 +283,31 @@
 	}
 	
 
->>>>>>> de77ba63f1490b77e0f27cd1e1a3369100760635
-	
+
 </style>  
 <body>
+<%@include file="/WEB-INF/common/header.jsp"%>
+
 <div>
-<<<<<<< HEAD
-=======
-<!-- Navigation bar Start -->
->>>>>>> de77ba63f1490b77e0f27cd1e1a3369100760635
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">WebSiteName</a>
-			</div>
-		</div>
-	</nav>
-<<<<<<< HEAD
-
+	
+	<div>
+		<h3>Customer Details</h3>
+	</div>
 <div class="table-responsive container main">
-	<table id="myTable" class="display table" width="100%"  >
-=======
-<!-- Navigation bar Ends -->	
 
-<div class="table-responsive container main">
-<!-- Table Starts -->
+<!-- Table Starts 
 	<table id="myTable" class="display table" width="100%"  >
-		<!-- Table header starts-->
->>>>>>> de77ba63f1490b77e0f27cd1e1a3369100760635
+		<!-- Table header starts
+
 		<thead class="thead" >  
 			<tr>  
 				<th><h4><center>Customer Service Details</center></h4></th>  
 			</tr>  
 		</thead>  
-<<<<<<< HEAD
-		<tbody>
-			<tr class="add">
-				<td><b><h3><center>ADD</center></h3></b></td>
-			</tr>
-			
-			  
-			<tr>  
-				<td >
-			
-					<div class="container-fluid "style="display:none">
-						<div class="row">
-							<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 name" tyle="border:2px solid red">
-								NAME : <label> MANI </label>
-							</div>	
-							<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"  tyle="border:2px solid red">	
-								Mobile: <label> 8870134052 </label>
-							</div>
-							<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" tyle="border:2px solid red">
-								Customer Id : <label> ID00001 </label>
-							</div>
-							<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 email" tyle="border:2px solid blue">
-								Email : <label> sankarmani110@gmail.com </label>
-							</div>
-							<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" tyle="border:2px solid red">
-								Expires : <label> 15/04/2018 </label>
-							</div>
-							<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 service_details" tyle="border:2px solid yellow">
-								<center>
-								<button class="btn btn-info service_details_btn" > Service Details </button>
-								</center>
-							</div>
-						</div>
-					</div>
-							
-				</td>  
-			</tr>
-			
-			<tr class="service_add" style="display:none">  
-				<td>
-					<div class="Service_add_close">X</div><br><br>
-					<div class="container service_type">
-						<form action="">
-							<div class="row" style="margin-top:2%">
-								<div class="col-lg-5 form-group" tyle="background-color:red">
-									<div>
-										Enter Customer Name :<input type="text" class="form-control" id="cus_name">
-									</div><br>
-									<div>
-										Mobile Number : <input type="text" class="form-control" id="mobile_no">	
-									</div><br>
-									<div>
-										Email Id: <input type="email" class="form-control" id="email_id">
-									</div>
-									<!--  <div>										
-										Service Type : 
-									</div><br>
-									<div>
-										From Date :	<input type="date">
-									</div><br>
-									<div>
-										To Date &nbsp &nbsp : <input type="date">
-									</div>
-									-->
-								</div>	
-								<div class="col-lg-2 form-group vl" tyle="background-color:yellow">
-									
-								</div>
-								<div class="col-lg-5 form-group" tyle="background-color:blue">
-									<div>										
-										Service Type : <input type="email" class="form-control" id="email_id">
-									</div><br>
-									<div>
-										<span>From Date :<input type="date" class="form-control"></span><br>
-										<span>To Date :<input type="date" class="form-control"></span>
-									</div><br>
-									<div>
-										Details :	<textarea class="form-control" rows="4" id="comment"></textarea>
-									</div>
-									
-								</div>
-							</div>	
-							<div>
-								<div>
-									
-									<button class="btn btn-info save_btn" > SAVE </button>
-								
-								</div>
-							</div>
-						</form>	
-					</div>		
-				</td>  
-			</tr> 			
-		</tbody> 
-		 
-	</table>
-</div>
-=======
-		<!-- Table header Ends -->
+
+		<!-- Table header Ends 
 		
-		<!-- Table Body starts -->
+		<!-- Table Body starts 
 		<tbody>
 
 			<tr class="add_cust">
@@ -527,30 +403,60 @@
 						</div>
 					</td>  
 				</tr>
-				<tr>
-					<td>
-						<div class="container view_service_details"style="display:none">
-							<div class="row">
-								<div class="col-lg- col-md-2 col-sm-2 col-xs-2 name" tyle="border:2px solid red">
-									Service Type : <label> Full service </label>
-								</div>	
-								<div class="col-lg- col-md-2 col-sm-2 col-xs-2"  tyle="border:2px solid red">	
-									From date: <label> 11/03/2018 </label>
-								</div>
-								<div class="col-lg- col-md-2 col-sm-2 col-xs-2" tyle="border:2px solid red">
-									To date : <label> 15/03/2018 </label>
-								</div>
-								<div class="col-lg- col-md-2 col-sm-2 col-xs-2 email" tyle="border:2px solid blue">
-									comment : <label> buibyvuvyuuvyutvvtuuvyyvbiyibyibyibuibybiyyb </label>
-								</div>
-							</div>
-						</div>
+				
+			</tbody> 
+		 </table> -->
+		 <table id="table_id" class="display">
+    		<thead>
+		        <tr>
+		            <th>Customer Id</th>
+		            <th>Name</th>
+		            <th>Mobile no</th>
+		            <th>Registration No</th>
+		            <th>Last Service</th>
+		            <th>GST</th>
+		            <th>View</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    	<c:forEach var="customer" varStatus="counter"  items="${it.data.customer}">
+		        <tr>
+		            <td>${customer.customer_id}</td>
+		            <td>${customer.first_name}</td>
+		            <td>${customer.mobile}</td>
+		            <td>${customer.registration_no}</td>
+		            <td>${customer.expire_service_date}</td>
+		            <td>${customer.gst_no}</td>
+		            <td>
+						<center>
+						<button class="btn btn-info service_details_btn" >Next Service</button>
+						</center>
 					</td>
 				</tr>
-			</tbody> 
-		 </table>
+				</c:forEach>
+		        
+		    </tbody>
+		</table>
+		 
 	</div>
->>>>>>> de77ba63f1490b77e0f27cd1e1a3369100760635
 </div>	
+<form action="msk/service-card" method="post">
+<input type="hidden" name="customer_id" value="" class="cusId">
+<input type="submit" class="serviceCard" style="display: none;">
+
+</form>
+<script>
+$(document).ready(function(){
+	
+	$(".service_details_btn").click(function(){
+		var id=$(this).closest("tr").find("td:eq(0)").text();
+		$(".cusId").val(id);
+		$(".serviceCard").trigger("click");
+	});
+	
+});
+
+</script>
+
 </body>    
 </html>

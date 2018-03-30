@@ -2,12 +2,16 @@ package com.msk.automobiles.service.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,12 +33,14 @@ public class MSK_Owner implements Serializable {
 	private String access_code;
 	private Date created_date;
 
+	private Set<Service_Adviser> service_Advisers = new HashSet<Service_Adviser>();
+
 	public MSK_Owner() {
 		super();
 	}
 
 	public MSK_Owner(Integer id, String name, String email, String mobile, String password, String access_code,
-			Date created_date) {
+			Date created_date, Set<Service_Adviser> service_Advisers) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -43,6 +49,7 @@ public class MSK_Owner implements Serializable {
 		this.password = password;
 		this.access_code = access_code;
 		this.created_date = created_date;
+		this.setService_Advisers(service_Advisers);
 	}
 
 	@Id
@@ -109,6 +116,15 @@ public class MSK_Owner implements Serializable {
 
 	public void setCreated_date(Date created_date) {
 		this.created_date = created_date;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "msk_Owner")
+	public Set<Service_Adviser> getService_Advisers() {
+		return service_Advisers;
+	}
+
+	public void setService_Advisers(Set<Service_Adviser> service_Advisers) {
+		this.service_Advisers = service_Advisers;
 	}
 
 }

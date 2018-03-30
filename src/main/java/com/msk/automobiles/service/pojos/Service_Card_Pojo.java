@@ -3,12 +3,14 @@ package com.msk.automobiles.service.pojos;
 public class Service_Card_Pojo {
 
 	private String invoice_no;
-	private String first_name;
+	private String customer_id;
+	private String name;
 	private String mobile;
 	private String registration_no;
+	private String engine_no;
+	private String policy_expires_date;
 	private String gst_no;
-	private String address_line_1;
-	private String address_line_2;
+	private String address_line;
 	private String city;
 	private String pincode;
 
@@ -17,16 +19,19 @@ public class Service_Card_Pojo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Service_Card_Pojo(String invoice_no, String first_name, String mobile, String registration_no, String gst_no,
-			String address_line_1, String address_line_2, String city, String pincode) {
+	public Service_Card_Pojo(String invoice_no, String customer_id, String name, String mobile, String registration_no,
+			String engine_no, String policy_expires_date, String gst_no, String address_line, String city,
+			String pincode) {
 		super();
 		this.invoice_no = invoice_no;
-		this.first_name = first_name;
+		this.customer_id = customer_id;
+		this.name = name;
 		this.mobile = mobile;
 		this.registration_no = registration_no;
+		this.engine_no = engine_no;
+		this.policy_expires_date = policy_expires_date;
 		this.gst_no = gst_no;
-		this.address_line_1 = address_line_1;
-		this.address_line_2 = address_line_2;
+		this.address_line = address_line;
 		this.city = city;
 		this.pincode = pincode;
 	}
@@ -39,12 +44,20 @@ public class Service_Card_Pojo {
 		this.invoice_no = invoice_no;
 	}
 
-	public String getFirst_name() {
-		return first_name;
+	public String getCustomer_id() {
+		return customer_id;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setCustomer_id(String customer_id) {
+		this.customer_id = customer_id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getMobile() {
@@ -63,6 +76,22 @@ public class Service_Card_Pojo {
 		this.registration_no = registration_no;
 	}
 
+	public String getEngine_no() {
+		return engine_no;
+	}
+
+	public void setEngine_no(String engine_no) {
+		this.engine_no = engine_no;
+	}
+
+	public String getPolicy_expires_date() {
+		return policy_expires_date;
+	}
+
+	public void setPolicy_expires_date(String policy_expires_date) {
+		this.policy_expires_date = policy_expires_date;
+	}
+
 	public String getGst_no() {
 		return gst_no;
 	}
@@ -71,20 +100,12 @@ public class Service_Card_Pojo {
 		this.gst_no = gst_no;
 	}
 
-	public String getAddress_line_1() {
-		return address_line_1;
+	public String getAddress_line() {
+		return address_line;
 	}
 
-	public void setAddress_line_1(String address_line_1) {
-		this.address_line_1 = address_line_1;
-	}
-
-	public String getAddress_line_2() {
-		return address_line_2;
-	}
-
-	public void setAddress_line_2(String address_line_2) {
-		this.address_line_2 = address_line_2;
+	public void setAddress_line(String address_line) {
+		this.address_line = address_line;
 	}
 
 	public String getCity() {
@@ -101,6 +122,14 @@ public class Service_Card_Pojo {
 
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
+	}
+
+	@Override
+	public String toString() {
+		return "Service_Card_Pojo [invoice_no=" + invoice_no + ", customer_id=" + customer_id + ", name=" + name
+				+ ", mobile=" + mobile + ", registration_no=" + registration_no + ", engine_no=" + engine_no
+				+ ", policy_expires_date=" + policy_expires_date + ", gst_no=" + gst_no + ", address_line="
+				+ address_line + ", city=" + city + ", pincode=" + pincode + "]";
 	}
 
 }

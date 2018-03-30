@@ -41,7 +41,7 @@ public class Update_DAO_Impl implements Update_DAO_Interface {
 	}
 
 	@Override
-	public void updateMSKOwnerPassword(MSK_Owner msk_Owner) {
+	public void updateMSKOwner(MSK_Owner msk_Owner) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
