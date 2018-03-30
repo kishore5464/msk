@@ -67,18 +67,20 @@ public class HomeController {
 	@POST
 	@Path("/login")
 	public Response login_cred(@FormParam("username") String username, @FormParam("password") String password,
-			/* @FormParam("page_type") String page_type, */ @Context HttpServletRequest request) {
+			@FormParam("page_type") String page_type, @Context HttpServletRequest request) {
 		String user_agent = request.getHeader("User-Agent");
 
 		JSONObject applicationStateJson = new JSONObject();
 
+		System.out.println("page_type----------->"+page_type);
+		
 		JSONObject mix = new JSONObject();
 
 		Viewable view = null;
 		String status = null;
 
 		try {
-			String page_type = "spare";
+//			String page_type = "spare";
 
 			String msk_Owner = get_Business_Interface.getMSKOwnerDetail(username, password);
 
