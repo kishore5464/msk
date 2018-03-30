@@ -36,6 +36,8 @@ public class Customer_Details implements Serializable {
 	private String email;
 	private Date dob;
 	private String registration_no;
+	private String engine_no;
+	private Date policy_expires_date;
 	private String gst_no;
 	private Date created_date;
 
@@ -47,8 +49,9 @@ public class Customer_Details implements Serializable {
 	}
 
 	public Customer_Details(Integer id, Car_Models car_Models, String customer_id, String first_name, String last_name,
-			String mobile, String email, Date dob, String registration_no, String gst_no, Date created_date,
-			Set<Customer_Contact_Details> customer_Contact_Details) {
+			String mobile, String email, Date dob, String registration_no, String engine_no, Date policy_expires_date,
+			String gst_no, Date created_date, Set<Customer_Contact_Details> customer_Contact_Details,
+			Set<Service_Invoice_Card> service_Invoice_Cards) {
 		super();
 		this.id = id;
 		this.car_Models = car_Models;
@@ -58,10 +61,13 @@ public class Customer_Details implements Serializable {
 		this.mobile = mobile;
 		this.email = email;
 		this.dob = dob;
-		this.setRegistration_no(registration_no);
+		this.registration_no = registration_no;
+		this.engine_no = engine_no;
+		this.setPolicy_expires_date(policy_expires_date);
 		this.gst_no = gst_no;
 		this.created_date = created_date;
 		this.customer_Contact_Details = customer_Contact_Details;
+		this.service_Invoice_Cards = service_Invoice_Cards;
 	}
 
 	@Id
@@ -184,6 +190,25 @@ public class Customer_Details implements Serializable {
 
 	public void setService_Invoice_Cards(Set<Service_Invoice_Card> service_Invoice_Cards) {
 		this.service_Invoice_Cards = service_Invoice_Cards;
+	}
+
+	@Column(name = "engine_no")
+	public String getEngine_no() {
+		return engine_no;
+	}
+
+	public void setEngine_no(String engine_no) {
+		this.engine_no = engine_no;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "policy_expires_date")
+	public Date getPolicy_expires_date() {
+		return policy_expires_date;
+	}
+
+	public void setPolicy_expires_date(Date policy_expires_date) {
+		this.policy_expires_date = policy_expires_date;
 	}
 
 }

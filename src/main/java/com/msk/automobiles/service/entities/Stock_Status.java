@@ -1,5 +1,5 @@
 package com.msk.automobiles.service.entities;
 
 public enum Stock_Status {
-	INSTOCK, OUTSTOCK;
+	INSTOCK, OUTSTOCK, NOT_PURCHASED;
 }

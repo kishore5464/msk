@@ -252,18 +252,18 @@ public class ListsController {
 		JSONObject data = new JSONObject();
 
 		Viewable view = null;
-//		try {
+		// try {
 		System.out.println(model_id);
-			List<Customer_Details_Pojo> existing_customer = get_Business_Interface
-					.getExistingCustomerModelDetails(model_id);
+		List<Customer_Details_Pojo> existing_customer = get_Business_Interface
+				.getExistingCustomerModelDetails(model_id);
 
-			data.put("customer", existing_customer);
-			mix.put("data", data);
+		data.put("customer", existing_customer);
+		mix.put("data", data);
 
-			view = new Viewable("/customer_details", mix);
-//		} catch (Exception e) {
-//			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
-//		}
+		view = new Viewable("/customer_details", mix);
+		// } catch (Exception e) {
+		// throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		// }
 
 		return Response.ok().entity(view).build();
 	}
@@ -300,27 +300,6 @@ public class ListsController {
 		}
 
 		return Response.ok().entity(mix.toString()).build();
-	}
-
-	@POST
-	@Path("/service-card-detail")
-	public Response service_card_detail(@FormParam("customer_id") String customer_id,
-			@Context HttpServletRequest request) {
-		JSONObject mix = new JSONObject();
-		JSONObject data = new JSONObject();
-
-		Viewable view = null;
-		try {
-
-			data.put("customer_detail", "");
-			mix.put("data", data);
-
-			view = new Viewable("/service_card", mix);
-		} catch (Exception e) {
-			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
-		}
-
-		return Response.ok().entity(view).build();
 	}
 
 	@GET

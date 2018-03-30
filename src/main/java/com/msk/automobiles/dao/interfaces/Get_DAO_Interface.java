@@ -42,7 +42,7 @@ public interface Get_DAO_Interface {
 
 	List<Service_Invoice_Card> getServiceInvoiceCards();
 
-	String getLocationByCityId(String location_id);
+	String getLocationByCityId(Integer location_id);
 
 	List<Parts> getSparePartsInStock(String stock_status);
 
@@ -57,5 +57,9 @@ public interface Get_DAO_Interface {
 	List<Service_Adviser> getServiceAdvicers();
 
 	List<Notification> getAllNotificationDetails();
+
+	List<Customer_Details> getCustomerRegistrationNo(String registration_no);
+
+	List<Customer_Details> getCustomerDetailById(String customer_id);
 
 }
