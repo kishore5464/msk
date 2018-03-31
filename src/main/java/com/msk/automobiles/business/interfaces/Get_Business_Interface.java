@@ -10,6 +10,8 @@ import com.msk.automobiles.service.pojos.Notifcation_Message_Pojo;
 import com.msk.automobiles.service.pojos.Notifcation_Pojo;
 import com.msk.automobiles.service.pojos.Service_Advicer_Pojo;
 import com.msk.automobiles.service.pojos.Service_Card_Pojo;
+import com.msk.automobiles.service.pojos.Service_Parts_Pojo2;
+import com.msk.automobiles.service.pojos.Service_Parts_Pojo3;
 import com.msk.automobiles.service.pojos.Service_Type_Pojo;
 import com.msk.automobiles.service.pojos.Spare_Parts_Pojo;
 
@@ -46,5 +48,9 @@ public interface Get_Business_Interface {
 	Service_Card_Pojo getCustomerDetail(String customer_id);
 
 	List<Notifcation_Pojo> getCustomerServiceNotification(String notification_id);
+
+	List<Service_Parts_Pojo2> getSparePartsAtParticularModelPojo(String model_id);
+
+	List<Service_Parts_Pojo3> getSparePartsAtParticularAmt(String part_id);
 
 }

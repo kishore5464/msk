@@ -25,6 +25,8 @@ import com.msk.automobiles.service.pojos.Car_Models_Pojo;
 import com.msk.automobiles.service.pojos.Customer_Details_Pojo;
 import com.msk.automobiles.service.pojos.Location_Pojo;
 import com.msk.automobiles.service.pojos.Service_Advicer_Pojo;
+import com.msk.automobiles.service.pojos.Service_Parts_Pojo2;
+import com.msk.automobiles.service.pojos.Service_Parts_Pojo3;
 import com.msk.automobiles.service.pojos.Service_Type_Pojo;
 import com.msk.automobiles.service.pojos.Spare_Parts_Pojo;
 
@@ -163,6 +165,7 @@ public class ListsController {
 	@POST
 	@Path("/check-part-stock")
 	public Response exists_model_parts(@FormParam("model_id") String model_id, @Context HttpServletRequest request) {
+
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 		try {
@@ -294,6 +297,8 @@ public class ListsController {
 		try {
 			List<Service_Type_Pojo> service_Type_Pojos = get_Business_Interface.getServiceType();
 			data.put("service_type", service_Type_Pojos);
+			data.put("service_type_count", service_Type_Pojos.size());
+			System.out.println(service_Type_Pojos.size() + " ppppppppppppp");
 			mix.put("data", data);
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
@@ -308,20 +313,69 @@ public class ListsController {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 
-		Viewable view = null;
 		try {
 			List<Service_Advicer_Pojo> service_advicer = get_Business_Interface.getServiceAdvicers();
 
 			data.put("service_advicer", service_advicer);
-
+			data.put("service_advicer_count", service_advicer.size());
 			mix.put("data", data);
-
-			view = new Viewable("/car_brands", mix);
 
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
 		}
 
-		return Response.ok().entity(view).build();
+		return Response.ok().entity(mix.toString()).build();
+	}
+
+	@POST
+	@Path("/part-stock")
+	public Response part_stock(@FormParam("model_id") String model_id, @Context HttpServletRequest request) {
+		JSONObject mix = new JSONObject();
+		JSONObject data = new JSONObject();
+		try {
+			System.out.println("MODEL ID --> " + model_id);
+
+			List<Service_Parts_Pojo2> parts = get_Business_Interface.getSparePartsAtParticularModelPojo(model_id);
+
+			System.out.println("PARTS --> " + parts);
+
+			if (!parts.isEmpty()) {
+				data.put("parts", parts);
+			} else {
+				data.put("parts", "empty");
+			}
+			data.put("parts_size", parts.size());
+			mix.put("data", data);
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+
+		return Response.ok().entity(mix.toString()).build();
+	}
+
+	@POST
+	@Path("/part-stock_amt")
+	public Response part_stock_amt(@FormParam("part_id") String part_id, @Context HttpServletRequest request) {
+		JSONObject mix = new JSONObject();
+		JSONObject data = new JSONObject();
+		try {
+			System.out.println("part_id ID --> " + part_id);
+
+			List<Service_Parts_Pojo3> parts =get_Business_Interface.getSparePartsAtParticularAmt(part_id);
+
+			System.out.println("PARTS --> " + parts);
+
+			if (!parts.isEmpty()) {
+				data.put("parts", parts);
+			} else {
+				data.put("parts", "empty");
+			}
+			data.put("parts_size", parts.size());
+			mix.put("data", data);
+		} catch (Exception e) {
+			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
+		}
+
+		return Response.ok().entity(mix.toString()).build();
 	}
 }

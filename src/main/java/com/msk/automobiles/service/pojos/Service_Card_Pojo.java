@@ -4,6 +4,7 @@ public class Service_Card_Pojo {
 
 	private String invoice_no;
 	private String customer_id;
+	private String model_id;
 	private String name;
 	private String mobile;
 	private String registration_no;
@@ -124,11 +125,19 @@ public class Service_Card_Pojo {
 		this.pincode = pincode;
 	}
 
+	public String getModel_id() {
+		return model_id;
+	}
+
+	public void setModel_id(String model_id) {
+		this.model_id = model_id;
+	}
+
 	@Override
 	public String toString() {
-		return "Service_Card_Pojo [invoice_no=" + invoice_no + ", customer_id=" + customer_id + ", name=" + name
-				+ ", mobile=" + mobile + ", registration_no=" + registration_no + ", engine_no=" + engine_no
-				+ ", policy_expires_date=" + policy_expires_date + ", gst_no=" + gst_no + ", address_line="
+		return "Service_Card_Pojo [invoice_no=" + invoice_no + ", customer_id=" + customer_id + ", model_id=" + model_id
+				+ ", name=" + name + ", mobile=" + mobile + ", registration_no=" + registration_no + ", engine_no="
+				+ engine_no + ", policy_expires_date=" + policy_expires_date + ", gst_no=" + gst_no + ", address_line="
 				+ address_line + ", city=" + city + ", pincode=" + pincode + "]";
 	}
 
