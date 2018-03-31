@@ -1,6 +1,4 @@
 
-
-
 $.ajax({
         url: 'msk/check-brand-stock',
         method : 'post',

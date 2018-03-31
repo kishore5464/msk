@@ -104,7 +104,7 @@
 <ul>
    <li class="instock"><a class="stock">In Stock</a></li>
    <li class="outstock"><a class="stock">Outstock</a></li>
-   <li class="notavailable"><a class="stock">Not Available</a></li>
+   <li class="notavailable"><a class="stock">Not Purchased</a></li>
 
 </ul>
 </div>
@@ -189,6 +189,11 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
+	
+	$(".notavailable").click(function(){
+		$('.stockvalue').val(not_purchased);
+		$('.spare_submit').trigger('click');
+	})
 	
 	$(".newcar_upload").click(function(){
 		
