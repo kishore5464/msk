@@ -343,4 +343,17 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 		return customer_Details;
 	}
 
+	@Override
+	public List<Notification> getNotificationDetailsById(Integer notification_id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Notification where id = '" + notification_id + "'");
+		List<Notification> notifications = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return notifications;
+	}
+
 }
