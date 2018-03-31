@@ -30,6 +30,9 @@ import com.msk.automobiles.service.pojos.Location_Pojo;
 import com.msk.automobiles.service.pojos.Notifcation_Pojo;
 import com.msk.automobiles.service.pojos.Service_Advicer_Pojo;
 import com.msk.automobiles.service.pojos.Service_Card_Pojo;
+import com.msk.automobiles.service.pojos.Service_Parts_Pojo;
+import com.msk.automobiles.service.pojos.Service_Parts_Pojo2;
+import com.msk.automobiles.service.pojos.Service_Parts_Pojo3;
 import com.msk.automobiles.service.pojos.Service_Type_Pojo;
 import com.msk.automobiles.service.pojos.Spare_Parts_Pojo;
 import com.msk.automobiles.util.Encrypt_Decrypt;
@@ -426,6 +429,7 @@ public class Get_Business_Impl implements Get_Business_Interface {
 					customer_Details_List.get(0).getFirst_name() + " " + customer_Details_List.get(0).getLast_name());
 			service_Card_Pojo.setMobile(customer_Details_List.get(0).getMobile());
 			service_Card_Pojo.setRegistration_no(customer_Details_List.get(0).getRegistration_no());
+			service_Card_Pojo.setModel_id(Integer.toString(customer_Details_List.get(0).getCar_Models().getId()));
 
 			if (customer_Details_List.get(0).getEngine_no() != null) {
 				service_Card_Pojo.setEngine_no(customer_Details_List.get(0).getEngine_no());
@@ -480,6 +484,44 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		}
 
 		return service_Card_Pojo;
+	}
+
+	@Override
+	public List<Service_Parts_Pojo2> getSparePartsAtParticularModelPojo(String model_id) {
+		// TODO Auto-generated method stub
+		List<Parts> parts = get_DAO_Interface.getSparePartsAtParticularModel(model_id);
+		List<Service_Parts_Pojo2> parts_list = new ArrayList<Service_Parts_Pojo2>();
+
+		if (!parts.isEmpty()) {
+			for (int i = 0; i < parts.size(); i++) {
+				Service_Parts_Pojo2 part = new Service_Parts_Pojo2();
+				part.setPart_id(Integer.toString(parts.get(i).getId()));
+				part.setPart(parts.get(i).getPart());
+
+				parts_list.add(part);
+			}
+		}
+
+		return parts_list;
+	}
+
+	@Override
+	public List<Service_Parts_Pojo3> getSparePartsAtParticularAmt(String part_id) {
+		// TODO Auto-generated method stub
+		List<Parts> parts = get_DAO_Interface.getSparePartsInStockById(part_id);
+		List<Service_Parts_Pojo3> parts_list = new ArrayList<Service_Parts_Pojo3>();
+
+		if (!parts.isEmpty()) {
+			for (int i = 0; i < parts.size(); i++) {
+				Service_Parts_Pojo3 part = new Service_Parts_Pojo3();
+				part.setQuantity(Integer.toString(parts.get(i).getQuantity()));
+				part.setAmount(Double.toString(parts.get(i).getAmount()));
+
+				parts_list.add(part);
+			}
+		}
+
+		return parts_list;
 	}
 
 }
