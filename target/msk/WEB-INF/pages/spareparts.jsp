@@ -104,6 +104,7 @@
 <ul>
    <li class="instock"><a class="stock">In Stock</a></li>
    <li class="outstock"><a class="stock">Outstock</a></li>
+   <li class="notavailable"><a class="stock">Not Purchased</a></li>
 
 </ul>
 </div>
@@ -167,13 +168,10 @@
     </form>
     
         <form  method="POST" action="msk/add-spare-part" style="display: none;">
-		
 		 <input type="hidden" name="model_id" id="model_id" value=""> 
 		  <input type="hidden" name="part" id="part_name2" value=""> 
 		   <input type="hidden" name="quantity" id="tot_quantity2" value=""> 
 		    <input type="hidden" name="amount" id="tot_amout2" value=""> 
-		    
-			
 			<input type="submit" id="add_submit_parts">
       </form>
       
@@ -191,6 +189,11 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
+	
+	$(".notavailable").click(function(){
+		$('.stockvalue').val(not_purchased);
+		$('.spare_submit').trigger('click');
+	})
 	
 	$(".newcar_upload").click(function(){
 		

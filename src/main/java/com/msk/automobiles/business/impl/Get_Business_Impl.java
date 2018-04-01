@@ -31,8 +31,7 @@ import com.msk.automobiles.service.pojos.Notifcation_Message_Pojo;
 import com.msk.automobiles.service.pojos.Notifcation_Pojo;
 import com.msk.automobiles.service.pojos.Service_Advicer_Pojo;
 import com.msk.automobiles.service.pojos.Service_Card_Pojo;
-import com.msk.automobiles.service.pojos.Service_Parts_Pojo2;
-import com.msk.automobiles.service.pojos.Service_Parts_Pojo3;
+import com.msk.automobiles.service.pojos.Service_Parts_Pojo;
 import com.msk.automobiles.service.pojos.Service_Type_Pojo;
 import com.msk.automobiles.service.pojos.Spare_Parts_Pojo;
 import com.msk.automobiles.util.Encrypt_Decrypt;
@@ -220,6 +219,10 @@ public class Get_Business_Impl implements Get_Business_Interface {
 	@Override
 	public List<Spare_Parts_Pojo> getSparePartsInStock(String stock_status) {
 		// TODO Auto-generated method stub
+
+		if (stock_status.equals("notpurchased")) {
+			stock_status = "not_purchased";
+		}
 		List<Parts> spare_parts = get_DAO_Interface.getSparePartsInStock(stock_status);
 		List<Spare_Parts_Pojo> spare_Parts_Pojos = new ArrayList<Spare_Parts_Pojo>();
 
@@ -622,16 +625,19 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		return notifcation_Pojos;
 	}
 
-	public List<Service_Parts_Pojo2> getSparePartsAtParticularModelPojo(String model_id) {
+	public List<Service_Parts_Pojo> getSparePartsAtParticularModelPojo(String model_id) {
 		// TODO Auto-generated method stub
 		List<Parts> parts = get_DAO_Interface.getSparePartsAtParticularModel(model_id);
-		List<Service_Parts_Pojo2> parts_list = new ArrayList<Service_Parts_Pojo2>();
+		List<Service_Parts_Pojo> parts_list = new ArrayList<Service_Parts_Pojo>();
 
 		if (!parts.isEmpty()) {
 			for (int i = 0; i < parts.size(); i++) {
-				Service_Parts_Pojo2 part = new Service_Parts_Pojo2();
+				Service_Parts_Pojo part = new Service_Parts_Pojo();
 				part.setPart_id(Integer.toString(parts.get(i).getId()));
 				part.setPart(parts.get(i).getPart());
+
+				part.setQuantity(Integer.toString(parts.get(i).getQuantity()));
+				part.setAmount(Double.toString(parts.get(i).getAmount()));
 
 				parts_list.add(part);
 			}
@@ -641,14 +647,17 @@ public class Get_Business_Impl implements Get_Business_Interface {
 	}
 
 	@Override
-	public List<Service_Parts_Pojo3> getSparePartsAtParticularAmt(String part_id) {
+	public List<Service_Parts_Pojo> getSparePartsAtParticularAmt(String part_id) {
 		// TODO Auto-generated method stub
 		List<Parts> parts = get_DAO_Interface.getSparePartsInStockById(part_id);
-		List<Service_Parts_Pojo3> parts_list = new ArrayList<Service_Parts_Pojo3>();
+		List<Service_Parts_Pojo> parts_list = new ArrayList<Service_Parts_Pojo>();
 
 		if (!parts.isEmpty()) {
 			for (int i = 0; i < parts.size(); i++) {
-				Service_Parts_Pojo3 part = new Service_Parts_Pojo3();
+				Service_Parts_Pojo part = new Service_Parts_Pojo();
+				part.setPart_id(Integer.toString(parts.get(i).getId()));
+				part.setPart(parts.get(i).getPart());
+
 				part.setQuantity(Integer.toString(parts.get(i).getQuantity()));
 				part.setAmount(Double.toString(parts.get(i).getAmount()));
 

@@ -8,6 +8,7 @@ F:\Workspace\msk\src\main\java\com\msk\automobiles\service\entities\Card_Type.ja
 F:\Workspace\msk\src\main\java\com\msk\automobiles\service\pojos\Notifcation_Message_Pojo.java
 F:\Workspace\msk\src\main\java\com\msk\automobiles\service\pojos\Service_Card_Pojo.java
 F:\Workspace\msk\src\main\java\com\msk\automobiles\service\controller\GenericController.java
+F:\Workspace\msk\src\main\java\com\msk\automobiles\service\pojos\Service_Parts_Pojo3.java
 F:\Workspace\msk\src\main\java\com\msk\automobiles\business\impl\Update_Business_Impl.java
 F:\Workspace\msk\src\main\java\com\msk\automobiles\service\entities\Service_Type.java
 F:\Workspace\msk\src\main\java\com\msk\automobiles\business\interfaces\Get_Business_Interface.java
@@ -39,6 +40,7 @@ F:\Workspace\msk\src\main\java\com\msk\automobiles\util\AuthorizationRequestFilt
 F:\Workspace\msk\src\main\java\com\msk\automobiles\exception\CustomGenericException.java
 F:\Workspace\msk\src\main\java\com\msk\automobiles\business\interfaces\Update_Business_Interface.java
 F:\Workspace\msk\src\main\java\com\msk\automobiles\service\pojos\Service_Type_Pojo.java
+F:\Workspace\msk\src\main\java\com\msk\automobiles\service\pojos\Service_Parts_Pojo2.java
 F:\Workspace\msk\src\main\java\com\msk\automobiles\service\entities\Parts.java
 F:\Workspace\msk\src\main\java\com\msk\automobiles\business\interfaces\Delete_Business_Interface.java
 F:\Workspace\msk\src\main\java\com\msk\automobiles\dao\impl\Insert_DAO_Impl.java

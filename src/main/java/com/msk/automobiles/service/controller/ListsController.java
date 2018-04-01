@@ -25,8 +25,7 @@ import com.msk.automobiles.service.pojos.Car_Models_Pojo;
 import com.msk.automobiles.service.pojos.Customer_Details_Pojo;
 import com.msk.automobiles.service.pojos.Location_Pojo;
 import com.msk.automobiles.service.pojos.Service_Advicer_Pojo;
-import com.msk.automobiles.service.pojos.Service_Parts_Pojo2;
-import com.msk.automobiles.service.pojos.Service_Parts_Pojo3;
+import com.msk.automobiles.service.pojos.Service_Parts_Pojo;
 import com.msk.automobiles.service.pojos.Service_Type_Pojo;
 import com.msk.automobiles.service.pojos.Spare_Parts_Pojo;
 
@@ -232,6 +231,8 @@ public class ListsController {
 
 		Viewable view = null;
 
+		System.out.println(stock_status);
+
 		try {
 			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock(stock_status);
 
@@ -333,11 +334,7 @@ public class ListsController {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 		try {
-			System.out.println("MODEL ID --> " + model_id);
-
-			List<Service_Parts_Pojo2> parts = get_Business_Interface.getSparePartsAtParticularModelPojo(model_id);
-
-			System.out.println("PARTS --> " + parts);
+			List<Service_Parts_Pojo> parts = get_Business_Interface.getSparePartsAtParticularModelPojo(model_id);
 
 			if (!parts.isEmpty()) {
 				data.put("parts", parts);
@@ -359,11 +356,7 @@ public class ListsController {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 		try {
-			System.out.println("part_id ID --> " + part_id);
-
-			List<Service_Parts_Pojo3> parts =get_Business_Interface.getSparePartsAtParticularAmt(part_id);
-
-			System.out.println("PARTS --> " + parts);
+			List<Service_Parts_Pojo> parts = get_Business_Interface.getSparePartsAtParticularAmt(part_id);
 
 			if (!parts.isEmpty()) {
 				data.put("parts", parts);
