@@ -62,4 +62,6 @@ public interface Get_DAO_Interface {
 
 	List<Customer_Details> getCustomerDetailById(String customer_id);
 
+	List<Notification> getNotificationDetailsById(Integer notification_id);
+
 }

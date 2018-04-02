@@ -101,7 +101,7 @@ public class HomeController {
 							|| (user_agent.indexOf("Chrome") != -1) || (user_agent.indexOf("Safari") != -1)) {
 						String url = request.getScheme() + "://" + request.getHeader("Host") + ""
 								+ env.getProperty("msk.host.url") + "spare-parts";
-						String urlParameters = java.net.URLEncoder.encode(applicationStateJson.toString());
+						String urlParameters = java.net.URLEncoder.encode("invoice ");
 						String htmlResponse = util.postRedirect(url, urlParameters);
 						return Response.status(200).entity(htmlResponse).type(MediaType.TEXT_HTML_TYPE).build();
 					}

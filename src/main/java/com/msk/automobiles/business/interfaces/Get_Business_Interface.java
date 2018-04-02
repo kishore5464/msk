@@ -6,9 +6,11 @@ import com.msk.automobiles.service.pojos.Car_Brands_Pojo;
 import com.msk.automobiles.service.pojos.Car_Models_Pojo;
 import com.msk.automobiles.service.pojos.Customer_Details_Pojo;
 import com.msk.automobiles.service.pojos.Location_Pojo;
+import com.msk.automobiles.service.pojos.Notifcation_Message_Pojo;
 import com.msk.automobiles.service.pojos.Notifcation_Pojo;
 import com.msk.automobiles.service.pojos.Service_Advicer_Pojo;
 import com.msk.automobiles.service.pojos.Service_Card_Pojo;
+import com.msk.automobiles.service.pojos.Service_Parts_Pojo;
 import com.msk.automobiles.service.pojos.Service_Type_Pojo;
 import com.msk.automobiles.service.pojos.Spare_Parts_Pojo;
 
@@ -38,10 +40,16 @@ public interface Get_Business_Interface {
 
 	List<Customer_Details_Pojo> getExistingCustomerModelDetails(String model_id);
 
-	List<Notifcation_Pojo> getServiceNotification();
+	List<Notifcation_Message_Pojo> getServiceNotificationMessage();
 
 	List<Service_Advicer_Pojo> getServiceAdvicers();
 
 	Service_Card_Pojo getCustomerDetail(String customer_id);
+
+	List<Notifcation_Pojo> getCustomerServiceNotification(String notification_id);
+
+	List<Service_Parts_Pojo> getSparePartsAtParticularModelPojo(String model_id);
+
+	List<Service_Parts_Pojo> getSparePartsAtParticularAmt(String part_id);
 
 }

@@ -85,19 +85,19 @@ public class Notifcation_Pojo {
 		this.dob = dob;
 	}
 
-	@Override
-	public String toString() {
-		return "Notifcation_Pojo [notification_id=" + notification_id + ", customer_name=" + customer_name + ", mobile="
-				+ mobile + ", dob=" + dob + ", car_brand=" + car_brand + ", car_model=" + car_model
-				+ ", service_expire_date=" + service_expire_date + "]";
-	}
-
 	public String getRegistration_no() {
 		return registration_no;
 	}
 
 	public void setRegistration_no(String registration_no) {
 		this.registration_no = registration_no;
+	}
+
+	@Override
+	public String toString() {
+		return "Notifcation_Pojo [notification_id=" + notification_id + ", customer_name=" + customer_name + ", mobile="
+				+ mobile + ", dob=" + dob + ", car_brand=" + car_brand + ", car_model=" + car_model
+				+ ", registration_no=" + registration_no + ", service_expire_date=" + service_expire_date + "]";
 	}
 
 }

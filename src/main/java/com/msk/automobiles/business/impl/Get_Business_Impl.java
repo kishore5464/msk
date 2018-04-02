@@ -1,8 +1,8 @@
 package com.msk.automobiles.business.impl;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -27,9 +27,11 @@ import com.msk.automobiles.service.pojos.Car_Brands_Pojo;
 import com.msk.automobiles.service.pojos.Car_Models_Pojo;
 import com.msk.automobiles.service.pojos.Customer_Details_Pojo;
 import com.msk.automobiles.service.pojos.Location_Pojo;
+import com.msk.automobiles.service.pojos.Notifcation_Message_Pojo;
 import com.msk.automobiles.service.pojos.Notifcation_Pojo;
 import com.msk.automobiles.service.pojos.Service_Advicer_Pojo;
 import com.msk.automobiles.service.pojos.Service_Card_Pojo;
+import com.msk.automobiles.service.pojos.Service_Parts_Pojo;
 import com.msk.automobiles.service.pojos.Service_Type_Pojo;
 import com.msk.automobiles.service.pojos.Spare_Parts_Pojo;
 import com.msk.automobiles.util.Encrypt_Decrypt;
@@ -217,6 +219,10 @@ public class Get_Business_Impl implements Get_Business_Interface {
 	@Override
 	public List<Spare_Parts_Pojo> getSparePartsInStock(String stock_status) {
 		// TODO Auto-generated method stub
+
+		if (stock_status.equals("notpurchased")) {
+			stock_status = "not_purchased";
+		}
 		List<Parts> spare_parts = get_DAO_Interface.getSparePartsInStock(stock_status);
 		List<Spare_Parts_Pojo> spare_Parts_Pojos = new ArrayList<Spare_Parts_Pojo>();
 
@@ -350,45 +356,73 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		return customer_Details_Pojos;
 	}
 
-	public List<Notifcation_Pojo> getServiceNotification() {
+	public List<Notifcation_Message_Pojo> getServiceNotificationMessage() {
 		// TODO Auto-generated method stub
 		List<Notification> notification = get_DAO_Interface.getAllNotificationDetails();
-		List<Notifcation_Pojo> notifcation_Pojos = new ArrayList<Notifcation_Pojo>();
+		List<Notifcation_Message_Pojo> notifcation_Message_Pojos = new ArrayList<Notifcation_Message_Pojo>();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 		if (!notification.isEmpty()) {
 			for (int i = 0; i < notification.size(); i++) {
-				System.out.println("DOB --> " + notification.get(i).getDob());
-				String c_date = dateFormat.format(new Date());
-				try {
-					System.out.println("DATE -> " + dateFormat.parse(c_date));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if (dateFormat.format(notification.get(i).getDob()).substring(5, 9)
+						.equals(dateFormat.format(new Date()).substring(5, 9))) {
+					Notifcation_Message_Pojo notifcation_Message_Pojo = new Notifcation_Message_Pojo();
+					notifcation_Message_Pojo.setNotification_id(Integer.toString(notification.get(i).getId()));
+					notifcation_Message_Pojo
+							.setMessage(notification.get(i).getCustomer_name() + " has celebrating his birthday! ");
+
+					notifcation_Message_Pojos.add(notifcation_Message_Pojo);
 				}
 
-				if (notification.get(i).getDob() == new Date()) {
-					System.out.println("DATE --> " + notification.get(i).getService_expire_date());
+				Date oneDay = new Date();
+				Calendar oneDayCalendar = Calendar.getInstance();
+				oneDayCalendar.setTime(oneDay);
+				oneDayCalendar.add(Calendar.DATE, 1);
+				oneDay = oneDayCalendar.getTime();
+				System.out.println("KK " + dateFormat.format(oneDay));
 
-					Notifcation_Pojo notifcation_Pojo = new Notifcation_Pojo();
-					notifcation_Pojo.setNotification_id(Integer.toString(notification.get(i).getId()));
-					notifcation_Pojo.setCustomer_name(notification.get(i).getCustomer_name());
-					notifcation_Pojo.setMobile(notification.get(i).getMobile());
-					notifcation_Pojo.setRegistration_no(notification.get(i).getRegistration_no());
-					notifcation_Pojo.setDob(dateFormat.format(notification.get(i).getDob()));
-					notifcation_Pojo.setCar_brand(notification.get(i).getCar_brand());
-					notifcation_Pojo.setCar_model(notification.get(i).getCar_model());
-					notifcation_Pojo
-							.setService_expire_date(dateFormat.format(notification.get(i).getService_expire_date()));
+				Date twoDay = new Date();
+				Calendar twoDayCalendar = Calendar.getInstance();
+				twoDayCalendar.setTime(twoDay);
+				twoDayCalendar.add(Calendar.DATE, 2);
+				twoDay = twoDayCalendar.getTime();
 
-					notifcation_Pojos.add(notifcation_Pojo);
+				// TODAY
+				if (dateFormat.format(notification.get(i).getService_expire_date()).substring(5, 9)
+						.equals(dateFormat.format(new Date()).substring(5, 9))) {
+					Notifcation_Message_Pojo notifcation_Message_Pojo = new Notifcation_Message_Pojo();
+					notifcation_Message_Pojo.setNotification_id(Integer.toString(notification.get(i).getId()));
+					notifcation_Message_Pojo
+							.setMessage(notification.get(i).getCustomer_name() + "'s service EXPIRES Today!");
+
+					notifcation_Message_Pojos.add(notifcation_Message_Pojo);
+				}
+
+				// TOMORROW
+				if (dateFormat.format(notification.get(i).getService_expire_date()).substring(5, 9)
+						.equals(dateFormat.format(oneDay).substring(5, 9))) {
+					Notifcation_Message_Pojo notifcation_Message_Pojo = new Notifcation_Message_Pojo();
+					notifcation_Message_Pojo.setNotification_id(Integer.toString(notification.get(i).getId()));
+					notifcation_Message_Pojo
+							.setMessage(notification.get(i).getCustomer_name() + "'s service EXPIRES Tomorrow!");
+
+					notifcation_Message_Pojos.add(notifcation_Message_Pojo);
+				}
+
+				// DAY AFTER TOMORROW
+				if (dateFormat.format(notification.get(i).getService_expire_date()).substring(5, 9)
+						.equals(dateFormat.format(twoDay).substring(5, 9))) {
+					Notifcation_Message_Pojo notifcation_Message_Pojo = new Notifcation_Message_Pojo();
+					notifcation_Message_Pojo.setNotification_id(Integer.toString(notification.get(i).getId()));
+					notifcation_Message_Pojo.setMessage(
+							notification.get(i).getCustomer_name() + "'s service EXPIRES Day After Tomorrow!");
+
+					notifcation_Message_Pojos.add(notifcation_Message_Pojo);
 				}
 			}
-		} else {
-
 		}
 
-		return notifcation_Pojos;
+		return notifcation_Message_Pojos;
 	}
 
 	@Override
@@ -426,6 +460,7 @@ public class Get_Business_Impl implements Get_Business_Interface {
 					customer_Details_List.get(0).getFirst_name() + " " + customer_Details_List.get(0).getLast_name());
 			service_Card_Pojo.setMobile(customer_Details_List.get(0).getMobile());
 			service_Card_Pojo.setRegistration_no(customer_Details_List.get(0).getRegistration_no());
+			service_Card_Pojo.setModel_id(Integer.toString(customer_Details_List.get(0).getCar_Models().getId()));
 
 			if (customer_Details_List.get(0).getEngine_no() != null) {
 				service_Card_Pojo.setEngine_no(customer_Details_List.get(0).getEngine_no());
@@ -480,6 +515,157 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		}
 
 		return service_Card_Pojo;
+	}
+
+	@Override
+	public List<Notifcation_Pojo> getCustomerServiceNotification(String notification_id) {
+		// TODO Auto-generated method stub
+		List<Notifcation_Pojo> notifcation_Pojos = new ArrayList<Notifcation_Pojo>();
+		List<Notification> notification;
+
+		if (notification_id.equals("0")) {
+			notification = get_DAO_Interface.getAllNotificationDetails();
+			System.out.println("AAAA " + notification.size());
+		} else {
+			notification = get_DAO_Interface.getNotificationDetailsById(Integer.parseInt(notification_id));
+			System.out.println("BBBB " + notification.size());
+		}
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println(notifcation_Pojos.size());
+
+		if (!notification.isEmpty()) {
+			for (int i = 0; i < notification.size(); i++) {
+				if (dateFormat.format(notification.get(i).getDob()).substring(5, 9)
+						.equals(dateFormat.format(new Date()).substring(5, 9))) {
+					Notifcation_Pojo notifcation_Pojo = new Notifcation_Pojo();
+					notifcation_Pojo.setNotification_id(Integer.toString(notification.get(i).getId()));
+
+					notifcation_Pojo.setCustomer_name(notification.get(i).getCustomer_name());
+					notifcation_Pojo.setMobile(notification.get(i).getMobile());
+					notifcation_Pojo.setRegistration_no(notification.get(i).getRegistration_no());
+					notifcation_Pojo.setDob(dateFormat.format(notification.get(i).getDob()));
+					notifcation_Pojo.setCar_brand(notification.get(i).getCar_brand());
+					notifcation_Pojo.setCar_model(notification.get(i).getCar_model());
+					notifcation_Pojo
+							.setService_expire_date(dateFormat.format(notification.get(i).getService_expire_date()));
+
+					notifcation_Pojos.add(notifcation_Pojo);
+				}
+
+				Date oneDay = new Date();
+				Calendar oneDayCalendar = Calendar.getInstance();
+				oneDayCalendar.setTime(oneDay);
+				oneDayCalendar.add(Calendar.DATE, 1);
+				oneDay = oneDayCalendar.getTime();
+				System.out.println("KK " + dateFormat.format(oneDay));
+
+				Date twoDay = new Date();
+				Calendar twoDayCalendar = Calendar.getInstance();
+				twoDayCalendar.setTime(twoDay);
+				twoDayCalendar.add(Calendar.DATE, 2);
+				twoDay = twoDayCalendar.getTime();
+
+				// TODAY
+				if (dateFormat.format(notification.get(i).getService_expire_date()).substring(5, 9)
+						.equals(dateFormat.format(new Date()).substring(5, 9))) {
+					Notifcation_Pojo notifcation_Pojo = new Notifcation_Pojo();
+					notifcation_Pojo.setNotification_id(Integer.toString(notification.get(i).getId()));
+
+					notifcation_Pojo.setCustomer_name(notification.get(i).getCustomer_name());
+					notifcation_Pojo.setMobile(notification.get(i).getMobile());
+					notifcation_Pojo.setRegistration_no(notification.get(i).getRegistration_no());
+					notifcation_Pojo.setDob(dateFormat.format(notification.get(i).getDob()));
+					notifcation_Pojo.setCar_brand(notification.get(i).getCar_brand());
+					notifcation_Pojo.setCar_model(notification.get(i).getCar_model());
+					notifcation_Pojo
+							.setService_expire_date(dateFormat.format(notification.get(i).getService_expire_date()));
+
+					notifcation_Pojos.add(notifcation_Pojo);
+				}
+
+				// TOMORROW
+				if (dateFormat.format(notification.get(i).getService_expire_date()).substring(5, 9)
+						.equals(dateFormat.format(oneDay).substring(5, 9))) {
+					Notifcation_Pojo notifcation_Pojo = new Notifcation_Pojo();
+					notifcation_Pojo.setNotification_id(Integer.toString(notification.get(i).getId()));
+
+					notifcation_Pojo.setCustomer_name(notification.get(i).getCustomer_name());
+					notifcation_Pojo.setMobile(notification.get(i).getMobile());
+					notifcation_Pojo.setRegistration_no(notification.get(i).getRegistration_no());
+					notifcation_Pojo.setDob(dateFormat.format(notification.get(i).getDob()));
+					notifcation_Pojo.setCar_brand(notification.get(i).getCar_brand());
+					notifcation_Pojo.setCar_model(notification.get(i).getCar_model());
+					notifcation_Pojo
+							.setService_expire_date(dateFormat.format(notification.get(i).getService_expire_date()));
+
+					notifcation_Pojos.add(notifcation_Pojo);
+				}
+
+				// DAY AFTER TOMORROW
+				if (dateFormat.format(notification.get(i).getService_expire_date()).substring(5, 9)
+						.equals(dateFormat.format(twoDay).substring(5, 9))) {
+					Notifcation_Pojo notifcation_Pojo = new Notifcation_Pojo();
+					notifcation_Pojo.setNotification_id(Integer.toString(notification.get(i).getId()));
+
+					notifcation_Pojo.setCustomer_name(notification.get(i).getCustomer_name());
+					notifcation_Pojo.setMobile(notification.get(i).getMobile());
+					notifcation_Pojo.setRegistration_no(notification.get(i).getRegistration_no());
+					notifcation_Pojo.setDob(dateFormat.format(notification.get(i).getDob()));
+					notifcation_Pojo.setCar_brand(notification.get(i).getCar_brand());
+					notifcation_Pojo.setCar_model(notification.get(i).getCar_model());
+					notifcation_Pojo
+							.setService_expire_date(dateFormat.format(notification.get(i).getService_expire_date()));
+
+					notifcation_Pojos.add(notifcation_Pojo);
+				}
+			}
+		}
+
+		return notifcation_Pojos;
+	}
+
+	public List<Service_Parts_Pojo> getSparePartsAtParticularModelPojo(String model_id) {
+		// TODO Auto-generated method stub
+		List<Parts> parts = get_DAO_Interface.getSparePartsAtParticularModel(model_id);
+		List<Service_Parts_Pojo> parts_list = new ArrayList<Service_Parts_Pojo>();
+
+		if (!parts.isEmpty()) {
+			for (int i = 0; i < parts.size(); i++) {
+				Service_Parts_Pojo part = new Service_Parts_Pojo();
+				part.setPart_id(Integer.toString(parts.get(i).getId()));
+				part.setPart(parts.get(i).getPart());
+
+				part.setQuantity(Integer.toString(parts.get(i).getQuantity()));
+				part.setAmount(Double.toString(parts.get(i).getAmount()));
+
+				parts_list.add(part);
+			}
+		}
+
+		return parts_list;
+	}
+
+	@Override
+	public List<Service_Parts_Pojo> getSparePartsAtParticularAmt(String part_id) {
+		// TODO Auto-generated method stub
+		List<Parts> parts = get_DAO_Interface.getSparePartsInStockById(part_id);
+		List<Service_Parts_Pojo> parts_list = new ArrayList<Service_Parts_Pojo>();
+
+		if (!parts.isEmpty()) {
+			for (int i = 0; i < parts.size(); i++) {
+				Service_Parts_Pojo part = new Service_Parts_Pojo();
+				part.setPart_id(Integer.toString(parts.get(i).getId()));
+				part.setPart(parts.get(i).getPart());
+
+				part.setQuantity(Integer.toString(parts.get(i).getQuantity()));
+				part.setAmount(Double.toString(parts.get(i).getAmount()));
+
+				parts_list.add(part);
+			}
+		}
+
+		return parts_list;
 	}
 
 }
