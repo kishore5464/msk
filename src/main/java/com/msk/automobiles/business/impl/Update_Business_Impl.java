@@ -1,6 +1,7 @@
 package com.msk.automobiles.business.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import com.msk.automobiles.service.entities.Parts;
 import com.msk.automobiles.service.entities.Service_Invoice_Card;
 import com.msk.automobiles.service.entities.Stock_Status;
 import com.msk.automobiles.service.pojos.Service_Card_Pojo;
+import com.msk.automobiles.service.pojos.Service_Parts_Pojo;
 import com.msk.automobiles.util.Encrypt_Decrypt;
 
 @Service
@@ -142,6 +144,59 @@ public class Update_Business_Impl implements Update_Business_Interface {
 		}
 
 		return service_Card_Pojo;
+	}
+
+	@Override
+	public List<Service_Parts_Pojo> updateStockPartsAndStatus(String model_id, Service_Parts_Pojo service_Parts_Pojo) {
+		// TODO Auto-generated method stub
+		List<Parts> parts = get_DAO_Interface.getSparePartsAtParticularModel(model_id);
+		List<Service_Parts_Pojo> parts_lkist = new ArrayList<Service_Parts_Pojo>();
+
+		if (!parts.isEmpty()) {
+			for (int i = 0; i < parts.size(); i++) {
+				if (parts.get(i).getPart().equals(service_Parts_Pojo.getPart())) {
+
+					parts.get(i).setAmount(Double.parseDouble(service_Parts_Pojo.getAmount()));
+
+					if (parts.get(i).getQuantity() > Integer.parseInt(service_Parts_Pojo.getQuantity())) {
+						parts.get(i).setQuantity(
+								parts.get(i).getQuantity() - Integer.parseInt(service_Parts_Pojo.getQuantity()));
+
+						parts.get(i).setParts_status(Stock_Status.INSTOCK);
+
+						update_DAO_Interface.updateSparePartsInStock(parts.get(i));
+					} else if (parts.get(i).getQuantity() == Integer.parseInt(service_Parts_Pojo.getQuantity())) {
+						parts.get(i).setQuantity(
+								parts.get(i).getQuantity() - Integer.parseInt(service_Parts_Pojo.getQuantity()));
+
+						parts.get(i).setParts_status(Stock_Status.OUTSTOCK);
+
+						update_DAO_Interface.updateSparePartsInStock(parts.get(i));
+					} else if (parts.get(i).getQuantity() < Integer.parseInt(service_Parts_Pojo.getQuantity())) {
+						parts.get(i).setQuantity(quantity);
+
+						parts.get(i).setParts_status(Stock_Status.NOT_PURCHASED);
+
+						update_DAO_Interface.updateSparePartsInStock(parts.get(i));
+					}
+
+				}
+
+				/*
+				 * 
+				 * Service_Parts_Pojo part = new Service_Parts_Pojo();
+				 * part.setPart_id(Integer.toString(parts.get(i).getId()));
+				 * part.setPart(parts.get(i).getPart());
+				 * 
+				 * part.setQuantity(Integer.toString(parts.get(i).getQuantity())
+				 * ); part.setAmount(Double.toString(parts.get(i).getAmount()));
+				 * 
+				 * parts_list.add(part);
+				 */
+			}
+		}
+
+		return null;
 	}
 
 }

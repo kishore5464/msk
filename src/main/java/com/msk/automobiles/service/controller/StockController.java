@@ -49,12 +49,9 @@ public class StockController {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 
-		System.out.println("PaRTSSSSSSSSS BRNAD SERVLETTTTTTTTT");
-
 		try {
 			List<Car_Brands_Pojo> brands = get_Business_Interface.getAllBrands("parts");
 
-			System.out.println("BRAND --> " + brands);
 			data.put("brands", brands);
 
 			mix.put("data", data);
@@ -72,11 +69,10 @@ public class StockController {
 	public Response parts_car_models(@FormParam("brand_id") String brand_id, @Context HttpServletRequest request) {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
+
 		try {
-			System.out.println("BRAND ID --> " + brand_id);
 			List<Car_Models_Pojo> models = get_Business_Interface.getModels(brand_id, "parts");
 
-			System.out.println("MODELS --> " + models);
 			data.put("models", models);
 
 			if (!models.isEmpty()) {
@@ -98,11 +94,7 @@ public class StockController {
 		JSONObject mix = new JSONObject();
 		JSONObject data = new JSONObject();
 		try {
-			System.out.println("MODEL ID --> " + model_id);
-
 			List<String> parts = get_Business_Interface.getSparePartsAtParticularModel(model_id);
-
-			System.out.println("PARTS --> " + parts);
 
 			if (!parts.isEmpty()) {
 				data.put("parts", parts);
@@ -132,9 +124,6 @@ public class StockController {
 
 			data.put("in_stock_parts", spare_Parts_Pojos);
 
-			System.out.println("MODEL ID --> " + model_id);
-			System.out.println("PART --> " + part);
-
 			Spare_Parts_Pojo spare_Parts_Pojo = get_Business_Interface.getSparePartsAtParticularModelParts(model_id,
 					part);
 
@@ -160,8 +149,6 @@ public class StockController {
 		JSONObject data = new JSONObject();
 
 		Viewable view = null;
-
-		System.out.println(stock_status);
 
 		try {
 			List<Spare_Parts_Pojo> spare_Parts_Pojos = get_Business_Interface.getSparePartsInStock(stock_status);

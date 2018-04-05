@@ -541,13 +541,10 @@ public class Get_Business_Impl implements Get_Business_Interface {
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-		if (!notification.isEmpty()) 
-		{
-			for (int i = 0; i < notification.size(); i++) 
-			{
+		if (!notification.isEmpty()) {
+			for (int i = 0; i < notification.size(); i++) {
 				if (dateFormat.format(notification.get(i).getDob()).substring(5, 9)
-						.equals(dateFormat.format(new Date()).substring(5, 9))) 
-				{
+						.equals(dateFormat.format(new Date()).substring(5, 9))) {
 					Notifcation_Pojo notifcation_Pojo = new Notifcation_Pojo();
 					notifcation_Pojo.setNotification_id(Integer.toString(notification.get(i).getId()));
 
@@ -699,6 +696,7 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				job_Card_Status_Pojo.setJob_card_id(service_invoice_card.get(i).getService_id());
 				job_Card_Status_Pojo.setBrand(brands.get(0).getBrand());
 				job_Card_Status_Pojo.setModel(models.get(0).getModel());
+				job_Card_Status_Pojo.setCard_status(service_invoice_card.get(i).getCard_status().toString());
 
 				if (customer.get(0).getLast_name() == null) {
 					job_Card_Status_Pojo.setCustomer_name(customer.get(0).getFirst_name());

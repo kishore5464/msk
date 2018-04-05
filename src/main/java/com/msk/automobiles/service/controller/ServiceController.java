@@ -53,9 +53,10 @@ public class ServiceController {
 
 		try {
 			List<Service_Type_Pojo> service_Type_Pojos = get_Business_Interface.getServiceType();
+			
 			data.put("service_type", service_Type_Pojos);
 			data.put("service_type_count", service_Type_Pojos.size());
-			System.out.println(service_Type_Pojos.size() + " ppppppppppppp");
+
 			mix.put("data", data);
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
@@ -137,6 +138,7 @@ public class ServiceController {
 		JSONObject data = new JSONObject();
 		JSONObject mix = new JSONObject();
 
+		String model_id = "10";
 		String parts = "[{\"part_id\": \"1\",\"part\": \"Vyper\",\"amount\": \"560\",\"quantity\": \"6\"}]";
 
 		try {
@@ -149,8 +151,19 @@ public class ServiceController {
 				String value = filterArray[i];
 				service_Parts_Pojo = mapper.readValue(value, Service_Parts_Pojo.class);
 			}
-
-			System.out.println(service_Parts_Pojo.toString());
+			
+			List<Service_Parts_Pojo> existing_stock = update_Business_Interface.updateStockPartsAndStatus(model_id, service_Parts_Pojo);
+			
+			if (!existing_stock.isEmpty()) {
+				data.put("parts", existing_stock);
+			} else {
+				data.put("parts", "empty");
+			}
+			
+			data.put("parts_size", existing_stock.size());
+			
+			mix.put("data", data);
+			
 
 			// data.put("filter", filterResult);
 			//
@@ -166,26 +179,30 @@ public class ServiceController {
 		// return Response.ok().entity(mix.toString()).build();
 	}
 
-	@GET
+	@POST
 	@Path("/service-card-status-change")
-	public Response service_card_status_change() throws IOException {
+	public Response service_card_status_change(@FormParam("service_type") String service_type,
+			@FormParam("invoice_no") String invoice_no, @FormParam("process_type") String process_type,
+			@Context HttpServletRequest request) throws IOException {
 
 		JSONObject data = new JSONObject();
 		JSONObject mix = new JSONObject();
 
-		// MAYBE
+		Viewable view = null;
+
 		// OPEN, CLOSE, BILLED
-		String service_type = "closed";
+		// EXISTING SERVICE CARD STATUS
+		// String service_type = "closed";
 
 		// INVOICE NUMBER
-		String invoice_no = "MSKS004";
+		// String invoice_no = "MSKS004";
 
 		// PROCESS TYPE
 		// CHECK SERVICE_TYPE AND DECIDE
 		// 1. OPEN => VIEW | CLOSE;
 		// 2. CLOSE => VIEW | BILLED;
 		// 3. BILLED => VIEW
-		String process_type = "billed";
+		// String process_type = "billed";
 
 		try {
 			Service_Card_Pojo service_Card_Pojo = update_Business_Interface
@@ -193,11 +210,16 @@ public class ServiceController {
 
 			data.put("filter", service_Card_Pojo);
 
+			List<Job_Card_Status_Pojo> job_Card_Status_Pojos = get_Business_Interface.getJobCardStatus(service_type);
+			data.put("card_details", job_Card_Status_Pojos);
+
 			mix.put("data", data);
+
+			view = new Viewable("/service_invoice", mix);
 		} catch (Exception e) {
 			throw new CustomGenericException("" + e.hashCode(), e.getMessage());
 		}
 
-		return Response.ok().entity(mix.toString()).build();
+		return Response.ok().entity(view).build();
 	}
 }

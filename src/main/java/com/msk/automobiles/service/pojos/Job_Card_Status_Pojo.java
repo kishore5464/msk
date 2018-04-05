@@ -11,6 +11,7 @@ public class Job_Card_Status_Pojo {
 	private String service_type;
 	private String total_amount;
 	private String service_date;
+	private String card_status;
 
 	public Job_Card_Status_Pojo() {
 		super();
@@ -18,7 +19,7 @@ public class Job_Card_Status_Pojo {
 
 	public Job_Card_Status_Pojo(String job_card_id, String brand, String model, String customer_name,
 			String customer_mobile, String registration_no, String service_type, String total_amount,
-			String service_date) {
+			String service_date, String card_status) {
 		super();
 		this.job_card_id = job_card_id;
 		this.brand = brand;
@@ -29,6 +30,7 @@ public class Job_Card_Status_Pojo {
 		this.service_type = service_type;
 		this.total_amount = total_amount;
 		this.service_date = service_date;
+		this.card_status = card_status;
 	}
 
 	public String getJob_card_id() {
@@ -103,12 +105,20 @@ public class Job_Card_Status_Pojo {
 		this.service_date = service_date;
 	}
 
+	public String getCard_status() {
+		return card_status;
+	}
+
+	public void setCard_status(String card_status) {
+		this.card_status = card_status;
+	}
+
 	@Override
 	public String toString() {
 		return "Job_Card_Status_Pojo [job_card_id=" + job_card_id + ", brand=" + brand + ", model=" + model
 				+ ", customer_name=" + customer_name + ", customer_mobile=" + customer_mobile + ", registration_no="
 				+ registration_no + ", service_type=" + service_type + ", total_amount=" + total_amount
-				+ ", service_date=" + service_date + "]";
+				+ ", service_date=" + service_date + ", card_status=" + card_status + "]";
 	}
 
 }
