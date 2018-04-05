@@ -42,6 +42,8 @@ public interface Get_DAO_Interface {
 
 	List<Service_Invoice_Card> getServiceInvoiceCards();
 
+	List<Service_Invoice_Card> getServiceInvoiceCardsByStatus(String service_card_status);
+
 	String getLocationByCityId(Integer location_id);
 
 	List<Parts> getSparePartsInStock(String stock_status);
@@ -60,8 +62,13 @@ public interface Get_DAO_Interface {
 
 	List<Customer_Details> getCustomerRegistrationNo(String registration_no);
 
-	List<Customer_Details> getCustomerDetailById(String customer_id);
+	List<Customer_Details> getCustomerDetailByCustomerId(String customer_id);
+
+	List<Customer_Details> getCustomerDetailById(Integer id);
 
 	List<Notification> getNotificationDetailsById(Integer notification_id);
 
+	List<Service_Type> getServiceTypeById(Integer id);
+
+	List<Service_Invoice_Card> getSericeInvoiceCardByServiceId(String service_id);
 }

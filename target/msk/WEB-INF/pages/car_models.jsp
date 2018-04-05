@@ -114,6 +114,7 @@
         }
         
     }
+   
     </script>
     <style>
     .models_name{
@@ -121,6 +122,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     }
+    
     </style>
 <body>
 <%@include file="/WEB-INF/common/header.jsp"%>

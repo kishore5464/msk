@@ -203,6 +203,20 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 	}
 
 	@Override
+	public List<Service_Invoice_Card> getServiceInvoiceCardsByStatus(String service_card_status) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session
+				.createQuery(" from Service_Invoice_Card where card_status = '" + service_card_status + "'");
+		List<Service_Invoice_Card> service_Invoice_Cards = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return service_Invoice_Cards;
+	}
+
+	@Override
 	public String getLocationByCityId(Integer location_id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
@@ -331,11 +345,24 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 	}
 
 	@Override
-	public List<Customer_Details> getCustomerDetailById(String customer_id) {
+	public List<Customer_Details> getCustomerDetailByCustomerId(String customer_id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		Query query = session.createQuery(" from Customer_Details where customer_id = '" + customer_id + "'");
+		List<Customer_Details> customer_Details = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return customer_Details;
+	}
+
+	@Override
+	public List<Customer_Details> getCustomerDetailById(Integer id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Customer_Details where id = '" + id + "'");
 		List<Customer_Details> customer_Details = query.list();
 		transaction.commit();
 		session.flush();
@@ -354,6 +381,32 @@ public class Get_DAO_Impl implements Get_DAO_Interface {
 		session.flush();
 		session.close();
 		return notifications;
+	}
+
+	@Override
+	public List<Service_Type> getServiceTypeById(Integer id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Service_Type where id = '" + id + "'");
+		List<Service_Type> service_Types = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return service_Types;
+	}
+
+	@Override
+	public List<Service_Invoice_Card> getSericeInvoiceCardByServiceId(String service_id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery(" from Service_Invoice_Card where service_id = '" + service_id + "'");
+		List<Service_Invoice_Card> service_Invoice_Cards = query.list();
+		transaction.commit();
+		session.flush();
+		session.close();
+		return service_Invoice_Cards;
 	}
 
 }

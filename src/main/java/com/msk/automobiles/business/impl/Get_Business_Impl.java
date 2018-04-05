@@ -3,6 +3,7 @@ package com.msk.automobiles.business.impl;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +27,7 @@ import com.msk.automobiles.service.entities.Service_Type;
 import com.msk.automobiles.service.pojos.Car_Brands_Pojo;
 import com.msk.automobiles.service.pojos.Car_Models_Pojo;
 import com.msk.automobiles.service.pojos.Customer_Details_Pojo;
+import com.msk.automobiles.service.pojos.Job_Card_Status_Pojo;
 import com.msk.automobiles.service.pojos.Location_Pojo;
 import com.msk.automobiles.service.pojos.Notifcation_Message_Pojo;
 import com.msk.automobiles.service.pojos.Notifcation_Pojo;
@@ -223,6 +225,7 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		if (stock_status.equals("notpurchased")) {
 			stock_status = "not_purchased";
 		}
+
 		List<Parts> spare_parts = get_DAO_Interface.getSparePartsInStock(stock_status);
 		List<Spare_Parts_Pojo> spare_Parts_Pojos = new ArrayList<Spare_Parts_Pojo>();
 
@@ -242,10 +245,13 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				spare_Parts_Pojo.setPrice_per_unit(Double.toString(spare_parts.get(i).getAmount()));
 				spare_Parts_Pojo.setTotal_price(
 						Double.toString((spare_parts.get(i).getQuantity() * spare_parts.get(i).getAmount())));
+				spare_Parts_Pojo.setCreated_date(spare_parts.get(i).getCreated_date());
 
 				spare_Parts_Pojos.add(spare_Parts_Pojo);
 			}
 		}
+
+		Collections.sort(spare_Parts_Pojos, new Spare_Parts_Pojo());
 
 		return spare_Parts_Pojos;
 	}
@@ -379,7 +385,6 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				oneDayCalendar.setTime(oneDay);
 				oneDayCalendar.add(Calendar.DATE, 1);
 				oneDay = oneDayCalendar.getTime();
-				System.out.println("KK " + dateFormat.format(oneDay));
 
 				Date twoDay = new Date();
 				Calendar twoDayCalendar = Calendar.getInstance();
@@ -451,13 +456,19 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Service_Card_Pojo service_Card_Pojo = new Service_Card_Pojo();
 
-		List<Customer_Details> customer_Details_List = get_DAO_Interface.getCustomerDetailById(customer_id);
+		List<Customer_Details> customer_Details_List = get_DAO_Interface.getCustomerDetailByCustomerId(customer_id);
 
 		if (!customer_Details_List.isEmpty()) {
 
 			service_Card_Pojo.setCustomer_id(customer_Details_List.get(0).getCustomer_id());
-			service_Card_Pojo.setName(
-					customer_Details_List.get(0).getFirst_name() + " " + customer_Details_List.get(0).getLast_name());
+
+			if (customer_Details_List.get(0).getLast_name() == null) {
+				service_Card_Pojo.setName(customer_Details_List.get(0).getFirst_name());
+			} else {
+				service_Card_Pojo.setName(customer_Details_List.get(0).getFirst_name() + " "
+						+ customer_Details_List.get(0).getLast_name());
+
+			}
 			service_Card_Pojo.setMobile(customer_Details_List.get(0).getMobile());
 			service_Card_Pojo.setRegistration_no(customer_Details_List.get(0).getRegistration_no());
 			service_Card_Pojo.setModel_id(Integer.toString(customer_Details_List.get(0).getCar_Models().getId()));
@@ -496,7 +507,6 @@ public class Get_Business_Impl implements Get_Business_Interface {
 			List<Service_Invoice_Card> service_Invoice_Cards = get_DAO_Interface.getServiceInvoiceCards();
 
 			if (!service_Invoice_Cards.isEmpty()) {
-				System.out.println("id ---> " + service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId());
 				if (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() < 9) {
 					service_Card_Pojo.setInvoice_no(
 							"MSKS00" + (service_Invoice_Cards.get(service_Invoice_Cards.size() - 1).getId() + 1));
@@ -525,19 +535,19 @@ public class Get_Business_Impl implements Get_Business_Interface {
 
 		if (notification_id.equals("0")) {
 			notification = get_DAO_Interface.getAllNotificationDetails();
-			System.out.println("AAAA " + notification.size());
 		} else {
 			notification = get_DAO_Interface.getNotificationDetailsById(Integer.parseInt(notification_id));
-			System.out.println("BBBB " + notification.size());
 		}
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println(notifcation_Pojos.size());
 
-		if (!notification.isEmpty()) {
-			for (int i = 0; i < notification.size(); i++) {
+		if (!notification.isEmpty()) 
+		{
+			for (int i = 0; i < notification.size(); i++) 
+			{
 				if (dateFormat.format(notification.get(i).getDob()).substring(5, 9)
-						.equals(dateFormat.format(new Date()).substring(5, 9))) {
+						.equals(dateFormat.format(new Date()).substring(5, 9))) 
+				{
 					Notifcation_Pojo notifcation_Pojo = new Notifcation_Pojo();
 					notifcation_Pojo.setNotification_id(Integer.toString(notification.get(i).getId()));
 
@@ -558,7 +568,6 @@ public class Get_Business_Impl implements Get_Business_Interface {
 				oneDayCalendar.setTime(oneDay);
 				oneDayCalendar.add(Calendar.DATE, 1);
 				oneDay = oneDayCalendar.getTime();
-				System.out.println("KK " + dateFormat.format(oneDay));
 
 				Date twoDay = new Date();
 				Calendar twoDayCalendar = Calendar.getInstance();
@@ -666,6 +675,49 @@ public class Get_Business_Impl implements Get_Business_Interface {
 		}
 
 		return parts_list;
+	}
+
+	@Override
+	public List<Job_Card_Status_Pojo> getJobCardStatus(String invoice_status) {
+		// TODO Auto-generated method stub
+		List<Service_Invoice_Card> service_invoice_card = get_DAO_Interface
+				.getServiceInvoiceCardsByStatus(invoice_status);
+		List<Job_Card_Status_Pojo> job_Card_Status_Pojos = new ArrayList<Job_Card_Status_Pojo>();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+		if (!service_invoice_card.isEmpty()) {
+			for (int i = 0; i < service_invoice_card.size(); i++) {
+				Job_Card_Status_Pojo job_Card_Status_Pojo = new Job_Card_Status_Pojo();
+
+				List<Customer_Details> customer = get_DAO_Interface
+						.getCustomerDetailById(service_invoice_card.get(i).getCustomer_Details().getId());
+				List<Car_Models> models = get_DAO_Interface.getModelById(customer.get(0).getCar_Models().getId());
+				List<Car_Brands> brands = get_DAO_Interface.getBrandById(models.get(0).getCar_Brands().getId());
+				List<Service_Type> service_type = get_DAO_Interface
+						.getServiceTypeById(service_invoice_card.get(i).getService_Type().getId());
+
+				job_Card_Status_Pojo.setJob_card_id(service_invoice_card.get(i).getService_id());
+				job_Card_Status_Pojo.setBrand(brands.get(0).getBrand());
+				job_Card_Status_Pojo.setModel(models.get(0).getModel());
+
+				if (customer.get(0).getLast_name() == null) {
+					job_Card_Status_Pojo.setCustomer_name(customer.get(0).getFirst_name());
+				} else {
+					job_Card_Status_Pojo
+							.setCustomer_name(customer.get(0).getFirst_name() + " " + customer.get(0).getLast_name());
+				}
+
+				job_Card_Status_Pojo.setCustomer_mobile(customer.get(0).getMobile());
+				job_Card_Status_Pojo.setRegistration_no(customer.get(0).getRegistration_no());
+				job_Card_Status_Pojo.setService_type(service_type.get(0).getService_type());
+				job_Card_Status_Pojo.setTotal_amount(Double.toString(service_invoice_card.get(i).getTotal_amount()));
+				job_Card_Status_Pojo
+						.setService_date(dateFormat.format(service_invoice_card.get(i).getCurrent_service_date()));
+
+				job_Card_Status_Pojos.add(job_Card_Status_Pojo);
+			}
+		}
+		return job_Card_Status_Pojos;
 	}
 
 }

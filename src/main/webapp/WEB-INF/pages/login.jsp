@@ -119,8 +119,20 @@
                                 <img src="../assets/loading.gif" width="30px"><br/>
                                 <strong> You Successfuly Logined Now !</strong>
                         </div>
+               
+               <div class="form-group">
                 <input type="text" class="form-control" name="username"  placeholder="Email" required autofocus>
+                </div>
+                
+                <div class="form-group">
                 <input type="password" class="form-control" name="password"  placeholder="Password" required>
+               </div>
+               
+<!--                <div class="form-group" align="left">
+               <input type="radio" name="page_type" class="invoice" style="margin-right: 9px" value="invoice"><span class="invoice">Invoice</span>
+               <input type="radio" name="page_type" class="spare" style="margin: 0px 9px 0px 42px;" value="spare_parts"><span class="spare">Spare Parts</span>
+               </div> -->
+               
                 <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="login(username,password)">
                     Sign in</button>
                 <label class="checkbox pull-left">
@@ -135,5 +147,20 @@
     </div>
 </div>
 </div>
+
+<script>
+
+$(document).ready(function(){
+/* 	$(".invoice").click(function(){
+		$(".invoice").trigger("click");
+	});
+	
+	$(".spare").click(function(){
+		$(".spare").trigger("click");
+	}); */
+
+});
+</script>
+
 </body>
 </html>

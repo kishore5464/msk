@@ -1,6 +1,9 @@
 package com.msk.automobiles.service.pojos;
 
-public class Spare_Parts_Pojo {
+import java.util.Comparator;
+import java.util.Date;
+
+public class Spare_Parts_Pojo implements Comparator<Spare_Parts_Pojo> {
 
 	private String id;
 	private String brand;
@@ -10,6 +13,7 @@ public class Spare_Parts_Pojo {
 	private String quantity;
 	private String price_per_unit;
 	private String total_price;
+	private Date created_date;
 
 	public Spare_Parts_Pojo() {
 		super();
@@ -17,16 +21,17 @@ public class Spare_Parts_Pojo {
 	}
 
 	public Spare_Parts_Pojo(String id, String brand, String model, String spare_part_id, String spare_part_name,
-			String quantity, String price_per_unit, String total_price) {
+			String quantity, String price_per_unit, String total_price, Date created_date) {
 		super();
 		this.id = id;
 		this.brand = brand;
 		this.model = model;
-		this.setSpare_part_id(spare_part_id);
+		this.spare_part_id = spare_part_id;
 		this.spare_part_name = spare_part_name;
 		this.quantity = quantity;
 		this.price_per_unit = price_per_unit;
 		this.total_price = total_price;
+		this.created_date = created_date;
 	}
 
 	public String getId() {
@@ -93,11 +98,25 @@ public class Spare_Parts_Pojo {
 		this.spare_part_id = spare_part_id;
 	}
 
+	public Date getCreated_date() {
+		return created_date;
+	}
+
+	public void setCreated_date(Date created_date) {
+		this.created_date = created_date;
+	}
+
 	@Override
 	public String toString() {
 		return "Spare_Parts_Pojo [id=" + id + ", brand=" + brand + ", model=" + model + ", spare_part_id="
 				+ spare_part_id + ", spare_part_name=" + spare_part_name + ", quantity=" + quantity
-				+ ", price_per_unit=" + price_per_unit + ", total_price=" + total_price + "]";
+				+ ", price_per_unit=" + price_per_unit + ", total_price=" + total_price + ", created_date="
+				+ created_date + "]";
 	}
 
+	@Override
+	public int compare(Spare_Parts_Pojo spare1, Spare_Parts_Pojo spare2) {
+		// TODO Auto-generated method stub
+		return spare2.getCreated_date().compareTo(spare1.getCreated_date());
+	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.msk.automobiles.service.pojos.Car_Brands_Pojo;
 import com.msk.automobiles.service.pojos.Car_Models_Pojo;
 import com.msk.automobiles.service.pojos.Customer_Details_Pojo;
+import com.msk.automobiles.service.pojos.Job_Card_Status_Pojo;
 import com.msk.automobiles.service.pojos.Location_Pojo;
 import com.msk.automobiles.service.pojos.Notifcation_Message_Pojo;
 import com.msk.automobiles.service.pojos.Notifcation_Pojo;
@@ -51,5 +52,7 @@ public interface Get_Business_Interface {
 	List<Service_Parts_Pojo> getSparePartsAtParticularModelPojo(String model_id);
 
 	List<Service_Parts_Pojo> getSparePartsAtParticularAmt(String part_id);
+
+	List<Job_Card_Status_Pojo> getJobCardStatus(String invoice_status);
 
 }

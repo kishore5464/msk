@@ -197,15 +197,12 @@ h4{
 				<h1>We take care of your CAR</h1>
 				
 
-			<a href="login"><button type="button" class="btn btn-primary btn-lg btn1">Invoice</button></a>&nbsp;&nbsp;&nbsp;
+		<a href="/msk/login">	<button type="button" class="btn btn-primary btn-lg btn1 chk_btn_status" id="">Login</button></a>
 			
-		 	<a href="car-brand">	<button type="button" class="btn btn-primary btn-lg btn1">Service</button></a> 
-			
-<!-- <<<<<<< HEAD -->
-			<a href="login"><button type="button" class="btn btn-primary btn-lg btn1">Spare Parts</button></a>&nbsp;&nbsp;&nbsp;
-<!-- =======
-			<button type="button" class="btn btn-primary btn-lg btn1 spare_btn">Spare Parts</button>&nbsp;&nbsp;&nbsp;
->>>>>>> 4669879970db332192cdf3e490a5e294e1f3f19f -->
+		 	<a href="/msk/car-brand">	<button type="button" class="btn btn-primary btn-lg btn1">Service</button></a> 
+
+			<!-- <button type="button" class="btn btn-primary btn-lg btn1 chk_btn_status" id="spare">Spare Partsss</button>&nbsp;&nbsp;&nbsp; -->
+
 				
 			</div>
 		</div></center>
@@ -218,14 +215,17 @@ h4{
 	
 </div>
 
-<form action="msk/spare-parts" method="post" style="display:none">
-<input type="hidden" name="stock_status" value="instock">
+<form action="msk/login" method="post" style="display:none">
+<input type="hidden" name="page_type" value="" id="btn_value"> 
 <input type="submit" class="sparebtn">
 </form>
 <script>
 $(document).ready(function(){
-	$('.spare_btn').click(function(){
+	$('.chk_btn_status').click(function(){
 		
+		
+		$('#btn_value').val($(this).attr('id'));
+	
 		$('.sparebtn').trigger('click');	
 	})
 	
