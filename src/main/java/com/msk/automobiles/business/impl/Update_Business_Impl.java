@@ -150,7 +150,7 @@ public class Update_Business_Impl implements Update_Business_Interface {
 	public List<Service_Parts_Pojo> updateStockPartsAndStatus(String model_id, Service_Parts_Pojo service_Parts_Pojo) {
 		// TODO Auto-generated method stub
 		List<Parts> parts = get_DAO_Interface.getSparePartsAtParticularModel(model_id);
-		List<Service_Parts_Pojo> parts_lkist = new ArrayList<Service_Parts_Pojo>();
+		List<Service_Parts_Pojo> parts_list = new ArrayList<Service_Parts_Pojo>();
 
 		if (!parts.isEmpty()) {
 			for (int i = 0; i < parts.size(); i++) {
@@ -173,7 +173,7 @@ public class Update_Business_Impl implements Update_Business_Interface {
 
 						update_DAO_Interface.updateSparePartsInStock(parts.get(i));
 					} else if (parts.get(i).getQuantity() < Integer.parseInt(service_Parts_Pojo.getQuantity())) {
-						parts.get(i).setQuantity(quantity);
+//						parts.get(i).setQuantity(quantity);
 
 						parts.get(i).setParts_status(Stock_Status.NOT_PURCHASED);
 
@@ -181,18 +181,6 @@ public class Update_Business_Impl implements Update_Business_Interface {
 					}
 
 				}
-
-				/*
-				 * 
-				 * Service_Parts_Pojo part = new Service_Parts_Pojo();
-				 * part.setPart_id(Integer.toString(parts.get(i).getId()));
-				 * part.setPart(parts.get(i).getPart());
-				 * 
-				 * part.setQuantity(Integer.toString(parts.get(i).getQuantity())
-				 * ); part.setAmount(Double.toString(parts.get(i).getAmount()));
-				 * 
-				 * parts_list.add(part);
-				 */
 			}
 		}
 

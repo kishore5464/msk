@@ -35,6 +35,7 @@ public class Car_Models implements Serializable {
 
 	private Set<Customer_Details> customer_Details = new HashSet<Customer_Details>();
 	private Set<Parts> parts = new HashSet<Parts>();
+	private Set<Parts_Stock_Maintain> parts_Stock_Maintains = new HashSet<Parts_Stock_Maintain>();
 
 	public Car_Models() {
 		super();
@@ -114,6 +115,15 @@ public class Car_Models implements Serializable {
 
 	public void setParts(Set<Parts> parts) {
 		this.parts = parts;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "car_Models")
+	public Set<Parts_Stock_Maintain> getParts_Stock_Maintains() {
+		return parts_Stock_Maintains;
+	}
+
+	public void setParts_Stock_Maintains(Set<Parts_Stock_Maintain> parts_Stock_Maintains) {
+		this.parts_Stock_Maintains = parts_Stock_Maintains;
 	}
 
 }

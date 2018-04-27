@@ -43,6 +43,7 @@ public class Customer_Details implements Serializable {
 
 	private Set<Customer_Contact_Details> customer_Contact_Details = new HashSet<Customer_Contact_Details>();
 	private Set<Service_Invoice_Card> service_Invoice_Cards = new HashSet<Service_Invoice_Card>();
+	private Set<Parts_Stock_Maintain> parts_Stock_Maintains = new HashSet<Parts_Stock_Maintain>();
 
 	public Customer_Details() {
 		super();
@@ -209,6 +210,15 @@ public class Customer_Details implements Serializable {
 
 	public void setPolicy_expires_date(Date policy_expires_date) {
 		this.policy_expires_date = policy_expires_date;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer_Details")
+	public Set<Parts_Stock_Maintain> getParts_Stock_Maintains() {
+		return parts_Stock_Maintains;
+	}
+
+	public void setParts_Stock_Maintains(Set<Parts_Stock_Maintain> parts_Stock_Maintains) {
+		this.parts_Stock_Maintains = parts_Stock_Maintains;
 	}
 
 }

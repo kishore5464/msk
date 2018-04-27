@@ -2,6 +2,8 @@ package com.msk.automobiles.service.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,6 +36,8 @@ public class Parts implements Serializable {
 	private Stock_Status parts_status;
 	private Double amount;
 	private Date created_date;
+
+	private Set<Parts_Stock_Maintain> parts_Stock_Maintains = new HashSet<Parts_Stock_Maintain>();
 
 	public Parts() {
 		super();
@@ -116,6 +121,15 @@ public class Parts implements Serializable {
 
 	public void setCreated_date(Date created_date) {
 		this.created_date = created_date;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parts")
+	public Set<Parts_Stock_Maintain> getParts_Stock_Maintains() {
+		return parts_Stock_Maintains;
+	}
+
+	public void setParts_Stock_Maintains(Set<Parts_Stock_Maintain> parts_Stock_Maintains) {
+		this.parts_Stock_Maintains = parts_Stock_Maintains;
 	}
 
 }
