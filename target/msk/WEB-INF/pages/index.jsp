@@ -197,11 +197,11 @@ h4{
 				<h1>We take care of your CAR</h1>
 				
 
-			<button type="button" class="btn btn-primary btn-lg btn1 chk_btn_status" id="invoice">Invoice</button>&nbsp;&nbsp;&nbsp;
+		<a href="/msk/login">	<button type="button" class="btn btn-primary btn-lg btn1 chk_btn_status" id="">Login</button></a>
 			
-		 	<a href="car-brand">	<button type="button" class="btn btn-primary btn-lg btn1">Service</button></a> 
+		 	<a href="/msk/car-brand">	<button type="button" class="btn btn-primary btn-lg btn1">Service</button></a> 
 
-			<button type="button" class="btn btn-primary btn-lg btn1 chk_btn_status" id="spare">Spare Partsss</button>&nbsp;&nbsp;&nbsp;
+			<!-- <button type="button" class="btn btn-primary btn-lg btn1 chk_btn_status" id="spare">Spare Partsss</button>&nbsp;&nbsp;&nbsp; -->
 
 				
 			</div>

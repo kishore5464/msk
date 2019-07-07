@@ -126,7 +126,7 @@ $(document).ready(function(){
 	$(document).on("click", ".parts", function(){
 	
 	$.ajax({
-		url:"/msk/part-stock_amt",
+		url:"/msk/part-stock-amt",
 		method:"POST",
 		data:{"part_id":$(".parts option:selected").val()},
 		success : function(response){

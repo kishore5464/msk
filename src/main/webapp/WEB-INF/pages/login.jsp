@@ -117,7 +117,7 @@
                         </div>
                         <div class="alert alert-success" style="display:none" [ngStyle]="{display: status == true ? 'block':'none'}">
                                 <img src="../assets/loading.gif" width="30px"><br/>
-                                <strong> You Successfuly Logined Now !</strong>
+                                <strong> You Successfully Logged Now !</strong>
                         </div>
                
                <div class="form-group">
