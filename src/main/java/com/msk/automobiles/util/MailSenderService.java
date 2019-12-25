@@ -41,7 +41,7 @@ public class MailSenderService {
 				message.setTo(email);
 				message.setFrom(new InternetAddress(fromEmailAddress));
 				message.setSubject(subject);
-				Map<String, String> model = new HashMap<String, String>();
+				Map<String, Object> model = new HashMap<String, Object>();
 				model.put("email", email);
 				model.put("access_code", access_code);
 
