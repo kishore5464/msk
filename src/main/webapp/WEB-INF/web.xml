@@ -13,11 +13,11 @@
 		    /WEB-INF/spring/resource/applicationContext-mail.xml 
 	    </param-value>
 	</context-param>
-	
+
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>  
-	
+	</listener>
+
 	<servlet>
 		<servlet-name>appServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -31,25 +31,16 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-		
+
 	<servlet>
 		<servlet-name>jersey-serlvet</servlet-name>
-		<servlet-class>
-			org.glassfish.jersey.servlet.ServletContainer
-		</servlet-class>
-		
-		<!-- <init-param>
-			<param-name>
-               jersey.config.server.provider.packages
-            </param-name>
-			<param-value>com.fbt.talentex.user.service.controller</param-value>
-		</init-param> -->
-		
+		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+
 		<init-param>
-	        <param-name>javax.ws.rs.Application</param-name>
-	        <param-value>com.msk.automobiles.util.CustomResourceConfig</param-value>
-    	</init-param>
-		
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>com.msk.automobiles.util.CustomResourceConfig</param-value>
+		</init-param>
+
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
@@ -57,8 +48,8 @@
 		<servlet-name>jersey-serlvet</servlet-name>
 		<url-pattern>/msk/*</url-pattern>
 	</servlet-mapping>
-	
-	
+
+
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.css</url-pattern>
@@ -108,20 +99,11 @@
 		<url-pattern>*.woff2</url-pattern>
 	</servlet-mapping>
 	<session-config>
-        <session-timeout>30</session-timeout>
-</session-config>
-	 <!-- <error-page>
-		<exception-type>com.fbt.jobseeker.service.exception.CustomException</exception-type>
-		<location>/WEB-INF/pages/generic_error.jsp</location>
-	</error-page> 
-	
-	 <error-page>
-		<error-code>404</error-code>
-		<location>/WEB-INF/pages/404.jsp</location>
-	</error-page>
-	
-	<error-page>
-		<exception-type>java.lang.Exception</exception-type>
-		<location>/WEB-INF/pages/exception_error</location>
-	</error-page>  -->
+		<session-timeout>30</session-timeout>
+	</session-config>
+	<!-- <error-page> <exception-type>com.fbt.jobseeker.service.exception.CustomException</exception-type> 
+		<location>/WEB-INF/pages/generic_error.jsp</location> </error-page> <error-page> 
+		<error-code>404</error-code> <location>/WEB-INF/pages/404.jsp</location> 
+		</error-page> <error-page> <exception-type>java.lang.Exception</exception-type> 
+		<location>/WEB-INF/pages/exception_error</location> </error-page> -->
 </web-app>

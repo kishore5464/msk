@@ -37,8 +37,8 @@ public class Insert_Business_Impl implements Insert_Business_Interface {
 	@Autowired
 	Update_DAO_Interface update_DAO_Interface;
 
-	@Autowired
-	MailSenderService mailSenderService;
+//	@Autowired
+//	MailSenderService mailSenderService;
 
 	@Override
 	public void insertOrUpdateBrandLogo(String brand_id, String logo) {
@@ -238,8 +238,8 @@ public class Insert_Business_Impl implements Insert_Business_Interface {
 			Encrypt_Decrypt encrypt_Decrypt = new Encrypt_Decrypt();
 
 			if (!msk_Owners.get(0).getAccess_code().equals("0")) {
-				mailSenderService.sendAccessCode(msk_Owners.get(0).getEmail(),
-						encrypt_Decrypt.decrypt(msk_Owners.get(0).getAccess_code()));
+//				mailSenderService.sendAccessCode(msk_Owners.get(0).getEmail(),
+//						encrypt_Decrypt.decrypt(msk_Owners.get(0).getAccess_code()));
 
 				status = "success";
 			} else {
@@ -249,7 +249,7 @@ public class Insert_Business_Impl implements Insert_Business_Interface {
 				msk_Owners.get(0).setAccess_code(encrypt_Decrypt.encrypt(secret));
 				update_DAO_Interface.updateMSKOwner(msk_Owners.get(0));
 
-				mailSenderService.sendAccessCode(msk_Owners.get(0).getEmail(), secret);
+//				mailSenderService.sendAccessCode(msk_Owners.get(0).getEmail(), secret);
 
 				status = "success";
 			}
